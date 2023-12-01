@@ -31,6 +31,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   CollisionBlock get startBlock => (game.world as GameLevel).startBlock;
 
   bool _isRespawning = false;
+  bool _isCleared = false;
 
   @override
   FutureOr<void> onLoad() {
@@ -40,6 +41,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   @override
   void update(double dt) {
+    if (_isCleared) return;
     _effectDt += dt;
     if (_effectDt >= 0.001) {
       _createBallEffect();
@@ -213,6 +215,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   void _checkGameClear() {
     if (clearBlock.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: _radius))) {
+      _isCleared = true;
       removeFromParent();
       manager.clearLevel();
     }

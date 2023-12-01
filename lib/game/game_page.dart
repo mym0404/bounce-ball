@@ -74,6 +74,7 @@ class _GamePageState extends State<GamePage> {
           child: PaddingBottom(
             24,
             child: AnimatedTextKit(
+              key: ValueKey(gameLevel),
               animatedTexts: [
                 TypewriterAnimatedText(
                   gameLevel.say,

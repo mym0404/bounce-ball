@@ -5,7 +5,7 @@ import '../overlay/overlay_id.dart';
 
 class GameManager {
   VAL<bool> isGameStarted = VAL(false);
-  VAL<Level> level = VAL(Level.lv03);
+  VAL<Level> level = VAL(Level.lv01);
   VAL<int> deathCount = VAL(0);
 
   void startGame() {
