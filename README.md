@@ -2,18 +2,4 @@
 
 with Flutter Flame
 
-![img](https://raw.githubusercontent.com/mym0404/image-archive/master/202312011854641.png)
-
-```cmd
-# get pub dependencies
-flutter pub get
-
-# generate ...
-dart run build_runner build --delete-conflicting-outputs
-
-# generate launcher icon
-dart run flutter_launcher_icons
-
-# generate splash screen
-dart run flutter_native_splash:create
-```
+![image](https://github.com/mym0404/bounce-ball/assets/33388801/a72bdd42-a9e7-4b39-8fb2-5d67cd14c702)
