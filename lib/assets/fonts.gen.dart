@@ -10,6 +10,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Maplestory
-  static const String maplestory = 'Maplestory';
+  /// Font family: Stardust
+  static const String stardust = 'Stardust';
 }

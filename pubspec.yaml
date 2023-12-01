@@ -106,10 +106,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Maplestory
+    - family: Stardust
       fonts:
-        - asset: assets/fonts/Maplestory_OTF_Light.otf
-        - asset: assets/fonts/Maplestory_OTF_Bold.otf
+        - asset: assets/fonts/stardust.ttf
+        - asset: assets/fonts/stardust_bold.ttf
           weight: 700
   #   - family: Trajan Pro
   #     fonts:

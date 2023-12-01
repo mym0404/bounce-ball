@@ -1,11 +1,12 @@
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 
 import '../export.dart';
 import 'component/level/Level.dart';
-import 'component/level/game_world.dart';
+import 'component/level/game_level.dart';
 import 'state/game_manager.dart';
 
-class MainGame extends FlameGame with HasCollisionDetection {
+class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerComponents {
   GameManager get gameManager => di<GameManager>();
 
   GameLevel get gameWorld => world as GameLevel;

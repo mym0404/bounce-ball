@@ -15,6 +15,31 @@ class $AssetsImagesGen {
   $AssetsImagesBackgroundGen get background =>
       const $AssetsImagesBackgroundGen();
   $AssetsImagesEffectGen get effect => const $AssetsImagesEffectGen();
+
+  /// File path: assets/images/tile.png
+  AssetGenImage get tile => const AssetGenImage('assets/images/tile.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [tile];
+}
+
+class $AssetsTilesGen {
+  const $AssetsTilesGen();
+
+  /// File path: assets/tiles/Tiles.tsx
+  String get tiles => 'assets/tiles/Tiles.tsx';
+
+  /// File path: assets/tiles/lv-01.tmx
+  String get lv01 => 'assets/tiles/lv-01.tmx';
+
+  /// File path: assets/tiles/tile.tiled-project
+  String get tileTiledProject => 'assets/tiles/tile.tiled-project';
+
+  /// File path: assets/tiles/tile.tiled-session
+  String get tileTiledSession => 'assets/tiles/tile.tiled-session';
+
+  /// List of all assets
+  List<String> get values => [tiles, lv01, tileTiledProject, tileTiledSession];
 }
 
 class $AssetsImagesBackgroundGen {
@@ -51,38 +76,37 @@ class $AssetsImagesBackgroundGen {
 class $AssetsImagesEffectGen {
   const $AssetsImagesEffectGen();
 
-  $AssetsImagesEffectBullet16Gen get bullet16 =>
-      const $AssetsImagesEffectBullet16Gen();
+  $AssetsImagesEffectSmokeGen get smoke => const $AssetsImagesEffectSmokeGen();
 }
 
-class $AssetsImagesEffectBullet16Gen {
-  const $AssetsImagesEffectBullet16Gen();
+class $AssetsImagesEffectSmokeGen {
+  const $AssetsImagesEffectSmokeGen();
 
-  /// File path: assets/images/effect/bullet16/green16x16.png
-  AssetGenImage get green16x16 =>
-      const AssetGenImage('assets/images/effect/bullet16/green16x16.png');
+  /// File path: assets/images/effect/smoke/smoke1.png
+  AssetGenImage get smoke1 =>
+      const AssetGenImage('assets/images/effect/smoke/smoke1.png');
 
-  /// File path: assets/images/effect/bullet16/ice16x16.png
-  AssetGenImage get ice16x16 =>
-      const AssetGenImage('assets/images/effect/bullet16/ice16x16.png');
+  /// File path: assets/images/effect/smoke/smoke2.png
+  AssetGenImage get smoke2 =>
+      const AssetGenImage('assets/images/effect/smoke/smoke2.png');
 
-  /// File path: assets/images/effect/bullet16/purple16x16.png
-  AssetGenImage get purple16x16 =>
-      const AssetGenImage('assets/images/effect/bullet16/purple16x16.png');
+  /// File path: assets/images/effect/smoke/smoke3.png
+  AssetGenImage get smoke3 =>
+      const AssetGenImage('assets/images/effect/smoke/smoke3.png');
 
-  /// File path: assets/images/effect/bullet16/red16x16.png
-  AssetGenImage get red16x16 =>
-      const AssetGenImage('assets/images/effect/bullet16/red16x16.png');
+  /// File path: assets/images/effect/smoke/smoke4.png
+  AssetGenImage get smoke4 =>
+      const AssetGenImage('assets/images/effect/smoke/smoke4.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [green16x16, ice16x16, purple16x16, red16x16];
+  List<AssetGenImage> get values => [smoke1, smoke2, smoke3, smoke4];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsTilesGen tiles = $AssetsTilesGen();
 }
 
 class AssetGenImage {

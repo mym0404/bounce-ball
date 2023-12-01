@@ -8,38 +8,38 @@ class TS {
     fontSize: 56,
     height: 64 / 56,
     fontWeight: FontWeight.bold,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const displayMedium = TextStyle(
     fontSize: 45,
     height: 52 / 45,
     fontWeight: FontWeight.bold,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const displaySmall = TextStyle(
     fontSize: 36,
     height: 44 / 36,
     fontWeight: FontWeight.bold,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
 
   static const headLarge = TextStyle(
     fontSize: 32,
     height: 40 / 32,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const headMedium = TextStyle(
     fontSize: 28,
     height: 36 / 28,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const headSmall = TextStyle(
     fontSize: 24,
     height: 32 / 24,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
 
   static const h1 = headLarge;
@@ -50,19 +50,19 @@ class TS {
     fontSize: 22,
     height: 28 / 22,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const titleMedium = TextStyle(
     fontSize: 16,
     height: 24 / 16,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const titleSmall = TextStyle(
     fontSize: 14,
     height: 20 / 14,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
 
   static const t1 = titleLarge;
@@ -72,17 +72,17 @@ class TS {
   static const bodyLarge = TextStyle(
     fontSize: 16,
     height: 24 / 16,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const bodyMedium = TextStyle(
     fontSize: 14,
     height: 20 / 14,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const bodySmall = TextStyle(
     fontSize: 12,
     height: 16 / 12,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
 
   static const b1 = bodyLarge;
@@ -93,19 +93,19 @@ class TS {
     fontSize: 14,
     height: 20 / 14,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const labelMedium = TextStyle(
     fontSize: 12,
     height: 16 / 12,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
   static const labelSmall = TextStyle(
     fontSize: 11,
     height: 16 / 11,
     fontWeight: FontWeight.w500,
-    fontFamily: FontFamily.maplestory,
+    fontFamily: FontFamily.stardust,
   );
 
   static const l1 = labelLarge;

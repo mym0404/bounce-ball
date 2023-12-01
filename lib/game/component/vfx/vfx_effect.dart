@@ -21,15 +21,16 @@ sealed class VfxEffect extends SpriteAnimationComponent with GRef {
   @override
   FutureOr<void> onLoad() {
     priority = 5;
-    size = V2.all(16);
+    size = V2.all(32);
     var image = game.images.fromCache(imageName);
-    var sheet = SpriteSheet(image: image, srcSize: V2.all(16));
+    var sheet = SpriteSheet(image: image, srcSize: V2.all(64));
     animation = sheet.createAnimation(row: row, stepTime: stepTime, from: start, to: end);
 
     add(RemoveEffect(delay: length * stepTime));
   }
 }
 
-class FireVfxEffect extends VfxEffect {
-  FireVfxEffect() : super(imageName: 'effect/bullet16/red16x16.png', start: 14, end: 17, row: 5);
+class GroundJumpVfxEffect extends VfxEffect {
+  GroundJumpVfxEffect()
+      : super(imageName: 'effect/smoke/smoke3.png', start: 0, end: 7, row: 12, stepTime: 0.05);
 }

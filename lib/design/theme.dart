@@ -1,3 +1,4 @@
+import '../assets/fonts.gen.dart';
 import '../export.dart';
 
 class AppTheme {
@@ -27,7 +28,7 @@ class AppTheme {
       colorScheme: appColorScheme,
       useMaterial3: true,
       textTheme: _textTheme,
-      fontFamily: 'Maplestory',
+      fontFamily: FontFamily.stardust,
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flame/game.dart';
 import '../export.dart';
 import 'main_game.dart';
 import 'overlay/game_ready_overlay.dart';
+import 'overlay/game_status_panel.dart';
 import 'overlay/overlay_id.dart';
 import 'overlay/settings_overlay.dart';
 
@@ -38,6 +39,9 @@ class _GamePageState extends State<GamePage> {
             OverlayId.ready: (context, game) => const GameReadyOverlay(),
             OverlayId.settings: (context, game) => const SettingsOverlay()
           },
+        ),
+        TopLeft(
+          child: PaddingAll(24, child: GameStatusPanel()),
         ),
       ],
     );
