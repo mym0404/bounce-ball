@@ -28,6 +28,9 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   List<CollisionBlock> get collisionBlocks => (game.world as GameLevel).collisionBlocks;
   CollisionBlock get clearBlock => (game.world as GameLevel).clearBlock;
+  CollisionBlock get startBlock => (game.world as GameLevel).startBlock;
+
+  bool _isRespawning = false;
 
   @override
   FutureOr<void> onLoad() {
@@ -37,18 +40,19 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   @override
   void update(double dt) {
+    _effectDt += dt;
+    if (_effectDt >= 0.001) {
+      _createBallEffect();
+      _effectDt = 0;
+    }
+
+    if (_isRespawning) return;
     _handleInput(dt);
     _horizontalCollisionCheckAndMove(dt);
     _applyGravity(dt);
     _verticalCollisionCheckAndMove(dt);
     _checkGameDie();
     _checkGameClear();
-
-    _effectDt += dt;
-    if (_effectDt >= 0.001) {
-      _createBallEffect();
-      _effectDt = 0;
-    }
 
     super.update(dt);
   }
@@ -191,7 +195,21 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     isRightPressing = false;
   }
 
-  void _checkGameDie() {}
+  void _checkGameDie() {
+    var isOverlap =
+        game.size.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: _radius));
+    if (!isOverlap) {
+      _isRespawning = true;
+      manager.die();
+      add(
+        MoveToEffect(startBlock.position, EffectController(duration: 1, curve: Curves.easeInOutCubic))
+          ..onComplete = () {
+            _isRespawning = false;
+            velocity = V2.zero();
+          },
+      );
+    }
+  }
 
   void _checkGameClear() {
     if (clearBlock.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: _radius))) {

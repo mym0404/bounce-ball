@@ -1,7 +1,10 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flame/game.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../export.dart';
-import '../feature/common/widget/overlay_panel.dart';
+import '../feature/common/ui/widget/game_icon_button.dart';
+import '../service/user_preferences/user_preferences.dart';
 import 'component/ball/ball.dart';
 import 'main_game.dart';
 import 'overlay/game_all_clear_overlay.dart';
@@ -36,6 +39,9 @@ class _GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     var isGameStarted = watchValue((GameManager e) => e.isGameStarted);
+    var gameLevel = watchValue((GameManager e) => e.level);
+    var deathCount = watchValue((GameManager e) => e.deathCount);
+    var userPref = watchIt<UserPreferences>();
 
     return Stack(
       children: [
@@ -48,67 +54,81 @@ class _GamePageState extends State<GamePage> {
           },
         ),
         const TopLeft(
-          child: PaddingAll(24, child: OverlayPanel(child: GameStatusPanel())),
+          child: PaddingAll(24, child: GameStatusPanel()),
         ),
-        BottomLeft(
+        TopRight(
           child: PaddingAll(
             24,
-            child: GestureDetector(
-              onTapDown: (details) {
-                if (!isGameStarted) return;
-                var ball = (_game.findByKeyName('ball') as Ball?);
-                ball?.onTapDownLeft();
+            child: GameIconButton(
+              icon: MdiIcons.cog,
+              size: 32,
+              onPressed: () {
+                _game.overlays.add(OverlayId.settings);
               },
-              onTapUp: (_) {
-                if (!isGameStarted) return;
-                var ball = (_game.findByKeyName('ball') as Ball?);
-                ball?.onTapUpLeft();
-              },
-              child: Container(
-                width: 64,
-                height: 64,
-                decoration: BoxDecoration(
-                  borderRadius: 32.bRadius,
-                  border: Border.all(color: C.white),
-                  boxShadow: const [
-                    BoxShadow(blurStyle: BlurStyle.outer, color: Colors.white, blurRadius: 8),
-                  ],
-                ),
-                child: Icon(MdiIcons.arrowLeft),
-              ),
             ),
           ),
         ),
-        BottomRight(
-          child: PaddingAll(
+        if (userPref.value.isShowArrowControls) _leftArrow(isGameStarted),
+        if (userPref.value.isShowArrowControls) _rightArrow(isGameStarted),
+        BottomCenter(
+          child: PaddingBottom(
             24,
-            child: GestureDetector(
-              onTapDown: (details) {
-                if (!isGameStarted) return;
-                var ball = (_game.findByKeyName('ball') as Ball?);
-                ball?.onTapDownRight();
-              },
-              onTapUp: (details) {
-                if (!isGameStarted) return;
-                var ball = (_game.findByKeyName('ball') as Ball?);
-                ball?.onTapUpRight();
-              },
-              child: Container(
-                width: 64,
-                height: 64,
-                decoration: BoxDecoration(
-                  borderRadius: 32.bRadius,
-                  border: Border.all(color: C.white),
-                  boxShadow: const [
-                    BoxShadow(blurStyle: BlurStyle.outer, color: Colors.white, blurRadius: 8),
-                  ],
+            child: AnimatedTextKit(
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  gameLevel.say,
+                  textStyle: TS.b2,
+                  textAlign: TextAlign.center,
+                  speed: const Duration(milliseconds: 100),
                 ),
-                child: Icon(MdiIcons.arrowRight),
-              ),
+              ],
+              isRepeatingAnimation: false,
             ),
           ),
         ),
       ],
     );
+  }
+
+  Widget _rightArrow(bool isGameStarted) {
+    return BottomRight(
+      child: PaddingAll(
+        24,
+        child: GameIconButton(
+          icon: MdiIcons.arrowRight,
+          onTapDown: (details) {
+            if (!isGameStarted) return;
+            var ball = (_game.findByKeyName('ball') as Ball?);
+            ball?.onTapDownRight();
+          },
+          onTapUp: (details) {
+            if (!isGameStarted) return;
+            var ball = (_game.findByKeyName('ball') as Ball?);
+            ball?.onTapUpRight();
+          },
+        ),
+      ),
+    ).animate().fade();
+  }
+
+  Widget _leftArrow(bool isGameStarted) {
+    return BottomLeft(
+      child: PaddingAll(
+        24,
+        child: GameIconButton(
+          icon: MdiIcons.arrowLeft,
+          onTapDown: (details) {
+            if (!isGameStarted) return;
+            var ball = (_game.findByKeyName('ball') as Ball?);
+            ball?.onTapDownLeft();
+          },
+          onTapUp: (_) {
+            if (!isGameStarted) return;
+            var ball = (_game.findByKeyName('ball') as Ball?);
+            ball?.onTapUpLeft();
+          },
+        ),
+      ),
+    ).animate().fade();
   }
 }

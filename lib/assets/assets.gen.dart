@@ -16,11 +16,15 @@ class $AssetsImagesGen {
       const $AssetsImagesBackgroundGen();
   $AssetsImagesEffectGen get effect => const $AssetsImagesEffectGen();
 
+  /// File path: assets/images/logo1024.png
+  AssetGenImage get logo1024 =>
+      const AssetGenImage('assets/images/logo1024.png');
+
   /// File path: assets/images/tile.png
   AssetGenImage get tile => const AssetGenImage('assets/images/tile.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [tile];
+  List<AssetGenImage> get values => [logo1024, tile];
 }
 
 class $AssetsTilesGen {
@@ -32,6 +36,12 @@ class $AssetsTilesGen {
   /// File path: assets/tiles/lv-01.tmx
   String get lv01 => 'assets/tiles/lv-01.tmx';
 
+  /// File path: assets/tiles/lv-02.tmx
+  String get lv02 => 'assets/tiles/lv-02.tmx';
+
+  /// File path: assets/tiles/lv-03.tmx
+  String get lv03 => 'assets/tiles/lv-03.tmx';
+
   /// File path: assets/tiles/tile.tiled-project
   String get tileTiledProject => 'assets/tiles/tile.tiled-project';
 
@@ -39,7 +49,8 @@ class $AssetsTilesGen {
   String get tileTiledSession => 'assets/tiles/tile.tiled-session';
 
   /// List of all assets
-  List<String> get values => [tiles, lv01, tileTiledProject, tileTiledSession];
+  List<String> get values =>
+      [tiles, lv01, lv02, lv03, tileTiledProject, tileTiledSession];
 }
 
 class $AssetsImagesBackgroundGen {

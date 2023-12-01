@@ -18,6 +18,7 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
   late final Ball _ball;
   final List<CollisionBlock> collisionBlocks = [];
   late final CollisionBlock clearBlock;
+  late final CollisionBlock startBlock;
 
   @override
   FutureOr<void> onLoad() async {
@@ -37,6 +38,7 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
     assert(layer != null);
 
     var ballObj = layer!.objects.firstWhere((element) => element.class_ == 'start');
+    startBlock = CollisionBlock.fromObject(ballObj);
 
     _ball = Ball(position: V2(ballObj.x, ballObj.y), key: ComponentKey.named('ball'));
     _tile.add(_ball);
