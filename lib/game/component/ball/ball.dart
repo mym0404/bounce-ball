@@ -7,18 +7,23 @@ import '../vfx/vfx_effect.dart';
 
 const _radius = 3.0;
 
+double yVelocityForMaxHeight({required double gravity, required double maxHeight}) {
+  return sqrt(maxHeight * 2 * gravity);
+}
+
 class Ball extends PositionComponent with GRef, KeyboardHandler {
   Ball({super.key, super.position});
 
-  final double _groundJumpYForce = 300;
-  final double _wallStrongJumpXForce = 150;
-  final double _wallStrongJumpYForce = 300;
+  late final double _groundJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 40);
+  final double _wallStrongJumpXForce = 100;
+  late final double _wallStrongJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 40);
   final double _wallGeneralJumpXForce = 70;
   final double _wallGeneralJumpYForce = 60;
 
   final double _maxXSpeed = 120;
   final double _inputXForce = 120;
-  final double gravity = 780;
+  final double gravity = 400;
+  final double terminalYVelocity = 400;
   V2 velocity = V2.zero();
 
   bool isLeftPressing = false, isRightPressing = false;
@@ -89,12 +94,14 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
           // left collision
           if (isRightPressing && unixMs - lastStrongJump >= 500) {
             _wallStrongJump(1);
+            isLeftPressing = false;
           } else {
             _wallGeneralJump(1);
           }
         } else {
           if (isLeftPressing && unixMs - lastStrongJump >= 500) {
             _wallStrongJump(-1);
+            isRightPressing = false;
           } else {
             _wallGeneralJump(-1);
           }
@@ -110,6 +117,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   void _applyGravity(double dt) {
     velocity.y += gravity * dt;
+    velocity.y = min(terminalYVelocity, velocity.y);
   }
 
   void _verticalCollisionCheckAndMove(double dt) {
@@ -175,7 +183,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
-    if (!manager.isGameStarted.value) return true;
+    if (!manager.isGameStarted.value || setEquals(keysPressed, _previousPressedKeys)) return true;
 
     isLeftPressing = keysPressed.contains(LogicalKeyboardKey.arrowLeft);
     isRightPressing = keysPressed.contains(LogicalKeyboardKey.arrowRight);
