@@ -6,6 +6,7 @@ import '../export.dart';
 import '../feature/common/util/dispose_bag.dart';
 import 'component/level/Level.dart';
 import 'component/level/game_level.dart';
+import 'component/level/level_background.dart';
 import 'overlay/overlay_id.dart';
 import 'state/game_manager.dart';
 
@@ -17,7 +18,7 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
-
+    add(LevelBackground());
     overlays.add(OverlayId.ready);
     listenValue(manager.level, (value) {
       loadLevel(value);

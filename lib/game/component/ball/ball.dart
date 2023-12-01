@@ -10,15 +10,15 @@ const _radius = 3.0;
 class Ball extends PositionComponent with GRef, KeyboardHandler {
   Ball({super.key, super.position});
 
-  final double _groundJumpYForce = 250;
+  final double _groundJumpYForce = 300;
   final double _wallStrongJumpXForce = 150;
   final double _wallStrongJumpYForce = 300;
-  final double _wallGeneralJumpXForce = 120;
+  final double _wallGeneralJumpXForce = 70;
   final double _wallGeneralJumpYForce = 60;
 
   final double _maxXSpeed = 120;
   final double _inputXForce = 120;
-  final double gravity = 700;
+  final double gravity = 780;
   V2 velocity = V2.zero();
 
   bool isLeftPressing = false, isRightPressing = false;
@@ -32,6 +32,8 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   bool _isRespawning = false;
   bool _isCleared = false;
+
+  int lastStrongJump = 0;
 
   @override
   FutureOr<void> onLoad() {
@@ -85,13 +87,13 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
       if (block.toRect().overlaps(Rect.fromCircle(center: nextPosition.toOffset(), radius: _radius))) {
         if (block.x + block.width / 2 < position.x) {
           // left collision
-          if (isRightPressing) {
+          if (isRightPressing && unixMs - lastStrongJump >= 500) {
             _wallStrongJump(1);
           } else {
             _wallGeneralJump(1);
           }
         } else {
-          if (isLeftPressing) {
+          if (isLeftPressing && unixMs - lastStrongJump >= 500) {
             _wallStrongJump(-1);
           } else {
             _wallGeneralJump(-1);
@@ -159,6 +161,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _wallStrongJump(int direction) {
+    lastStrongJump = unixMs;
     parent!.add(WallStrongJumpVfxEffect()
       ..anchor = Anchor.center
       ..position = V2(

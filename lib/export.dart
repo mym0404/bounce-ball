@@ -43,6 +43,7 @@ export 'feature/common/util/snack_bar_extension.dart';
 export 'feature/common/util/style_extension.dart';
 export 'game/util/asset_gen_extension.dart';
 export 'game/util/const.dart';
+export 'game/util/date_time_util.dart';
 export 'service/di/singleton.dart';
 export 'service/l10n/generated/l10n.dart';
 export 'service/l10n/util/l10n_util.dart';

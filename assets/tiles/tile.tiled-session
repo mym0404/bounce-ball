@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "lv-02.tmx",
+    "activeFile": "lv-06.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -78,8 +78,8 @@
             "scale": 1.0192708333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 288.44149207971384,
-                "y": 192.78487480838015
+                "x": 286.4793050587635,
+                "y": 217.31221257026058
             }
         }
     },
@@ -90,12 +90,11 @@
     "map.tileWidth": 16,
     "map.width": 36,
     "openFiles": [
-        "lv-01.tmx",
-        "Tiles.tsx",
-        "lv-02.tmx"
+        "lv-06.tmx"
     ],
     "project": "tile.tiled-project",
     "recentFiles": [
+        "lv-06.tmx",
         "lv-05.tmx",
         "lv-04.tmx",
         "lv-03.tmx",

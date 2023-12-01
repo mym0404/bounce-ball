@@ -9,7 +9,7 @@ class LevelBackground extends PositionComponent with GRef {
   FutureOr<void> onLoad() async {
     var bg = await game.loadParallaxComponent(
       [
-        ParallaxImageData(Assets.images.background.star2.gPath),
+        ParallaxImageData(Assets.images.background.star3.gPath),
       ],
       baseVelocity: V2(10, 5),
       velocityMultiplierDelta: V2(1.8, 1.0),

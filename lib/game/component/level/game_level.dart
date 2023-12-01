@@ -5,7 +5,6 @@ import '../../../feature/common/util/dispose_bag.dart';
 import '../ball/ball.dart';
 import '../collision/CollisionBlock.dart';
 import 'Level.dart';
-import 'level_background.dart';
 
 class GameLevel extends World with GRef, DisposeBag implements PositionProvider {
   GameLevel({
@@ -22,7 +21,6 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
 
   @override
   FutureOr<void> onLoad() async {
-    add(LevelBackground());
     _tile = await TiledComponent.load('${level.name}.tmx', V2.all(16));
     _tile.anchor = Anchor.center;
     _tile.position = game.size / 2;
