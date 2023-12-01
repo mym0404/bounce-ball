@@ -1,7 +1,9 @@
 import 'package:flame/game.dart';
 
 import '../export.dart';
+import '../feature/common/widget/overlay_panel.dart';
 import 'main_game.dart';
+import 'overlay/game_all_clear_overlay.dart';
 import 'overlay/game_ready_overlay.dart';
 import 'overlay/game_status_panel.dart';
 import 'overlay/overlay_id.dart';
@@ -37,11 +39,12 @@ class _GamePageState extends State<GamePage> {
           game: _game,
           overlayBuilderMap: {
             OverlayId.ready: (context, game) => const GameReadyOverlay(),
-            OverlayId.settings: (context, game) => const SettingsOverlay()
+            OverlayId.settings: (context, game) => const SettingsOverlay(),
+            OverlayId.allClear: (context, game) => const GameAllClearOverlay()
           },
         ),
-        TopLeft(
-          child: PaddingAll(24, child: GameStatusPanel()),
+        const TopLeft(
+          child: PaddingAll(24, child: OverlayPanel(child: GameStatusPanel())),
         ),
       ],
     );

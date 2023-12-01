@@ -1,3 +1,5 @@
+import 'package:flame/effects.dart';
+
 import '../../../export.dart';
 import '../../../feature/common/util/dispose_bag.dart';
 import '../ball/ball.dart';
@@ -5,7 +7,7 @@ import '../collision/CollisionBlock.dart';
 import 'Level.dart';
 import 'level_background.dart';
 
-class GameLevel extends World with GRef, DisposeBag {
+class GameLevel extends World with GRef, DisposeBag implements PositionProvider {
   GameLevel({
     required this.level,
   });
@@ -15,6 +17,7 @@ class GameLevel extends World with GRef, DisposeBag {
   late final TiledComponent _tile;
   late final Ball _ball;
   final List<CollisionBlock> collisionBlocks = [];
+  late final CollisionBlock clearBlock;
 
   @override
   FutureOr<void> onLoad() async {
@@ -26,6 +29,7 @@ class GameLevel extends World with GRef, DisposeBag {
 
     _initBall();
     _initCollisions();
+    _initClearBlock();
   }
 
   void _initBall() {
@@ -43,9 +47,24 @@ class GameLevel extends World with GRef, DisposeBag {
 
     if (layer != null) {
       for (final obj in layer.objects) {
-        var block = CollisionBlock(size: V2(obj.width, obj.height), position: V2(obj.x, obj.y));
+        var block = CollisionBlock.fromObject(obj);
         collisionBlocks.add(block);
       }
     }
+  }
+
+  void _initClearBlock() {
+    final layer = _tile.tileMap.getLayer<ObjectGroup>('spot');
+    var obj = layer!.objects.firstWhere((element) => element.class_ == 'goal');
+
+    clearBlock = CollisionBlock.fromObject(obj);
+  }
+
+  @override
+  Vector2 get position => _tile.position;
+
+  @override
+  set position(Vector2 value) {
+    _tile.position = value;
   }
 }

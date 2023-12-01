@@ -7,4 +7,7 @@ class CollisionBlock extends PositionComponent {
   }) {
     debugMode = true;
   }
+
+  CollisionBlock.fromObject(TiledObject obj)
+      : this(size: V2(obj.width, obj.height), position: V2(obj.x, obj.y));
 }

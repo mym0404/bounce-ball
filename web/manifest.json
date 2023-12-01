@@ -1,11 +1,11 @@
 {
-    "name": "수학대왕 캐릭터 싸움",
-    "short_name": "수학대왕 캐릭터 싸움",
+    "name": "Bounce Ball",
+    "short_name": "Bounce Ball",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#1A1A1A",
     "theme_color": "#AAC7FF",
-    "description": "수학대왕 캐릭터 싸움!",
+    "description": "Bounce Ball",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -11,6 +11,7 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           'BOUNCE    BALL  (0.0.1)',

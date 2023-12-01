@@ -1,7 +1,6 @@
 import '../../export.dart';
 import '../../feature/common/widget/blur.dart';
 import '../../feature/common/widget/overlay_panel.dart';
-import '../main_game.dart';
 
 class GameReadyOverlay extends StatefulWidget {
   const GameReadyOverlay({super.key});
@@ -11,21 +10,6 @@ class GameReadyOverlay extends StatefulWidget {
 }
 
 class _GameReadyOverlayState extends State<GameReadyOverlay> {
-  late final nickname = TC(text: '문명주');
-
-  MainGame get game => di();
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (kDebugMode) {
-      // 500.ms.runAfter(() {
-      //   game.startGame(nickname: nickname.text);
-      // });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BackdropBlur(
@@ -43,9 +27,9 @@ class _GameReadyOverlayState extends State<GameReadyOverlay> {
                 const Gap(48),
                 FilledButton.tonal(
                   onPressed: () {
-                    game.startGame(nickname: nickname.text);
+                    manager.startGame();
                   },
-                  child: const Text('시작하기'),
+                  child: const Text('Start'),
                 )
               ],
             ),

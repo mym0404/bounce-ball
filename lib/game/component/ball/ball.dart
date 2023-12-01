@@ -5,49 +5,44 @@ import '../collision/CollisionBlock.dart';
 import '../level/game_level.dart';
 import '../vfx/vfx_effect.dart';
 
+const _radius = 3.0;
+
 class Ball extends PositionComponent with GRef, KeyboardHandler {
   Ball({super.position});
 
-  final double _wallCollisionForce = 100;
-  final double _jumpForce = 250;
-  final double _wallJumpForce = 120;
-  final double _maxHorizontalSpeed = 120;
-  final double _horizontalForce = 150;
+  final double _groundJumpYForce = 250;
+  final double _wallStrongJumpXForce = 150;
+  final double _wallStrongJumpYForce = 300;
+  final double _wallGeneralJumpXForce = 120;
+  final double _wallGeneralJumpYForce = 60;
+
+  final double _maxXSpeed = 120;
+  final double _inputXForce = 120;
   final double gravity = 700;
   V2 velocity = V2.zero();
 
   bool isLeftPressing = false, isRightPressing = false;
   Set<LogicalKeyboardKey> _previousPressedKeys = {};
 
-  bool isCollideLeftWall = false, isCollideRightWall = false;
-  double _wallCollideDelta = 0;
-  int _lastWallCollideAt = 0;
   double _effectDt = 0;
 
   List<CollisionBlock> get collisionBlocks => (game.world as GameLevel).collisionBlocks;
+  CollisionBlock get clearBlock => (game.world as GameLevel).clearBlock;
 
   @override
   FutureOr<void> onLoad() {
     size = V2.all(8);
-    add(CircleComponent(radius: 4, paint: Paint()..color = C.white)..anchor = Anchor.center);
+    add(CircleComponent(radius: _radius, paint: Paint()..color = C.white)..anchor = Anchor.center);
   }
 
   @override
   void update(double dt) {
     _handleInput(dt);
-    _clampAndDecreaseHorizontalVelocity(dt);
     _horizontalCollisionCheckAndMove(dt);
     _applyGravity(dt);
     _verticalCollisionCheckAndMove(dt);
     _checkGameDie();
     _checkGameClear();
-
-    if (isCollideLeftWall || isCollideRightWall) {
-      _wallCollideDelta += dt;
-      if (_wallCollideDelta >= 0.15) {
-        _resetWallCollideStates();
-      }
-    }
 
     _effectDt += dt;
     if (_effectDt >= 0.001) {
@@ -59,7 +54,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _createBallEffect() {
-    parent!.add(CircleComponent(radius: 4, paint: Paint()..color = C.white)
+    parent!.add(CircleComponent(radius: _radius, paint: Paint()..color = C.white)
       ..add(RemoveEffect(delay: 0.6))
       ..add(OpacityEffect.fadeOut(EffectController(duration: 0.6)))
       ..position = position
@@ -67,21 +62,13 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _handleInput(double dt) {
-    if (isCollideLeftWall || isCollideRightWall) {}
-
     if (isLeftPressing) {
-      var diff = max(0, velocity.x - -_maxHorizontalSpeed);
-      velocity.x -= min(diff, _horizontalForce * 5 * dt);
+      var diff = max(0, velocity.x - -_maxXSpeed);
+      velocity.x -= min(diff, _inputXForce * 5 * dt);
     } else if (isRightPressing) {
-      var diff = max(0, _maxHorizontalSpeed - velocity.x);
-      velocity.x += min(diff, _horizontalForce * 5 * dt);
+      var diff = max(0, _maxXSpeed - velocity.x);
+      velocity.x += min(diff, _inputXForce * 5 * dt);
     }
-  }
-
-  void _clampAndDecreaseHorizontalVelocity(double dt) {
-    // if (velocity.x.abs() > _horizontalSpeed) {
-    //   velocity.x -= velocity.x.sign * 100 * dt;
-    // }
   }
 
   void _horizontalCollisionCheckAndMove(double dt) {
@@ -89,29 +76,23 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
     var nextPosition = V2(position.x + velocity.x * dt, position.y);
     for (var block in collisionBlocks) {
-      if (block.toRect().overlaps(Rect.fromCircle(center: nextPosition.toOffset(), radius: 4))) {
-        if (velocity.x < 0) {
-          isCollideLeftWall = true;
-          isCollideRightWall = false;
-          parent!.add(
-            GroundJumpVfxEffect()
-              ..anchor = Anchor.center
-              ..position = V2(
-                position.x - 5 - Random().nextDouble() * 5,
-                position.y,
-              )
-              ..angle = pi / 2,
-          );
+      if (block.toRect().overlaps(Rect.fromCircle(center: nextPosition.toOffset(), radius: _radius))) {
+        if (block.x + block.width / 2 < position.x) {
+          // left collision
+          if (isRightPressing) {
+            _wallStrongJump(1);
+          } else {
+            _wallGeneralJump(1);
+          }
         } else {
-          isCollideLeftWall = false;
-          isCollideRightWall = true;
+          if (isLeftPressing) {
+            _wallStrongJump(-1);
+          } else {
+            _wallGeneralJump(-1);
+          }
         }
-        _wallCollideDelta = 0;
-        _lastWallCollideAt = DateTime.now().millisecondsSinceEpoch;
 
         nextPosition = position;
-        velocity.x = -velocity.x.sign * _wallCollisionForce;
-        velocity.y += _wallCollisionForce * (Random().nextDouble() - 0.5);
         break;
       }
     }
@@ -128,7 +109,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
     var nextPosition = V2(position.x, position.y + velocity.y * dt);
     for (var block in collisionBlocks) {
-      if (block.toRect().overlaps(Rect.fromCircle(center: nextPosition.toOffset(), radius: 4))) {
+      if (block.toRect().overlaps(Rect.fromCircle(center: nextPosition.toOffset(), radius: _radius))) {
         if (velocity.y > 0) {
           _jump();
           nextPosition = position;
@@ -145,7 +126,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _jump() {
-    velocity.y = -_jumpForce;
+    velocity.y = -_groundJumpYForce;
     parent!.add(
       GroundJumpVfxEffect()
         ..anchor = Anchor.center
@@ -156,32 +137,39 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     );
   }
 
-  void _wallJump(int direction) {
-    _resetWallCollideStates();
+  void _wallGeneralJump(int direction) {
+    parent!.add(
+      GroundJumpVfxEffect()
+        ..anchor = Anchor.center
+        ..position = V2(
+          position.x + (5 - Random().nextDouble() * 5) * -direction,
+          position.y,
+        )
+        ..angle = pi / 2,
+    );
 
-    velocity.x = _wallJumpForce * direction;
-    velocity.y = -_jumpForce;
-    log.i('_wallJump');
+    velocity.x = direction * _wallGeneralJumpXForce * (0.5 + Random().nextDouble());
+    velocity.y += -_wallGeneralJumpYForce * (Random().nextDouble() - 0.5);
   }
 
-  void _resetWallCollideStates() {
-    _wallCollideDelta = 0;
-    isCollideLeftWall = false;
-    isCollideRightWall = false;
+  void _wallStrongJump(int direction) {
+    parent!.add(WallStrongJumpVfxEffect()
+      ..anchor = Anchor.center
+      ..position = V2(
+        position.x + (5 - Random().nextDouble() * 5) * -direction,
+        position.y,
+      ));
+
+    velocity.x = _wallStrongJumpXForce * direction;
+    velocity.y = -_wallStrongJumpYForce;
   }
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
+    if (!manager.isGameStarted.value) return true;
+
     isLeftPressing = keysPressed.contains(LogicalKeyboardKey.arrowLeft);
     isRightPressing = keysPressed.contains(LogicalKeyboardKey.arrowRight);
-
-    if (isRightPressing && isCollideLeftWall) {
-      _wallJump(1);
-    }
-
-    if (isLeftPressing && isCollideRightWall) {
-      _wallJump(-1);
-    }
 
     _previousPressedKeys = keysPressed;
     return super.onKeyEvent(event, keysPressed);
@@ -189,5 +177,10 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   void _checkGameDie() {}
 
-  void _checkGameClear() {}
+  void _checkGameClear() {
+    if (clearBlock.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: _radius))) {
+      removeFromParent();
+      manager.clearLevel();
+    }
+  }
 }
