@@ -1,10 +1,10 @@
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: false
   ios: false
-  image_path: "assets/app/launcher_icon.png"
+  image_path: "assets/images/logo1024.png"
   remove_alpha_ios: true
   web:
     generate: true
-    image_path: "assets/app/launcher_icon.png"
-    background_color: '#1A1A1A'
-    theme_color: '#AAC7FF'
+    image_path: "assets/images/logo1024.png"
+    background_color: '#000000'
+    theme_color: '#FFFFFF'
