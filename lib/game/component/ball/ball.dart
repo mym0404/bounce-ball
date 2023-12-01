@@ -8,7 +8,7 @@ import '../vfx/vfx_effect.dart';
 const _radius = 3.0;
 
 class Ball extends PositionComponent with GRef, KeyboardHandler {
-  Ball({super.position});
+  Ball({super.key, super.position});
 
   final double _groundJumpYForce = 250;
   final double _wallStrongJumpXForce = 150;
@@ -173,6 +173,22 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
     _previousPressedKeys = keysPressed;
     return super.onKeyEvent(event, keysPressed);
+  }
+
+  void onTapDownLeft() {
+    isLeftPressing = true;
+  }
+
+  void onTapDownRight() {
+    isRightPressing = true;
+  }
+
+  void onTapUpLeft() {
+    isLeftPressing = false;
+  }
+
+  void onTapUpRight() {
+    isRightPressing = false;
   }
 
   void _checkGameDie() {}

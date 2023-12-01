@@ -2,12 +2,14 @@ import 'package:flame/game.dart';
 
 import '../export.dart';
 import '../feature/common/widget/overlay_panel.dart';
+import 'component/ball/ball.dart';
 import 'main_game.dart';
 import 'overlay/game_all_clear_overlay.dart';
 import 'overlay/game_ready_overlay.dart';
 import 'overlay/game_status_panel.dart';
 import 'overlay/overlay_id.dart';
 import 'overlay/settings_overlay.dart';
+import 'state/game_manager.dart';
 
 class GamePage extends StatefulWidget with WatchItStatefulWidgetMixin {
   const GamePage({super.key});
@@ -33,6 +35,8 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
+    var isGameStarted = watchValue((GameManager e) => e.isGameStarted);
+
     return Stack(
       children: [
         GameWidget(
@@ -45,6 +49,64 @@ class _GamePageState extends State<GamePage> {
         ),
         const TopLeft(
           child: PaddingAll(24, child: OverlayPanel(child: GameStatusPanel())),
+        ),
+        BottomLeft(
+          child: PaddingAll(
+            24,
+            child: GestureDetector(
+              onTapDown: (details) {
+                if (!isGameStarted) return;
+                var ball = (_game.findByKeyName('ball') as Ball?);
+                ball?.onTapDownLeft();
+              },
+              onTapUp: (_) {
+                if (!isGameStarted) return;
+                var ball = (_game.findByKeyName('ball') as Ball?);
+                ball?.onTapUpLeft();
+              },
+              child: Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  borderRadius: 32.bRadius,
+                  border: Border.all(color: C.white),
+                  boxShadow: const [
+                    BoxShadow(blurStyle: BlurStyle.outer, color: Colors.white, blurRadius: 8),
+                  ],
+                ),
+                child: Icon(MdiIcons.arrowLeft),
+              ),
+            ),
+          ),
+        ),
+        BottomRight(
+          child: PaddingAll(
+            24,
+            child: GestureDetector(
+              onTapDown: (details) {
+                if (!isGameStarted) return;
+                var ball = (_game.findByKeyName('ball') as Ball?);
+                ball?.onTapDownRight();
+              },
+              onTapUp: (details) {
+                if (!isGameStarted) return;
+                var ball = (_game.findByKeyName('ball') as Ball?);
+                ball?.onTapUpRight();
+              },
+              child: Container(
+                width: 64,
+                height: 64,
+                decoration: BoxDecoration(
+                  borderRadius: 32.bRadius,
+                  border: Border.all(color: C.white),
+                  boxShadow: const [
+                    BoxShadow(blurStyle: BlurStyle.outer, color: Colors.white, blurRadius: 8),
+                  ],
+                ),
+                child: Icon(MdiIcons.arrowRight),
+              ),
+            ),
+          ),
         ),
       ],
     );

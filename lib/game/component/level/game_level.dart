@@ -38,7 +38,7 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
 
     var ballObj = layer!.objects.firstWhere((element) => element.class_ == 'start');
 
-    _ball = Ball(position: V2(ballObj.x, ballObj.y));
+    _ball = Ball(position: V2(ballObj.x, ballObj.y), key: ComponentKey.named('ball'));
     _tile.add(_ball);
   }
 
