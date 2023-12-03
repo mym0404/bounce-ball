@@ -105,7 +105,7 @@
         },
         "lv-07.tmx": {
             "scale": 1.1924479166666666,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
                 "x": 288.48220135400743,
                 "y": 192.0419305525224
@@ -124,6 +124,7 @@
     "project": "tile.tiled-project",
     "recentFiles": [
         "lv-06.tmx",
+        "lv-07.tmx",
         "/Users/mj/Desktop/bounce-ball/assets/images/kenney_pixel-platformer/Tiled/tilemap-example-b.tmx",
         "lv-05.tmx",
         "lv-04.tmx",
