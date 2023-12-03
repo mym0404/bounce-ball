@@ -3,14 +3,12 @@ import 'package:logger/logger.dart';
 
 import '../../export.dart';
 import '../../game/state/game_manager.dart';
-import '../../game/util/user_thumbnail_util.dart';
 import '../l10n/util/l10n_manager.dart';
 import '../layout/layout_manager.dart';
 import '../user_preferences/user_preferences.dart';
 
 Future<void> registerSingletons() async {
   di.registerSingleton(UserPreferences());
-  di.registerSingleton(UserThumbnailUtil());
 
   var sharedPreferences = await SharedPreferences.getInstance();
   registerGlobalStorage(SharedPreferencesStorage(sharedPreferences: sharedPreferences));

@@ -5,8 +5,6 @@ import '../collision/CollisionBlock.dart';
 import '../level/game_level.dart';
 import '../vfx/vfx_effect.dart';
 
-const _radius = 3.0;
-
 double yVelocityForMaxHeight({required double gravity, required double maxHeight}) {
   return sqrt(maxHeight * 2 * gravity);
 }
@@ -14,15 +12,18 @@ double yVelocityForMaxHeight({required double gravity, required double maxHeight
 class Ball extends PositionComponent with GRef, KeyboardHandler {
   Ball({super.key, super.position});
 
-  late final double _groundJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 40);
-  final double _wallStrongJumpXForce = 100;
-  late final double _wallStrongJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 40);
+  static const ballRadius = 3.0;
+
+  late final double _groundJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 16 * 2 + 4);
+  late final double _jumpBlockJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 16 * 6 + 4);
+  final double _wallStrongJumpXForce = 130;
+  late final double _wallStrongJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 50);
   final double _wallGeneralJumpXForce = 70;
-  final double _wallGeneralJumpYForce = 60;
+  final double _wallGeneralJumpYForce = 30;
 
   final double _maxXSpeed = 120;
   final double _inputXForce = 120;
-  final double gravity = 400;
+  final double gravity = 600;
   final double terminalYVelocity = 400;
   V2 velocity = V2.zero();
 
@@ -31,20 +32,32 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   double _effectDt = 0;
 
-  List<CollisionBlock> get collisionBlocks => (game.world as GameLevel).collisionBlocks;
-  CollisionBlock get clearBlock => (game.world as GameLevel).clearBlock;
-  CollisionBlock get startBlock => (game.world as GameLevel).startBlock;
+  GameLevel get level => game.world as GameLevel;
+  List<CollisionBlock> get collisionBlocks => level.collisionBlocks;
+  List<CollisionBlock> get jumpBlocks => level.jumpBlocks;
+  List<CollisionBlock> get bombBlocks => level.bombBlocks;
+  List<CollisionBlock> get breakBlocks => level.breakBlocks;
+  List<CollisionBlock> get leftArrowBlocks => level.leftArrowBlocks;
+  List<CollisionBlock> get rightArrowBlocks => level.rightArrowBlocks;
+  CollisionBlock get clearBlock => level.clearBlock;
+  CollisionBlock get startBlock => level.startBlock;
 
   bool _isRespawning = false;
   bool _isCleared = false;
 
   int lastStrongJump = 0;
 
+  // region init
+
   @override
   FutureOr<void> onLoad() {
     size = V2.all(8);
-    add(CircleComponent(radius: _radius, paint: Paint()..color = C.white)..anchor = Anchor.center);
+    add(CircleComponent(radius: ballRadius, paint: Paint()..color = C.white)..anchor = Anchor.center);
   }
+
+  // endregion
+
+  // region update
 
   @override
   void update(double dt) {
@@ -57,24 +70,30 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
     if (_isRespawning) return;
     _handleInput(dt);
-    _horizontalCollisionCheckAndMove(dt);
+    _handleHorizontalMove(dt);
     _applyGravity(dt);
     _verticalCollisionCheckAndMove(dt);
-    _checkGameDie();
+    _checkGameDieByOutside();
     _checkGameClear();
 
     super.update(dt);
   }
 
   void _createBallEffect() {
-    parent!.add(CircleComponent(radius: _radius, paint: Paint()..color = C.white)
+    parent!.add(CircleComponent(radius: ballRadius, paint: Paint()..color = C.white)
       ..add(RemoveEffect(delay: 0.6))
       ..add(OpacityEffect.fadeOut(EffectController(duration: 0.6)))
       ..position = position
       ..anchor = Anchor.center);
   }
 
+  void _applyGravity(double dt) {
+    velocity.y += gravity * dt;
+    velocity.y = min(terminalYVelocity, velocity.y);
+  }
+
   void _handleInput(double dt) {
+    if (isLeftPressing && isRightPressing) return;
     if (isLeftPressing) {
       var diff = max(0, velocity.x - -_maxXSpeed);
       velocity.x -= min(diff, _inputXForce * 5 * dt);
@@ -84,13 +103,46 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     }
   }
 
-  void _horizontalCollisionCheckAndMove(double dt) {
+  void _handleHorizontalMove(double dt) {
     if (velocity.x == 0) return;
-
     var nextPosition = V2(position.x + velocity.x * dt, position.y);
-    for (var block in collisionBlocks) {
-      if (block.toRect().overlaps(Rect.fromCircle(center: nextPosition.toOffset(), radius: _radius))) {
-        if (block.x + block.width / 2 < position.x) {
+    _checkCollisionsWithNextPosition(nextPosition, isHorizontal: true);
+  }
+
+  void _verticalCollisionCheckAndMove(double dt) {
+    if (velocity.y == 0) return;
+    var nextPosition = V2(position.x, position.y + velocity.y * dt);
+    _checkCollisionsWithNextPosition(nextPosition, isHorizontal: false);
+  }
+
+  void _checkCollisionsWithNextPosition(V2 nextPosition, {required bool isHorizontal}) {
+    if (_isCollidedWithBomb(nextPosition) != null) {
+      position = nextPosition;
+      parent!.add(
+        BombVfxEffect()
+          ..anchor = Anchor.center
+          ..position = position,
+      );
+      _die();
+      return;
+    }
+
+    CollisionBlock? breakBlock = _isCollidedWithBreak(nextPosition);
+    CollisionBlock? generalCollisionBlock = _isCollidedWithGeneralCollisions(nextPosition);
+    if (breakBlock != null && !isHorizontal && velocity.y > 0) {
+      level.removeBreakBlock(breakBlock);
+      _jump();
+      parent!.add(
+        BombVfxEffect()
+          ..anchor = Anchor.center
+          ..position = V2(position.x, position.y + 8),
+      );
+      return;
+    }
+
+    if (isHorizontal) {
+      if (generalCollisionBlock != null) {
+        if (generalCollisionBlock.x + generalCollisionBlock.width / 2 < position.x) {
           // left collision
           if (isRightPressing && unixMs - lastStrongJump >= 500) {
             _wallStrongJump(1);
@@ -108,32 +160,20 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
         }
 
         nextPosition = position;
-        break;
+        return;
       }
-    }
-
-    position = nextPosition;
-  }
-
-  void _applyGravity(double dt) {
-    velocity.y += gravity * dt;
-    velocity.y = min(terminalYVelocity, velocity.y);
-  }
-
-  void _verticalCollisionCheckAndMove(double dt) {
-    if (velocity.y == 0) return;
-
-    var nextPosition = V2(position.x, position.y + velocity.y * dt);
-    for (var block in collisionBlocks) {
-      if (block.toRect().overlaps(Rect.fromCircle(center: nextPosition.toOffset(), radius: _radius))) {
+    } else {
+      if (generalCollisionBlock != null) {
         if (velocity.y > 0) {
-          _jump();
+          if (_isCollidedWithJump(nextPosition) != null) {
+            _jump(jumpBlock: true);
+          } else {
+            _jump();
+          }
           nextPosition = position;
-          break;
         } else {
           velocity.y *= -1;
           nextPosition = position;
-          break;
         }
       }
     }
@@ -141,8 +181,28 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     position = nextPosition;
   }
 
-  void _jump() {
-    velocity.y = -_groundJumpYForce;
+  void _checkGameDieByOutside() {
+    var isOverlap =
+        game.size.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: ballRadius));
+    if (!isOverlap) {
+      _die();
+    }
+  }
+
+  void _checkGameClear() {
+    if (_isCollidedWithClear(position)) {
+      _isCleared = true;
+      removeFromParent();
+      manager.clearLevel();
+    }
+  }
+
+  // endregion
+
+  // region action
+
+  void _jump({bool jumpBlock = false}) {
+    velocity.y = -(jumpBlock ? _jumpBlockJumpYForce : _groundJumpYForce);
     parent!.add(
       GroundJumpVfxEffect()
         ..anchor = Anchor.center
@@ -165,7 +225,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     );
 
     velocity.x = direction * _wallGeneralJumpXForce * (0.5 + Random().nextDouble());
-    velocity.y += -_wallGeneralJumpYForce * (Random().nextDouble() - 0.5);
+    velocity.y += -_wallGeneralJumpYForce * (Random().nextDouble() - 0.4);
   }
 
   void _wallStrongJump(int direction) {
@@ -180,6 +240,23 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     velocity.x = _wallStrongJumpXForce * direction;
     velocity.y = -_wallStrongJumpYForce;
   }
+
+  void _die() {
+    _isRespawning = true;
+    manager.die();
+    add(
+      MoveToEffect(startBlock.position, EffectController(duration: 1, curve: Curves.easeInOutCubic))
+        ..onComplete = () {
+          _isRespawning = false;
+          velocity = V2.zero();
+        },
+    );
+    level.resetBlocks();
+  }
+
+  // endregion
+
+  // region input
 
   @override
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
@@ -208,27 +285,29 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     isRightPressing = false;
   }
 
-  void _checkGameDie() {
-    var isOverlap =
-        game.size.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: _radius));
-    if (!isOverlap) {
-      _isRespawning = true;
-      manager.die();
-      add(
-        MoveToEffect(startBlock.position, EffectController(duration: 1, curve: Curves.easeInOutCubic))
-          ..onComplete = () {
-            _isRespawning = false;
-            velocity = V2.zero();
-          },
-      );
-    }
-  }
+  // endregion
 
-  void _checkGameClear() {
-    if (clearBlock.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: _radius))) {
-      _isCleared = true;
-      removeFromParent();
-      manager.clearLevel();
-    }
-  }
+  // region util
+
+  CollisionBlock? _isCollidedWithGeneralCollisions(V2 position) =>
+      collisionBlocks.firstWhereOrNull((element) => element.isOverlapWithBallNextPosition(position));
+
+  CollisionBlock? _isCollidedWithBomb(V2 position) =>
+      bombBlocks.firstWhereOrNull((element) => element.isOverlapWithBallNextPosition(position));
+
+  CollisionBlock? _isCollidedWithBreak(V2 position) =>
+      breakBlocks.firstWhereOrNull((element) => element.isOverlapWithBallNextPosition(position));
+
+  CollisionBlock? _isCollidedWithJump(V2 position) =>
+      jumpBlocks.firstWhereOrNull((element) => element.isOverlapWithBallNextPosition(position));
+
+  CollisionBlock? _isCollidedWithLeftArrow(V2 position) =>
+      leftArrowBlocks.firstWhereOrNull((element) => element.isOverlapWithBallNextPosition(position));
+
+  CollisionBlock? _isCollidedWithRightArrow(V2 position) =>
+      rightArrowBlocks.firstWhereOrNull((element) => element.isOverlapWithBallNextPosition(position));
+
+  bool _isCollidedWithClear(V2 position) => clearBlock.isOverlapWithBallNextPosition(position);
+
+  // endregion
 }

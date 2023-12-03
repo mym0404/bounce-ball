@@ -8,6 +8,20 @@
         "."
     ],
     "fileStates": {
+        "/Users/mj/Desktop/bounce-ball/assets/images/kenney_pixel-platformer/Tiled/tilemap-example-b.tmx": {
+            "scale": 1.471688034188034,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 234.08493647912886,
+                "y": 135.55862068965519
+            }
+        },
+        "/Users/mj/Desktop/bounce-ball/assets/images/kenney_pixel-platformer/Tiled/tileset-characters.tsx": {
+            "scaleInDock": 1
+        },
+        "/Users/mj/Desktop/bounce-ball/assets/images/kenney_pixel-platformer/Tiled/tileset-tiles.tsx": {
+            "scaleInDock": 1
+        },
         "Tiles.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1.3286,
@@ -75,11 +89,26 @@
             }
         },
         "lv-06.tmx": {
+            "expandedObjectLayers": [
+                4,
+                3,
+                5,
+                2,
+                8
+            ],
             "scale": 1.0192708333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 286.4793050587635,
-                "y": 217.31221257026058
+                "x": 281.57383750638735,
+                "y": 208.97291773122123
+            }
+        },
+        "lv-07.tmx": {
+            "scale": 1.1924479166666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 288.48220135400743,
+                "y": 192.0419305525224
             }
         }
     },
@@ -95,6 +124,7 @@
     "project": "tile.tiled-project",
     "recentFiles": [
         "lv-06.tmx",
+        "/Users/mj/Desktop/bounce-ball/assets/images/kenney_pixel-platformer/Tiled/tilemap-example-b.tmx",
         "lv-05.tmx",
         "lv-04.tmx",
         "lv-03.tmx",

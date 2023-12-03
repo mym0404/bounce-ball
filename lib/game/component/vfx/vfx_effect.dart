@@ -45,3 +45,8 @@ class WallStrongJumpVfxEffect extends VfxEffect {
   WallStrongJumpVfxEffect()
       : super(imageName: 'effect/smoke/smoke2.png', row: 4, stepTime: 0.05, end: 10, size: V2.all(64));
 }
+
+class BombVfxEffect extends VfxEffect {
+  BombVfxEffect()
+      : super(imageName: 'effect/smoke/smoke2.png', row: 7, stepTime: 0.05, end: 10, size: V2.all(64));
+}
