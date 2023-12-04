@@ -1,3 +1,5 @@
+import 'package:flutter_animate/flutter_animate.dart';
+
 import '../../export.dart';
 import '../../feature/common/widget/blur.dart';
 import '../../feature/common/widget/overlay_panel.dart';
@@ -16,21 +18,34 @@ class _GameReadyOverlayState extends State<GameReadyOverlay> {
       colorOpacity: 0.1,
       child: Center(
         child: OverlayPanel(
+          size: PanelSize.l,
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Bounce Ball 🥎',
+                  'Bounce Ball',
                   style: TS.titleLarge,
                 ),
-                const Gap(48),
+                const Gap(12),
+                const Text('Bounce your ball\nReach the Goal', textAlign: TextAlign.center),
+                const Gap(12),
+                img.logo1024
+                    .image(width: 128)
+                    .animate()
+                    .blur(duration: 2.seconds, end: Offset.zero, begin: const Offset(12, 12)),
+                const Gap(12),
                 FilledButton.tonal(
                   onPressed: () {
                     manager.startGame();
                   },
                   child: const Text('Start'),
-                )
+                ),
+                const Gap(12),
+                Text(
+                  'MJ Studio',
+                  style: TS.l3.onSurface50,
+                ),
               ],
             ),
           ),

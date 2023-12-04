@@ -112,12 +112,21 @@ class TS {
   static const l2 = labelMedium;
   static const l3 = labelSmall;
 
-  static const bold = TextStyle(fontWeight: FontWeight.bold);
-  static const medium = TextStyle(fontWeight: FontWeight.w500);
+  static const bold = TextStyle(fontFamily: FontFamily.stardust, fontWeight: FontWeight.bold);
+  static const medium = TextStyle(fontFamily: FontFamily.stardust, fontWeight: FontWeight.w500);
 }
 
 extension TextStyleExtension on TextStyle {
   TextStyle c(Color c) => copyWith(color: c);
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
   TextStyle get medium => copyWith(fontWeight: FontWeight.w500);
+  TextStyle get onSurface30 => copyWith(color: C.onSurface30);
+  TextStyle get onSurface50 => copyWith(color: C.onSurface50);
+  TextStyle get onSurface70 => copyWith(color: C.onSurface70);
+  TextStyle get surface30 => copyWith(color: C.surface30);
+  TextStyle get surface50 => copyWith(color: C.surface50);
+  TextStyle get surface70 => copyWith(color: C.surface70);
+  TextStyle get primary30 => copyWith(color: C.primary30);
+  TextStyle get primary50 => copyWith(color: C.primary50);
+  TextStyle get primary70 => copyWith(color: C.primary70);
 }

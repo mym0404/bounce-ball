@@ -18,6 +18,7 @@ export 'package:flutter/foundation.dart' hide binarySearch, mergeSort;
 export 'package:flutter/gestures.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter/services.dart';
+export 'package:flutter_animate/src/extensions/num_duration_extensions.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:gap/gap.dart';
 export 'package:get_it/get_it.dart';

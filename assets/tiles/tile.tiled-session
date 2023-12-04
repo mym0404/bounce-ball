@@ -90,40 +90,48 @@
         },
         "lv-06.tmx": {
             "expandedObjectLayers": [
-                4,
+                2,
                 3,
                 5,
-                2,
-                8
+                8,
+                4
             ],
             "scale": 1.0192708333333333,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 281.57383750638735,
-                "y": 208.97291773122123
+                "x": 288.93203883495147,
+                "y": 186.89831374552892
             }
         },
         "lv-07.tmx": {
             "scale": 1.1924479166666666,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 288.48220135400743,
-                "y": 192.0419305525224
+                "x": 288.0628958287836,
+                "y": 192.4612360777462
             }
         },
         "lv-08.tmx": {
             "expandedObjectLayers": [
-                6,
-                3,
-                5,
                 2,
+                3,
+                7,
+                5,
                 8,
-                7
+                6
             ],
             "scale": 1.1924479166666666,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 288.48220135400743,
+                "x": 282.6119240008735,
+                "y": 186.17165319938852
+            }
+        },
+        "lv-09.tmx": {
+            "scale": 1.1924479166666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 231.4566499235641,
                 "y": 192.0419305525224
             }
         },
@@ -131,8 +139,8 @@
             "scale": 1.1924479166666666,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 288.48220135400743,
-                "y": 192.0419305525224
+                "x": 288.0628958287836,
+                "y": 192.4612360777462
             }
         }
     },
@@ -150,18 +158,18 @@
     ],
     "project": "tile.tiled-project",
     "recentFiles": [
+        "lv-09.tmx",
+        "lv-08.tmx",
         "lv-06.tmx",
         "lv-07.tmx",
         "lv-16.tmx",
-        "lv-08.tmx",
         "/Users/mj/Desktop/bounce-ball/assets/images/kenney_pixel-platformer/Tiled/tilemap-example-b.tmx",
         "lv-05.tmx",
         "lv-04.tmx",
         "lv-03.tmx",
         "lv-02.tmx",
         "Tiles.tsx",
-        "lv-01.tmx",
-        "level-01.tmx"
+        "lv-01.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

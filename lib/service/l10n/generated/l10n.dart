@@ -60,51 +60,31 @@ class S {
     );
   }
 
-  /// `Welcome`
-  String get homeTitle {
+  /// `Bounce Ball`
+  String get app_name {
     return Intl.message(
-      'Welcome',
-      name: 'homeTitle',
+      'Bounce Ball',
+      name: 'app_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `Welcome to Flutter Boilerplate project\nThis can be your very good start point.`
-  String get homeBody {
+  /// `Settings`
+  String get setting_title {
     return Intl.message(
-      'Welcome to Flutter Boilerplate project\nThis can be your very good start point.',
-      name: 'homeBody',
+      'Settings',
+      name: 'setting_title',
       desc: '',
       args: [],
     );
   }
 
-  /// `Go Detail`
-  String get homeNavigateDetailButton {
+  /// `Start`
+  String get g_start {
     return Intl.message(
-      'Go Detail',
-      name: 'homeNavigateDetailButton',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Detail`
-  String get detailTitle {
-    return Intl.message(
-      'Detail',
-      name: 'detailTitle',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Setting`
-  String get settingTitle {
-    return Intl.message(
-      'Setting',
-      name: 'settingTitle',
+      'Start',
+      name: 'g_start',
       desc: '',
       args: [],
     );
@@ -117,6 +97,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ko'),
     ];
   }
 
