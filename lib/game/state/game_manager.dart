@@ -14,6 +14,7 @@ class GameManager {
   }
 
   void clearLevel() {
+    fbAnalytics.logLevelEnd(levelName: level.value.name);
     var index = Level.values.indexOf(level.value);
     if (index == Level.values.length - 1) {
       _allClear();
@@ -37,5 +38,6 @@ class GameManager {
 
   void die() {
     deathCount.value += 1;
+    fbAnalytics.logEvent(name: 'level_die', parameters: {'level': level.value.name});
   }
 }

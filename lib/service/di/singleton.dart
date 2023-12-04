@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:local_file_preferences/local_file_preferences.dart';
 import 'package:logger/logger.dart';
 
@@ -31,3 +32,4 @@ Future<void> registerSingletons() async {
 
 Logger get log => di();
 GameManager get manager => di();
+FirebaseAnalytics get fbAnalytics => FirebaseAnalytics.instance;

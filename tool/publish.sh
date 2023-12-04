@@ -20,7 +20,7 @@ git init
 # change this remote url for examle your remote url is https://github.com/onatcipli/flutter_web.git then the following:
 git remote add origin "https://github.com/mym0404/${repo_name}.git"
 git checkout -b gh-pages
-git add --all
+git add .
 git commit -m "update" --allow-empty
 git push origin gh-pages -f
 
