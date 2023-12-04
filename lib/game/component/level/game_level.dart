@@ -19,7 +19,7 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
   final Level level;
 
   late final TiledComponent _tile;
-  late final Ball _ball;
+  late final Ball ball;
   final List<CollisionBlock> collisionBlocks = [];
   final List<CollisionBlock> jumpBlocks = [];
   final List<CollisionBlock> bombBlocks = [];
@@ -53,8 +53,8 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
     var ballObj = layer!.objects.firstWhere((element) => element.class_ == 'start');
     startBlock = CollisionBlock.fromObject(ballObj);
 
-    _ball = Ball(position: V2(ballObj.x, ballObj.y), key: ComponentKey.named('ball'));
-    _tile.add(_ball);
+    ball = Ball(position: V2(ballObj.x, ballObj.y), key: ComponentKey.named('ball'));
+    _tile.add(ball);
   }
 
   void _initCollisions() {

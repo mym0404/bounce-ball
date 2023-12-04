@@ -3,14 +3,14 @@ import 'package:flame/game.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import '../export.dart';
-import '../feature/common/ui/widget/game_icon_button.dart';
+import '../feature/common/widget/app_dialog.dart';
+import '../feature/common/widget/game_icon_button.dart';
+import '../feature/common/widget/overlay_panel.dart';
 import '../service/user_preferences/user_preferences.dart';
 import 'component/ball/ball.dart';
 import 'main_game.dart';
-import 'overlay/game_all_clear_overlay.dart';
-import 'overlay/game_ready_overlay.dart';
+import 'overlay/game_map_overlay.dart';
 import 'overlay/game_status_panel.dart';
-import 'overlay/overlay_id.dart';
 import 'overlay/settings_overlay.dart';
 import 'state/game_manager.dart';
 
@@ -28,6 +28,11 @@ class _GamePageState extends State<GamePage> {
   void initState() {
     super.initState();
     di.registerSingleton(_game);
+
+    if(kDebugMode){
+      showAppDialog(context, (context) => const GameMapOverlay(),
+          maxHeightRatio: 0.85, size: PanelSize.l);
+    }
   }
 
   @override
@@ -46,11 +51,6 @@ class _GamePageState extends State<GamePage> {
       children: [
         GameWidget(
           game: _game,
-          overlayBuilderMap: {
-            OverlayId.ready: (context, game) => const GameReadyOverlay(),
-            OverlayId.settings: (context, game) => const SettingsOverlay(),
-            OverlayId.allClear: (context, game) => const GameAllClearOverlay()
-          },
         ),
         const TopLeft(
           child: PaddingAll(24, child: GameStatusPanel()),
@@ -58,17 +58,43 @@ class _GamePageState extends State<GamePage> {
         TopRight(
           child: PaddingAll(
             24,
-            child: GameIconButton(
-              icon: MdiIcons.cog,
-              size: 32,
-              onPressed: () {
-                _game.overlays.add(OverlayId.settings);
-              },
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (isGameStarted) ...[
+                  GameIconButton(
+                    icon: MdiIcons.map,
+                    size: 32,
+                    onPressed: () {
+                      showAppDialog(context, (context) => const GameMapOverlay(),
+                          maxHeightRatio: 0.85, size: PanelSize.l);
+                    },
+                  ),
+                  const Gap(12)
+                ],
+                if (isGameStarted) ...[
+                  GameIconButton(
+                    icon: MdiIcons.refresh,
+                    size: 32,
+                    onPressed: () {
+                      manager.resetLevel();
+                    },
+                  ),
+                  const Gap(12)
+                ],
+                GameIconButton(
+                  icon: MdiIcons.cog,
+                  size: 32,
+                  onPressed: () {
+                    showAppDialog(context, (context) => const SettingsOverlay());
+                  },
+                ),
+              ],
             ),
           ),
         ),
-        if (userPref.value.isShowArrowControls) _leftArrow(isGameStarted),
-        if (userPref.value.isShowArrowControls) _rightArrow(isGameStarted),
+        if (userPref.value.isShowArrowControls && isGameStarted) _leftArrow(isGameStarted),
+        if (userPref.value.isShowArrowControls && isGameStarted) _rightArrow(isGameStarted),
         BottomCenter(
           child: PaddingBottom(
             24,

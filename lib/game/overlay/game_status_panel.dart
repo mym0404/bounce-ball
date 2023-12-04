@@ -8,6 +8,7 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
   Widget build(BuildContext context) {
     var level = watchValue((GameManager e) => e.level);
     var deathCount = watchValue((GameManager e) => e.deathCount);
+    var isGameStarted = watchValue((GameManager e) => e.isGameStarted);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -17,8 +18,9 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
           'BOUNCE    BALL  (0.0.1)',
           style: TS.t3.bold,
         ),
-        Text('LV ${level.name.split('').where((element) => RegExp(r'\d').hasMatch(element)).join()}'),
-        Text('DIE $deathCount'),
+        if (isGameStarted)
+          Text('LV ${level.name.split('').where((element) => RegExp(r'\d').hasMatch(element)).join()}'),
+        if (isGameStarted) Text('DIE $deathCount'),
       ],
     );
   }

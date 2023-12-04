@@ -8,20 +8,23 @@ class OverlayPanel extends StatelessWidget with WatchItMixin {
     super.key,
     required this.child,
     this.size = PanelSize.m,
+    this.maxHeightRatio,
   });
 
   final Widget child;
   final PanelSize size;
+  final double? maxHeightRatio;
 
   @override
   Widget build(BuildContext context) {
-    var screenWidth = watchPropertyValue((LayoutManager e) => e.size.width);
-    var maxWidth = screenWidth * 0.9;
-    var minWidth = min(maxWidth, size.minWidth);
+    var screenSize = watchPropertyValue((LayoutManager e) => e.size);
+    var maxWidth = screenSize.width * 0.9;
 
     return Container(
       padding: const EdgeInsets.all(16),
-      constraints: BoxConstraints(minWidth: minWidth),
+      width: min(maxWidth, size.minWidth),
+      constraints:
+          maxHeightRatio != null ? BoxConstraints(maxHeight: maxHeightRatio! * screenSize.height) : null,
       decoration: BoxDecoration(
         borderRadius: 4.bRadius,
         border: Border.all(color: C.onSurface),

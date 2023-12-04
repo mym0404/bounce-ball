@@ -269,8 +269,15 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _die() {
-    _isRespawning = true;
     manager.die();
+    reset();
+  }
+
+  void reset() {
+    _isRespawning = true;
+    _isFlying = false;
+    isLeftPressing = false;
+    isRightPressing = false;
     add(
       MoveToEffect(startBlock.position, EffectController(duration: 1, curve: Curves.easeInOutCubic))
         ..onComplete = () {
@@ -319,8 +326,12 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _onKeyDown(LogicalKeyboardKey key) {
+    if (_isRespawning) return;
     if (_isFlying && (key == LogicalKeyboardKey.arrowLeft || key == LogicalKeyboardKey.arrowRight)) {
       _isFlying = false;
+    }
+    if (key == LogicalKeyboardKey.keyR) {
+      reset();
     }
   }
 

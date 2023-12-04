@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../export.dart';
+import '../../feature/common/widget/app_scroll_behavior.dart';
 import '../../firebase_options.dart';
 import '../l10n/util/l10n_manager.dart';
 import '../router/app_router.dart';
@@ -51,7 +52,7 @@ class BootStrapApp extends StatelessWidget with WatchItMixin {
       theme: AppTheme.instance.createTheme(Brightness.dark),
       darkTheme: AppTheme.instance.createTheme(Brightness.dark),
       themeMode: ThemeMode.dark,
-      // scrollBehavior: const AppScrollBehavior(),
+      scrollBehavior: const AppScrollBehavior(),
       debugShowCheckedModeBanner: false,
     );
   }

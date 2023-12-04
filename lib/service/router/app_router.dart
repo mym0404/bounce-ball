@@ -3,14 +3,17 @@ import 'package:flutter/cupertino.dart';
 import '../../export.dart';
 import '../../game/game_page.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final rootNavigatorKey = GlobalKey<NavigatorState>();
+BuildContext get globalContext => rootNavigatorKey.currentContext!;
+final _shellRootNavigatorKey = GlobalKey<NavigatorState>();
 
 final appRouter = GoRouter(
   debugLogDiagnostics: true,
   initialLocation: '/',
+  navigatorKey: rootNavigatorKey,
   routes: [
     ShellRoute(
-      navigatorKey: _rootNavigatorKey,
+      navigatorKey: _shellRootNavigatorKey,
       builder: (context, state, child) => AppScaffold(child: child),
       routes: [
         AppRoute('/', (_) => const GamePage()),

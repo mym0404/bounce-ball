@@ -1,5 +1,5 @@
-import '../../../../export.dart';
-import '../../../../service/layout/layout_manager.dart';
+import '../../../export.dart';
+import '../../../service/layout/layout_manager.dart';
 
 class AppScaffold extends StatelessWidget {
   const AppScaffold({
