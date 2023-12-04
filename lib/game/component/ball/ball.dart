@@ -1,7 +1,7 @@
 import 'package:flame/effects.dart';
 
 import '../../../export.dart';
-import '../collision/CollisionBlock.dart';
+import '../collision/collision_block.dart';
 import '../level/game_level.dart';
 import '../vfx/vfx_effect.dart';
 

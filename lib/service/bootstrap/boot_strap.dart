@@ -7,15 +7,20 @@ import '../l10n/util/l10n_manager.dart';
 import '../router/app_router.dart';
 
 Future<void> bootStrap() async {
-  await _initFirebase();
   await registerSingletons();
+  await _initFirebase();
   _registerErrorHandler();
   runApp(const BootStrapApp());
 }
 
 FutureOr<void> _initFirebase() async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // fbAnalytics.setAnalyticsCollectionEnabled(!kDebugMode);
+  try {
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    // fbAnalytics.setAnalyticsCollectionEnabled(!kDebugMode);
+  } catch (e) {
+    print(e);
+    log.e(e);
+  }
 }
 
 void _registerErrorHandler() {

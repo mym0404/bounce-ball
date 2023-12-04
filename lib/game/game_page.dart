@@ -40,7 +40,6 @@ class _GamePageState extends State<GamePage> {
   Widget build(BuildContext context) {
     var isGameStarted = watchValue((GameManager e) => e.isGameStarted);
     var gameLevel = watchValue((GameManager e) => e.level);
-    var deathCount = watchValue((GameManager e) => e.deathCount);
     var userPref = watchIt<UserPreferences>();
 
     return Stack(

@@ -26,7 +26,6 @@ Future<void> registerSingletons() async {
     ),
   );
   di.registerSingleton(LayoutManager());
-
   di.registerSingleton(GameManager());
 }
 

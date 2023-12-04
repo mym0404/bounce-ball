@@ -8,7 +8,7 @@ import '../block_decoration/break_block_decoration.dart';
 import '../block_decoration/clear_block_decoration.dart';
 import '../block_decoration/jump_block_decoration.dart';
 import '../block_decoration/right_arrow_block_decoration.dart';
-import '../collision/CollisionBlock.dart';
+import '../collision/collision_block.dart';
 import 'Level.dart';
 
 class GameLevel extends World with GRef, DisposeBag implements PositionProvider {
