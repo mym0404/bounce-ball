@@ -16,11 +16,8 @@ Future<void> bootStrap() async {
 FutureOr<void> _initFirebase() async {
   try {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-    // fbAnalytics.setAnalyticsCollectionEnabled(!kDebugMode);
-  } catch (e) {
-    print(e);
-    log.e(e);
-  }
+    fbAnalytics.setAnalyticsCollectionEnabled(!kDebugMode);
+  } catch (e) {}
 }
 
 void _registerErrorHandler() {
