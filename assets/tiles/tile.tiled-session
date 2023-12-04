@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "lv-06.tmx",
+    "activeFile": "lv-08.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -110,6 +110,30 @@
                 "x": 288.48220135400743,
                 "y": 192.0419305525224
             }
+        },
+        "lv-08.tmx": {
+            "expandedObjectLayers": [
+                6,
+                3,
+                5,
+                2,
+                8,
+                7
+            ],
+            "scale": 1.1924479166666666,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 288.48220135400743,
+                "y": 192.0419305525224
+            }
+        },
+        "lv-16.tmx": {
+            "scale": 1.1924479166666666,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 288.48220135400743,
+                "y": 192.0419305525224
+            }
         }
     },
     "last.imagePath": "/Users/mj/Desktop/bounce-ball/assets/tile",
@@ -119,12 +143,17 @@
     "map.tileWidth": 16,
     "map.width": 36,
     "openFiles": [
-        "lv-06.tmx"
+        "lv-06.tmx",
+        "lv-07.tmx",
+        "lv-08.tmx",
+        "lv-16.tmx"
     ],
     "project": "tile.tiled-project",
     "recentFiles": [
         "lv-06.tmx",
         "lv-07.tmx",
+        "lv-16.tmx",
+        "lv-08.tmx",
         "/Users/mj/Desktop/bounce-ball/assets/images/kenney_pixel-platformer/Tiled/tilemap-example-b.tmx",
         "lv-05.tmx",
         "lv-04.tmx",

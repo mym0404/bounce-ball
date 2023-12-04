@@ -5,7 +5,8 @@ enum Level {
   lv04('lv-04', 36, 24, 'It seems to impossible hah?'),
   lv05('lv-05', 36, 24, 'This is really really impossible!?\nHint: This is the last stage'),
   lv06('lv-06', 36, 24, 'Life isn\'t always easy'),
-  lv07('lv-07', 36, 24, 'Show me what you would jump\nwithout limit'),
+  lv07('lv-07', 36, 24, 'Jump as high as possible'),
+  lv08('lv-08', 36, 24, 'Move like sneak'),
   lv16('lv-16', 36, 24, 'Welcome to New World!\na.k.a. Hello World!'),
   ;
 

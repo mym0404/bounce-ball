@@ -22,6 +22,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   final double _wallGeneralJumpYForce = 30;
 
   final double _maxXSpeed = 120;
+  final double _flyingXSpeed = 170;
   final double _inputXForce = 120;
   final double gravity = 600;
   final double terminalYVelocity = 400;
@@ -47,6 +48,17 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   int lastStrongJump = 0;
 
+  bool _isFlyingByRightArrow = false;
+  bool _isFlyingByLeftArrow = false;
+  bool get _isFlying => _isFlyingByRightArrow || _isFlyingByLeftArrow;
+  set _isFlying(bool value) {
+    if (value == false) {
+      _isFlyingByLeftArrow = _isFlyingByRightArrow = false;
+    } else {
+      assert(false);
+    }
+  }
+
   // region init
 
   @override
@@ -71,7 +83,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     if (_isRespawning) return;
     _handleInput(dt);
     _handleHorizontalMove(dt);
-    _applyGravity(dt);
+    if (!_isFlying) _applyGravity(dt);
     _verticalCollisionCheckAndMove(dt);
     _checkGameDieByOutside();
     _checkGameClear();
@@ -93,6 +105,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _handleInput(double dt) {
+    if (_isFlying) return;
     if (isLeftPressing && isRightPressing) return;
     if (isLeftPressing) {
       var diff = max(0, velocity.x - -_maxXSpeed);
@@ -140,8 +153,27 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
       return;
     }
 
-    if (isHorizontal) {
-      if (generalCollisionBlock != null) {
+    CollisionBlock? rightArrowBlock = _isCollidedWithRightArrow(nextPosition);
+    CollisionBlock? leftArrowBlock = _isCollidedWithLeftArrow(nextPosition);
+    if (rightArrowBlock != null) {
+      _isFlyingByRightArrow = true;
+      position = V2(rightArrowBlock.x + rightArrowBlock.width + ballRadius + 1,
+          rightArrowBlock.y + rightArrowBlock.height / 2);
+      velocity = V2(_flyingXSpeed, 0);
+      log.i(1);
+      return;
+    }
+    if (leftArrowBlock != null) {
+      _isFlyingByLeftArrow = true;
+      position = V2(leftArrowBlock.x - ballRadius - 1, leftArrowBlock.y + leftArrowBlock.height / 2);
+      velocity = V2(-_flyingXSpeed, 0);
+      return;
+    }
+
+    if (generalCollisionBlock != null) {
+      _isFlying = false;
+
+      if (isHorizontal) {
         if (generalCollisionBlock.x + generalCollisionBlock.width / 2 < position.x) {
           // left collision
           if (isRightPressing && unixMs - lastStrongJump >= 500) {
@@ -158,12 +190,8 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
             _wallGeneralJump(-1);
           }
         }
-
         nextPosition = position;
-        return;
-      }
-    } else {
-      if (generalCollisionBlock != null) {
+      } else {
         if (velocity.y > 0) {
           if (_isCollidedWithJump(nextPosition) != null) {
             _jump(jumpBlock: true);
@@ -262,6 +290,12 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   bool onKeyEvent(RawKeyEvent event, Set<LogicalKeyboardKey> keysPressed) {
     if (!manager.isGameStarted.value || setEquals(keysPressed, _previousPressedKeys)) return true;
 
+    for (var key in keysPressed) {
+      if (!_previousPressedKeys.contains(key)) {
+        _onKeyDown(key);
+      }
+    }
+
     isLeftPressing = keysPressed.contains(LogicalKeyboardKey.arrowLeft);
     isRightPressing = keysPressed.contains(LogicalKeyboardKey.arrowRight);
 
@@ -283,6 +317,12 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   void onTapUpRight() {
     isRightPressing = false;
+  }
+
+  void _onKeyDown(LogicalKeyboardKey key) {
+    if (_isFlying && (key == LogicalKeyboardKey.arrowLeft || key == LogicalKeyboardKey.arrowRight)) {
+      _isFlying = false;
+    }
   }
 
   // endregion
