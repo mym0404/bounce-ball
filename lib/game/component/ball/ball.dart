@@ -160,7 +160,6 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
       position = V2(rightArrowBlock.x + rightArrowBlock.width + ballRadius + 1,
           rightArrowBlock.y + rightArrowBlock.height / 2);
       velocity = V2(_flyingXSpeed, 0);
-      log.i(1);
       return;
     }
     if (leftArrowBlock != null) {
