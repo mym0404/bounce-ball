@@ -48,6 +48,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   bool _isRespawning = false;
   bool _isCleared = false;
+  bool _isReady = true;
 
   int lastStrongJump = 0;
 
@@ -87,7 +88,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   void update(double dt) {
     if (_isCleared) return;
 
-    if (!_isRespawning) {
+    if (!_isRespawning && !_isReady) {
       _handleInput(dt);
       _handleHorizontalMove(dt);
       if (!_isFlying) _applyGravity(dt);
@@ -347,6 +348,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   }
 
   void _onKeyDown(LogicalKeyboardKey key) {
+    _isReady = false;
     if (_isRespawning) return;
     if (_isFlying && (key == LogicalKeyboardKey.arrowLeft || key == LogicalKeyboardKey.arrowRight)) {
       _isFlying = false;

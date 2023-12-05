@@ -14,11 +14,12 @@ import 'Level.dart';
 class GameLevel extends World with GRef, DisposeBag implements PositionProvider {
   GameLevel({
     required this.level,
+    required this.tile,
   });
 
   final Level level;
 
-  late final TiledComponent _tile;
+  final TiledComponent tile;
   late final Ball ball;
   final List<CollisionBlock> collisionBlocks = [];
   final List<CollisionBlock> jumpBlocks = [];
@@ -29,14 +30,11 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
   late final CollisionBlock clearBlock;
   late final CollisionBlock startBlock;
 
-  bool resizable = false;
-
   @override
   FutureOr<void> onLoad() async {
-    _tile = await TiledComponent.load('${level.name}.tmx', V2.all(16));
-    _tile.anchor = Anchor.center;
-    _tile.position = game.size / 2;
-    add(_tile);
+    tile.anchor = Anchor.center;
+    tile.position = game.size / 2;
+    add(tile);
 
     _initBall();
     _initCollisions();
@@ -46,33 +44,29 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
     _initBreakBlocks();
     _initLeftArrowBlocks();
     _initRightArrowBlocks();
-
-    2.seconds.runAfter(() => resizable = true);
   }
 
   @override
   void onGameResize(Vector2 size) {
     super.onGameResize(size);
-    if (resizable) {
-      doOnLayout(() {
-        _tile.position = game.size / 2;
-      });
-    }
+    doOnLayout(() {
+      tile.position = game.size / 2;
+    });
   }
 
   void _initBall() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('spot');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('spot');
     assert(layer != null);
 
     var ballObj = layer!.objects.firstWhere((element) => element.class_ == 'start');
     startBlock = CollisionBlock.fromObject(ballObj);
 
     ball = Ball(position: V2(ballObj.x, ballObj.y), key: ComponentKey.named('ball'));
-    _tile.add(ball);
+    tile.add(ball);
   }
 
   void _initCollisions() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('collision');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('collision');
 
     if (layer != null) {
       for (final obj in layer.objects) {
@@ -83,45 +77,45 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
   }
 
   void _initJumpBlocks() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('jump');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('jump');
 
     if (layer != null) {
       for (final obj in layer.objects) {
         var block = CollisionBlock.fromObject(obj)..add(JumpBlockDecoration());
         jumpBlocks.add(block);
-        _tile.add(block);
+        tile.add(block);
       }
     }
   }
 
   void _initClearBlock() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('spot');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('spot');
     var obj = layer!.objects.firstWhere((element) => element.class_ == 'goal');
 
     clearBlock = CollisionBlock.fromObject(obj)..add(ClearBlockDecoration());
-    _tile.add(clearBlock);
+    tile.add(clearBlock);
   }
 
   void _initBombBlocks() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('bomb');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('bomb');
 
     if (layer != null) {
       for (final obj in layer.objects) {
         var block = CollisionBlock.fromObject(obj)..add(BombBlockDecoration());
         bombBlocks.add(block);
-        _tile.add(block);
+        tile.add(block);
       }
     }
   }
 
   void _initBreakBlocks() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('break');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('break');
 
     if (layer != null) {
       for (final obj in layer.objects) {
         var block = CollisionBlock.fromObject(obj)..add(BreakBlockDecoration());
         breakBlocks.add(block);
-        _tile.add(block);
+        tile.add(block);
       }
     }
   }
@@ -131,26 +125,26 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
   }
 
   void _initLeftArrowBlocks() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('leftArrow');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('leftArrow');
 
     if (layer != null) {
       for (final obj in layer.objects) {
         var block = CollisionBlock.fromObject(obj)
           ..add(RightArrowBlockDecoration()..flipHorizontallyAroundCenter());
         leftArrowBlocks.add(block);
-        _tile.add(block);
+        tile.add(block);
       }
     }
   }
 
   void _initRightArrowBlocks() {
-    final layer = _tile.tileMap.getLayer<ObjectGroup>('rightArrow');
+    final layer = tile.tileMap.getLayer<ObjectGroup>('rightArrow');
 
     if (layer != null) {
       for (final obj in layer.objects) {
         var block = CollisionBlock.fromObject(obj)..add(RightArrowBlockDecoration());
         rightArrowBlocks.add(block);
-        _tile.add(block);
+        tile.add(block);
       }
     }
   }
@@ -162,10 +156,10 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
   }
 
   @override
-  Vector2 get position => _tile.position;
+  Vector2 get position => tile.position;
 
   @override
   set position(Vector2 value) {
-    _tile.position = value;
+    tile.position = value;
   }
 }

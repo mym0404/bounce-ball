@@ -54,7 +54,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
             contentPadding: EdgeInsets.zero,
           ),
           const Gap(12),
-          Text('Camera Zoom Scale'),
+          const Text('Camera Zoom Scale'),
           VL(
             valueListenable: userPref,
             builder: (context, pref, child) {

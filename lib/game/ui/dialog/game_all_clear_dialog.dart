@@ -9,8 +9,6 @@ class GameAllClearDialog extends StatefulWidget {
 }
 
 class _GameAllClearDialogState extends State<GameAllClearDialog> {
-  late final nickname = TC(text: '문명주');
-
   MainGame get game => di();
 
   @override

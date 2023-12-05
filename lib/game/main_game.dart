@@ -39,32 +39,21 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
     }, listenInitialValue: false);
   }
 
-  void _loadLevel(Level level) {
+  void _loadLevel(Level level) async {
     var currentWorld = children.query<GameLevel>().firstOrNull;
     var showTransition = level != Level.values.first && currentWorld != null;
 
-    var newWorld = GameLevel(level: level);
+    var newTile = await TiledComponent.load('${level.name}.tmx', V2.all(16));
+    var newWorld = GameLevel(level: level, tile: newTile);
 
     if (showTransition) {
       currentWorld.add(
         MoveByEffect(V2(0, -size.y), EffectController(duration: 0.5, curve: Curves.easeInOutCubic))
           ..onComplete = () {
-            addAll([newWorld]);
-            camera = createCameraByZoomScale(world: newWorld, zoomScale: userPref.value.cameraZoomScale);
+            currentWorld.removeFromParent();
             world = newWorld;
-
-            newWorld.add(
-              SequenceEffect([
-                MoveByEffect(
-                  V2(0, size.y * userPref.value.cameraZoomScale),
-                  EffectController(duration: 0.0001, curve: Curves.easeInOutCubic),
-                ),
-                MoveByEffect(
-                  V2(0, -size.y * userPref.value.cameraZoomScale),
-                  EffectController(duration: 0.5, curve: Curves.easeInOutCubic),
-                )
-              ]),
-            );
+            camera.world = newWorld;
+            add(newWorld);
           },
       );
     } else {
