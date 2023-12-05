@@ -1,3 +1,4 @@
+import 'package:flame/widgets.dart';
 import 'package:grouped_list/grouped_list.dart';
 
 import '../../export.dart';
@@ -19,6 +20,19 @@ class GameMapOverlay extends StatelessWidget {
             Text(
               '---- Chapter ${element.world.index} ---',
               style: TS.t3.medium,
+            ),
+            const Gap(8),
+            SizedBox(
+              height: 64,
+              width: 64,
+              child: SpriteAnimationWidget.asset(
+                path: element.world.sprite.gPath,
+                data: SpriteAnimationData.sequenced(
+                  amount: element.world.spriteAmount,
+                  stepTime: 0.3,
+                  textureSize: V2.all(128),
+                ),
+              ),
             ),
             const Gap(8),
             Text(

@@ -65,7 +65,7 @@ enum Level {
     'Move like sneak',
   ),
   lv16(
-    LevelWorlds.brick02,
+    LevelWorlds.abandondGasStation02,
     'lv-16',
     36,
     24,
@@ -86,8 +86,8 @@ enum Level {
 
 enum LevelWorlds {
   dummy0(''),
-  unknownGalaxy01('Unknown Galaxy'),
-  brick02('Brick'),
+  unknownGalaxy01('Unknown Planet'),
+  abandondGasStation02('Abandoned Gas Station'),
   ;
 
   const LevelWorlds(this.name);
@@ -96,6 +96,12 @@ enum LevelWorlds {
 
   AssetGenImage get sprite => switch (this) {
         LevelWorlds.unknownGalaxy01 => img.planet.world1,
+        LevelWorlds.abandondGasStation02 => img.planet.world2,
         _ => img.planet.world1,
+      };
+  int get spriteAmount => switch (this) {
+        LevelWorlds.unknownGalaxy01 => 24,
+        LevelWorlds.abandondGasStation02 => 48,
+        _ => 1,
       };
 }
