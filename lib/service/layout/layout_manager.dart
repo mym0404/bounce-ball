@@ -38,7 +38,6 @@ class LayoutManager extends ValueNotifier<LayoutData> {
   set supportedOrientationsOverride(List<Axis>? value) {
     if (_supportedOrientationsOverride != value) {
       _supportedOrientationsOverride = value;
-      _updateSystemOrientation();
     }
   }
 
@@ -51,38 +50,11 @@ class LayoutManager extends ValueNotifier<LayoutData> {
     /// Disable landscape layout on smaller form factors
     bool isSmall = display.size.shortestSide / display.devicePixelRatio < 600;
     supportedOrientations = isSmall ? [Axis.vertical] : [Axis.vertical, Axis.horizontal];
-    _updateSystemOrientation();
     value = value.copyWith(
       size: size,
       padding: padding,
       viewPadding: viewPadding,
       viewInsets: viewInsets,
     );
-  }
-
-  /// Enable landscape, portrait or both. Views can call this method to override the default settings.
-  /// For example, the [FullscreenVideoViewer] always wants to enable both landscape and portrait.
-  /// If a view overrides this, it is responsible for setting it back to [supportedOrientations] when disposed.
-  void _updateSystemOrientation() {
-    final axisList = _supportedOrientationsOverride ?? supportedOrientations;
-    //debugPrint('updateDeviceOrientation, supportedAxis: $axisList');
-    final orientations = <DeviceOrientation>[];
-    if (axisList.contains(Axis.vertical)) {
-      orientations.addAll([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    }
-    if (axisList.contains(Axis.horizontal)) {
-      orientations.addAll([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    }
-    SystemChrome.setPreferredOrientations(orientations);
   }
 }

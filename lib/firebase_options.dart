@@ -21,15 +21,9 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -60,5 +54,22 @@ class DefaultFirebaseOptions {
     authDomain: 'bounce-ball-dc155.firebaseapp.com',
     storageBucket: 'bounce-ball-dc155.appspot.com',
     measurementId: 'G-V5KRKQ5H4D',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyA70985ZmzJNTH_iPnrz9K8c6ZwtdMp6bs',
+    appId: '1:170994721232:android:2a67cf3e0351bafd5859d5',
+    messagingSenderId: '170994721232',
+    projectId: 'bounce-ball-dc155',
+    storageBucket: 'bounce-ball-dc155.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCKMp6SEkqXRL528csU63knKKHXk4RIHzQ',
+    appId: '1:170994721232:ios:e24c618c302986345859d5',
+    messagingSenderId: '170994721232',
+    projectId: 'bounce-ball-dc155',
+    storageBucket: 'bounce-ball-dc155.appspot.com',
+    iosBundleId: 'happy.mjstudio.bounceball',
   );
 }

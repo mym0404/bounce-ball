@@ -43,11 +43,5 @@ class GameMapOverlay extends StatelessWidget {
       stickyHeaderBackgroundColor: C.surface50,
       useStickyGroupSeparators: true,
     );
-    return ListView.builder(
-      itemCount: 100,
-      itemBuilder: (context, index) => ListTile(
-        title: Text('$index'),
-      ),
-    );
   }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "170994721232",
+    "project_id": "bounce-ball-dc155",
+    "storage_bucket": "bounce-ball-dc155.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170994721232:android:2a67cf3e0351bafd5859d5",
+        "android_client_info": {
+          "package_name": "happy.mjstudio.bounceball"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA70985ZmzJNTH_iPnrz9K8c6ZwtdMp6bs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

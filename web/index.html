@@ -43,22 +43,20 @@
   
   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
   
-  <meta property="og:title" content="Bounce Ball"/>
-  <meta property="og:image" content="icons/Icon-512.png"/>
-  <meta property="og:description" content="Bounce your ball."/>
-  <meta property="og:url" content="https://mym0404.github.io/bounce-ball/"/>
-  <meta property="og:image:width" content="512" />
-  <meta property="og:image:height" content="512"/>
-  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Bounce Ball">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:description" content="Bounce your ball.">
+  <meta property="og:url" content="https://mym0404.github.io/bounce-ball/">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:type" content="website">
+  
+  
   
   
   
   
   <style id="splash-screen-style">
-    body {
-      background-color: black;
-    }
-  
     .flutter-loader {
       z-index: 999999;
     }
@@ -73,9 +71,8 @@
         opacity: 1;
         /* animation type and duration */
         transition: opacity 0.25s;
-        background-color: #ffffff;
-        background-image: url("splash/img/light-background.png");
-        -moz-osx-font-smoothing: grayscale;
+        background-color: #000000;
+              -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
     }
     
@@ -144,6 +141,13 @@
   </script>
 </head>
 <body>
+  <div id="splash">
+    <picture>
+        <source srcset="splash/img/light-1x.png 1x, splash/img/light-2x.png 2x, splash/img/light-3x.png 3x, splash/img/light-4x.png 4x" media="(prefers-color-scheme: light)">
+        <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
+        <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
+    </picture>
+  </div>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
