@@ -104,4 +104,9 @@ enum LevelWorlds {
         LevelWorlds.abandondGasStation02 => 48,
         _ => 1,
       };
+  double get spriteSize => switch (this) {
+        LevelWorlds.unknownGalaxy01 => 128,
+        LevelWorlds.abandondGasStation02 => 256,
+        _ => 1,
+      };
 }

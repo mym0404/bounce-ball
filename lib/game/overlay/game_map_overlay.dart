@@ -30,7 +30,7 @@ class GameMapOverlay extends StatelessWidget {
                 data: SpriteAnimationData.sequenced(
                   amount: element.world.spriteAmount,
                   stepTime: 0.3,
-                  textureSize: V2.all(128),
+                  textureSize: V2.all(element.world.spriteSize),
                 ),
               ),
             ),
@@ -55,7 +55,7 @@ class GameMapOverlay extends StatelessWidget {
       },
       groupSeparatorBuilder: (value) => const Divider(),
       stickyHeaderBackgroundColor: C.surface50,
-      useStickyGroupSeparators: true,
+      floatingHeader: true,
     );
   }
 }
