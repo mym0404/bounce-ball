@@ -12,7 +12,7 @@ class LevelClearStorage with LocalFilePrefMixin<List<String>> {
 
   @override
   List<String> fromJson(Map<String, dynamic> json) {
-    return json['data'] as List<String>;
+    return (json['data'] as List<dynamic>).cast<String>();
   }
 
   @override
