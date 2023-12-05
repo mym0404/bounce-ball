@@ -81,7 +81,7 @@ enum Level {
   final String name, say;
   final LevelWorlds world;
 
-  String get id => '${world.hashCode}-$hashCode';
+  String get id => '${world.name}-$name';
 }
 
 enum LevelWorlds {
