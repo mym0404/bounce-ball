@@ -1,4 +1,5 @@
 import '../../../export.dart';
+import '../../../feature/common/widget/interval_builder.dart';
 import '../../state/game_manager.dart';
 
 class GameStatusPanel extends StatelessWidget with WatchItMixin {
@@ -7,22 +8,43 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
   @override
   Widget build(BuildContext context) {
     var level = watchValue((GameManager e) => e.level);
-    var deathCount = watchValue((GameManager e) => e.deathCount);
+    var scoreOfStage = watchValue((GameManager e) => e.scoreOfStage);
     var isGameStarted = watchValue((GameManager e) => e.isGameStarted);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          'BOUNCE    BALL  (0.1.0)',
-          style: TS.t3.bold,
-        ),
-        if (isGameStarted)
+    return DefaultTextStyle(
+      style: TS.b1.onSurface.copyWith(
+        shadows: [
+          const Shadow(color: C.primary, blurRadius: 2, offset: Offset(2, 2)),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
           Text(
-              '${level.world.name} - ${level.name.split('').where((element) => RegExp(r'\d').hasMatch(element)).join()}'),
-        if (isGameStarted) Text('DIE $deathCount'),
-      ],
+            'BOUNCE    BALL  (0.1.0)',
+            style: TS.t3.bold,
+          ),
+          if (isGameStarted)
+            Text(
+                '${level.world.name} - ${level.name.split('').where((element) => RegExp(r'\d').hasMatch(element)).join()}'),
+          if (isGameStarted) ...[
+            Text(
+              'DIE ${scoreOfStage.deathCount}   BOUNCE ${scoreOfStage.bounceCount}',
+            ),
+            RepaintBoundary(
+              child: IntervalBuilder(
+                interval: 0.01.seconds,
+                builder: (context) {
+                  var diffMs = scoreOfStage.startUnixMs == 0 ? 0 : DateTime.now().millisecondsSinceEpoch - scoreOfStage.startUnixMs;
+                  var formatted = '${diffMs ~/ 1000}.${(diffMs % 1000).toStringAsFixed(0)}';
+                  return Text(formatted);
+                },
+              ),
+            ),
+          ],
+        ],
+      ),
     );
   }
 }

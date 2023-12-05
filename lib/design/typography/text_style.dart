@@ -124,10 +124,12 @@ extension TextStyleExtension on TextStyle {
   TextStyle get onSurface30 => copyWith(color: C.onSurface30);
   TextStyle get onSurface50 => copyWith(color: C.onSurface50);
   TextStyle get onSurface70 => copyWith(color: C.onSurface70);
+  TextStyle get onSurface => copyWith(color: C.onSurface);
   TextStyle get surface30 => copyWith(color: C.surface30);
   TextStyle get surface50 => copyWith(color: C.surface50);
   TextStyle get surface70 => copyWith(color: C.surface70);
   TextStyle get primary30 => copyWith(color: C.primary30);
   TextStyle get primary50 => copyWith(color: C.primary50);
   TextStyle get primary70 => copyWith(color: C.primary70);
+  TextStyle get primary => copyWith(color: C.primary);
 }

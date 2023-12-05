@@ -166,6 +166,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
           ..anchor = Anchor.center
           ..position = V2(position.x, position.y + 8),
       );
+      manager.increaseBounceCount();
       return;
     }
 
@@ -176,17 +177,20 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
       position = V2(rightArrowBlock.x + rightArrowBlock.width + ballRadius + 1,
           rightArrowBlock.y + rightArrowBlock.height / 2);
       velocity = V2(_flyingXSpeed, 0);
+      manager.increaseBounceCount();
       return;
     }
     if (leftArrowBlock != null) {
       _isFlyingByLeftArrow = true;
       position = V2(leftArrowBlock.x - ballRadius - 1, leftArrowBlock.y + leftArrowBlock.height / 2);
       velocity = V2(-_flyingXSpeed, 0);
+      manager.increaseBounceCount();
       return;
     }
 
     if (generalCollisionBlock != null) {
       _isFlying = false;
+      manager.increaseBounceCount();
 
       if (isHorizontal) {
         if (generalCollisionBlock.x + generalCollisionBlock.width / 2 < position.x) {
@@ -302,6 +306,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
         },
     );
     level.resetBlocks();
+    manager.resetScore(resetDie: false);
   }
 
   // endregion

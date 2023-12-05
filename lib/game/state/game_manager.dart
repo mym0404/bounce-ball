@@ -6,11 +6,12 @@ import '../main_game.dart';
 import '../ui/dialog/game_all_clear_dialog.dart';
 import '../ui/dialog/game_ready_dialog.dart';
 import 'level_clear_storage.dart';
+import 'score_schema.dart';
 
 class GameManager {
   VAL<bool> isGameStarted = VAL(false);
   VAL<Level> level = VAL(Level.lv00);
-  VAL<int> deathCount = VAL(0);
+  VAL<ScoreSchema> scoreOfStage = VAL(ScoreSchema.initial());
 
   MainGame get game => di();
 
@@ -28,6 +29,7 @@ class GameManager {
     } else {
       level.value = Level.values[index + 1];
     }
+    resetScore();
   }
 
   void _allClear() {
@@ -38,12 +40,12 @@ class GameManager {
   void resetGame() {
     isGameStarted.value = false;
     level.value = Level.values.first;
-    deathCount.value = 0;
+    resetScore(resetDie: true);
     showAppDialog(globalContext, (context) => const GameReadyDialog(), dismissible: false);
   }
 
   void die() {
-    deathCount.value += 1;
+    scoreOfStage.value = scoreOfStage.value.copyWith(deathCount: scoreOfStage.value.deathCount + 1);
     fbAnalytics.logEvent(name: 'level_die', parameters: {'level': level.value.name});
   }
 
@@ -53,6 +55,22 @@ class GameManager {
 
   void moveLevel(Level level) {
     this.level.value = level;
-    deathCount.value = 0;
+    resetScore(resetDie: true);
+  }
+
+  void increaseBounceCount() {
+    scoreOfStage.value = scoreOfStage.value.copyWith(bounceCount: scoreOfStage.value.bounceCount + 1);
+    // start at first bounce
+    if (scoreOfStage.value.bounceCount <= 1) {
+      _markStageStart();
+    }
+  }
+
+  void _markStageStart() {
+    scoreOfStage.value = scoreOfStage.value.copyWith(startUnixMs: DateTime.now().millisecondsSinceEpoch);
+  }
+
+  void resetScore({bool resetDie = true}) {
+    scoreOfStage.value = ScoreSchema.initial(deathCount: resetDie ? 0 : scoreOfStage.value.deathCount);
   }
 }
