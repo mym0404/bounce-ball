@@ -71,7 +71,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     add(_createCircle());
 
     for (int i = 0; i < 30; i++) {
-      var circle = _createCircle();
+      var circle = _createCircle()..opacity = 0;
       _circleEffects.addLast(circle);
       parent?.add(circle);
     }
