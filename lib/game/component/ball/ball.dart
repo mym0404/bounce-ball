@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flame/effects.dart';
 
 import '../../../export.dart';
@@ -32,6 +34,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   Set<LogicalKeyboardKey> _previousPressedKeys = {};
 
   double _effectDt = 0;
+  final Queue<CircleComponent> _circleEffects = Queue();
 
   GameLevel get level => game.world as GameLevel;
   List<CollisionBlock> get collisionBlocks => level.collisionBlocks;
@@ -64,8 +67,17 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   @override
   FutureOr<void> onLoad() {
     size = V2.all(8);
-    add(CircleComponent(radius: ballRadius, paint: Paint()..color = C.white)..anchor = Anchor.center);
+    add(_createCircle());
+
+    for (int i = 0; i < 30; i++) {
+      var circle = _createCircle();
+      _circleEffects.addLast(circle);
+      parent?.add(circle);
+    }
   }
+
+  CircleComponent _createCircle() =>
+      CircleComponent(radius: ballRadius, paint: Paint()..color = C.white)..anchor = Anchor.center;
 
   // endregion
 
@@ -74,29 +86,33 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   @override
   void update(double dt) {
     if (_isCleared) return;
-    _effectDt += dt;
-    if (_effectDt >= 0.001) {
-      _createBallEffect();
-      _effectDt = 0;
+
+    if (!_isRespawning) {
+      _handleInput(dt);
+      _handleHorizontalMove(dt);
+      if (!_isFlying) _applyGravity(dt);
+      _verticalCollisionCheckAndMove(dt);
+      _checkGameDieByOutside();
+      _checkGameClear();
     }
 
-    if (_isRespawning) return;
-    _handleInput(dt);
-    _handleHorizontalMove(dt);
-    if (!_isFlying) _applyGravity(dt);
-    _verticalCollisionCheckAndMove(dt);
-    _checkGameDieByOutside();
-    _checkGameClear();
+    _effectDt += dt;
+    while (_effectDt >= 1 / 33) {
+      _updateBallEffect(position);
+      _effectDt -= 1 / 33;
+    }
 
     super.update(dt);
   }
 
-  void _createBallEffect() {
-    parent!.add(CircleComponent(radius: ballRadius, paint: Paint()..color = C.white)
-      ..add(RemoveEffect(delay: 0.6))
-      ..add(OpacityEffect.fadeOut(EffectController(duration: 0.6)))
-      ..position = position
-      ..anchor = Anchor.center);
+  void _updateBallEffect(V2 pos) {
+    var first = _circleEffects.removeFirst();
+    first.position = pos;
+    first.opacity = 1;
+    first.scale = V2.all(1);
+    first.add(OpacityEffect.fadeOut(EffectController(duration: 1)));
+    first.add(ScaleEffect.to(V2.all(0.5), EffectController(duration: 1)));
+    _circleEffects.addLast(first);
   }
 
   void _applyGravity(double dt) {

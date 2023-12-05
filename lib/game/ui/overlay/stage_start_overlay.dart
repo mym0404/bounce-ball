@@ -65,9 +65,9 @@ class StageStartOverlay extends StatelessWidget {
           },
         )
         .fadeIn()
-        .slideY(begin: -0.05, end: 0)
+        .slideY(begin: 0.08, end: 0)
         .then(delay: 2.seconds)
         .fadeOut()
-        .slideY(end: -0.05);
+        .slideY(end: -0.08);
   }
 }
