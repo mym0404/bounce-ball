@@ -8,6 +8,8 @@ import '../l10n/util/l10n_manager.dart';
 import '../router/app_router.dart';
 
 Future<void> bootStrap() async {
+  await Flame.device.fullScreen();
+  await Flame.device.setLandscape();
   await registerSingletons();
   await _initFirebase();
   _registerErrorHandler();
