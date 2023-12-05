@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../export.dart';
 import '../../feature/common/widget/app_scroll_behavior.dart';
@@ -14,6 +15,7 @@ Future<void> bootStrap() async {
   await _initFirebase();
   _registerErrorHandler();
   runApp(const BootStrapApp());
+  FlutterNativeSplash.remove();
 }
 
 FutureOr<void> _initFirebase() async {

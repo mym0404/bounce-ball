@@ -1,8 +1,12 @@
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+
 import 'export.dart';
 import 'service/bootstrap/boot_strap.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  var binding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: binding);
+
   await bootStrap();
 }
 
