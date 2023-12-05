@@ -25,7 +25,7 @@ class OverlayPanel extends StatelessWidget with WatchItMixin {
         padding: const EdgeInsets.all(16),
         width: min(maxWidth, size.minWidth),
         constraints:
-            maxHeightRatio != null ? BoxConstraints(maxHeight: maxHeightRatio! * screenSize.height) : null,
+            BoxConstraints(maxHeight: (maxHeightRatio ?? 0.9) * screenSize.height),
         decoration: BoxDecoration(
           borderRadius: 4.bRadius,
           border: Border.all(color: C.onSurface50, width: 1),

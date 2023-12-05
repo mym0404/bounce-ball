@@ -21,6 +21,7 @@ UserPreferencesData _$UserPreferencesDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserPreferencesData {
   bool get isShowArrowControls => throw _privateConstructorUsedError;
+  double get cameraZoomScale => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $UserPreferencesDataCopyWith<$Res> {
           UserPreferencesData value, $Res Function(UserPreferencesData) then) =
       _$UserPreferencesDataCopyWithImpl<$Res, UserPreferencesData>;
   @useResult
-  $Res call({bool isShowArrowControls});
+  $Res call({bool isShowArrowControls, double cameraZoomScale});
 }
 
 /// @nodoc
@@ -51,12 +52,17 @@ class _$UserPreferencesDataCopyWithImpl<$Res, $Val extends UserPreferencesData>
   @override
   $Res call({
     Object? isShowArrowControls = null,
+    Object? cameraZoomScale = null,
   }) {
     return _then(_value.copyWith(
       isShowArrowControls: null == isShowArrowControls
           ? _value.isShowArrowControls
           : isShowArrowControls // ignore: cast_nullable_to_non_nullable
               as bool,
+      cameraZoomScale: null == cameraZoomScale
+          ? _value.cameraZoomScale
+          : cameraZoomScale // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -69,7 +75,7 @@ abstract class _$$UserPreferencesDataImplCopyWith<$Res>
       __$$UserPreferencesDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isShowArrowControls});
+  $Res call({bool isShowArrowControls, double cameraZoomScale});
 }
 
 /// @nodoc
@@ -84,12 +90,17 @@ class __$$UserPreferencesDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isShowArrowControls = null,
+    Object? cameraZoomScale = null,
   }) {
     return _then(_$UserPreferencesDataImpl(
       isShowArrowControls: null == isShowArrowControls
           ? _value.isShowArrowControls
           : isShowArrowControls // ignore: cast_nullable_to_non_nullable
               as bool,
+      cameraZoomScale: null == cameraZoomScale
+          ? _value.cameraZoomScale
+          : cameraZoomScale // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -98,7 +109,8 @@ class __$$UserPreferencesDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserPreferencesDataImpl extends _UserPreferencesData
     with DiagnosticableTreeMixin {
-  const _$UserPreferencesDataImpl({this.isShowArrowControls = true})
+  const _$UserPreferencesDataImpl(
+      {this.isShowArrowControls = true, this.cameraZoomScale = 1})
       : super._();
 
   factory _$UserPreferencesDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -107,10 +119,13 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
   @override
   @JsonKey()
   final bool isShowArrowControls;
+  @override
+  @JsonKey()
+  final double cameraZoomScale;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserPreferencesData(isShowArrowControls: $isShowArrowControls)';
+    return 'UserPreferencesData(isShowArrowControls: $isShowArrowControls, cameraZoomScale: $cameraZoomScale)';
   }
 
   @override
@@ -118,7 +133,8 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserPreferencesData'))
-      ..add(DiagnosticsProperty('isShowArrowControls', isShowArrowControls));
+      ..add(DiagnosticsProperty('isShowArrowControls', isShowArrowControls))
+      ..add(DiagnosticsProperty('cameraZoomScale', cameraZoomScale));
   }
 
   @override
@@ -127,12 +143,15 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
         (other.runtimeType == runtimeType &&
             other is _$UserPreferencesDataImpl &&
             (identical(other.isShowArrowControls, isShowArrowControls) ||
-                other.isShowArrowControls == isShowArrowControls));
+                other.isShowArrowControls == isShowArrowControls) &&
+            (identical(other.cameraZoomScale, cameraZoomScale) ||
+                other.cameraZoomScale == cameraZoomScale));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isShowArrowControls);
+  int get hashCode =>
+      Object.hash(runtimeType, isShowArrowControls, cameraZoomScale);
 
   @JsonKey(ignore: true)
   @override
@@ -150,8 +169,9 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
 }
 
 abstract class _UserPreferencesData extends UserPreferencesData {
-  const factory _UserPreferencesData({final bool isShowArrowControls}) =
-      _$UserPreferencesDataImpl;
+  const factory _UserPreferencesData(
+      {final bool isShowArrowControls,
+      final double cameraZoomScale}) = _$UserPreferencesDataImpl;
   const _UserPreferencesData._() : super._();
 
   factory _UserPreferencesData.fromJson(Map<String, dynamic> json) =
@@ -159,6 +179,8 @@ abstract class _UserPreferencesData extends UserPreferencesData {
 
   @override
   bool get isShowArrowControls;
+  @override
+  double get cameraZoomScale;
   @override
   @JsonKey(ignore: true)
   _$$UserPreferencesDataImplCopyWith<_$UserPreferencesDataImpl> get copyWith =>

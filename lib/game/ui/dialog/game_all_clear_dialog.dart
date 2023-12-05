@@ -1,14 +1,14 @@
-import '../../export.dart';
-import '../main_game.dart';
+import '../../../export.dart';
+import '../../main_game.dart';
 
-class GameAllClearOverlay extends StatefulWidget {
-  const GameAllClearOverlay({super.key});
+class GameAllClearDialog extends StatefulWidget {
+  const GameAllClearDialog({super.key});
 
   @override
-  State<GameAllClearOverlay> createState() => _GameAllClearOverlayState();
+  State<GameAllClearDialog> createState() => _GameAllClearDialogState();
 }
 
-class _GameAllClearOverlayState extends State<GameAllClearOverlay> {
+class _GameAllClearDialogState extends State<GameAllClearDialog> {
   late final nickname = TC(text: '문명주');
 
   MainGame get game => di();

@@ -9,10 +9,11 @@ import '../feature/common/widget/overlay_panel.dart';
 import '../service/user_preferences/user_preferences.dart';
 import 'component/ball/ball.dart';
 import 'main_game.dart';
-import 'overlay/game_map_overlay.dart';
-import 'overlay/game_status_panel.dart';
-import 'overlay/settings_overlay.dart';
 import 'state/game_manager.dart';
+import 'ui/dialog/game_map_dialog.dart';
+import 'ui/dialog/settings_dialog.dart';
+import 'ui/overlay/overlay_id.dart';
+import 'ui/panel/game_status_panel.dart';
 
 class GamePage extends StatefulWidget with WatchItStatefulWidgetMixin {
   const GamePage({super.key});
@@ -57,6 +58,7 @@ class _GamePageState extends State<GamePage> {
       children: [
         GameWidget(
           game: _game,
+          overlayBuilderMap: {for (var overlay in OverlayId.values) overlay.name: overlay.builder},
         ),
         const TopLeft(
           child: PaddingAll(24, child: GameStatusPanel()),
@@ -72,7 +74,7 @@ class _GamePageState extends State<GamePage> {
                     icon: MdiIcons.map,
                     size: 32,
                     onPressed: () {
-                      showAppDialog(context, (context) => const GameMapOverlay(),
+                      showAppDialog(context, (context) => const GameMapDialog(),
                           maxHeightRatio: 0.85, size: PanelSize.l);
                     },
                   ),
@@ -92,7 +94,7 @@ class _GamePageState extends State<GamePage> {
                   icon: MdiIcons.cog,
                   size: 32,
                   onPressed: () {
-                    showAppDialog(context, (context) => const SettingsOverlay());
+                    showAppDialog(context, (context) => const SettingsDialog());
                   },
                 ),
               ],

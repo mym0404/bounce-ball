@@ -29,6 +29,8 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
   late final CollisionBlock clearBlock;
   late final CollisionBlock startBlock;
 
+  bool resizable = false;
+
   @override
   FutureOr<void> onLoad() async {
     _tile = await TiledComponent.load('${level.name}.tmx', V2.all(16));
@@ -44,6 +46,18 @@ class GameLevel extends World with GRef, DisposeBag implements PositionProvider 
     _initBreakBlocks();
     _initLeftArrowBlocks();
     _initRightArrowBlocks();
+
+    2.seconds.runAfter(() => resizable = true);
+  }
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+    if (resizable) {
+      doOnLayout(() {
+        _tile.position = game.size / 2;
+      });
+    }
   }
 
   void _initBall() {

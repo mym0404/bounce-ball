@@ -1,15 +1,29 @@
 import 'package:flutter_animate/flutter_animate.dart';
 
-import '../../export.dart';
+import '../../../export.dart';
 
-class GameReadyOverlay extends StatefulWidget {
-  const GameReadyOverlay({super.key});
+class GameReadyDialog extends StatefulWidget {
+  const GameReadyDialog({super.key});
 
   @override
-  State<GameReadyOverlay> createState() => _GameReadyOverlayState();
+  State<GameReadyDialog> createState() => _GameReadyDialogState();
 }
 
-class _GameReadyOverlayState extends State<GameReadyOverlay> {
+class _GameReadyDialogState extends State<GameReadyDialog> {
+  @override
+  void initState() {
+    super.initState();
+
+    if (kDebugMode) {
+      500.ms.runAfter(_pressStart);
+    }
+  }
+
+  void _pressStart() {
+    manager.startGame();
+    Navigator.pop(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -29,10 +43,7 @@ class _GameReadyOverlayState extends State<GameReadyOverlay> {
               .blur(duration: 2.seconds, end: Offset.zero, begin: const Offset(12, 12)),
           const Gap(12),
           FilledButton.tonal(
-            onPressed: () {
-              manager.startGame();
-              Navigator.pop(context);
-            },
+            onPressed: _pressStart,
             child: const Text('Start'),
           ),
           const Gap(12),

@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -14,8 +15,10 @@ Future<void> bootStrap() async {
   await registerSingletons();
   await _initFirebase();
   _registerErrorHandler();
+  Animate.defaultDuration = 500.ms;
+  Animate.defaultCurve = Curves.easeInOutCubic;
   runApp(const BootStrapApp());
-  FlutterNativeSplash.remove();
+  100.ms.runAfter(() => FlutterNativeSplash.remove());
 }
 
 FutureOr<void> _initFirebase() async {

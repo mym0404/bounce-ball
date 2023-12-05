@@ -3,8 +3,8 @@ import '../../feature/common/widget/app_dialog.dart';
 import '../../service/router/app_router.dart';
 import '../component/level/Level.dart';
 import '../main_game.dart';
-import '../overlay/game_all_clear_overlay.dart';
-import '../overlay/game_ready_overlay.dart';
+import '../ui/dialog/game_all_clear_dialog.dart';
+import '../ui/dialog/game_ready_dialog.dart';
 import 'level_clear_storage.dart';
 
 class GameManager {
@@ -31,7 +31,7 @@ class GameManager {
   }
 
   void _allClear() {
-    showAppDialog(globalContext, (context) => const GameAllClearOverlay(), dismissible: false);
+    showAppDialog(globalContext, (context) => const GameAllClearDialog(), dismissible: false);
     isGameStarted.value = false;
   }
 
@@ -39,7 +39,7 @@ class GameManager {
     isGameStarted.value = false;
     level.value = Level.values.first;
     deathCount.value = 0;
-    showAppDialog(globalContext, (context) => const GameReadyOverlay(), dismissible: false);
+    showAppDialog(globalContext, (context) => const GameReadyDialog(), dismissible: false);
   }
 
   void die() {

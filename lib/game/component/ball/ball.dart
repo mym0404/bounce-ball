@@ -19,7 +19,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   final double _wallStrongJumpXForce = 130;
   late final double _wallStrongJumpYForce = yVelocityForMaxHeight(gravity: gravity, maxHeight: 50);
   final double _wallGeneralJumpXForce = 70;
-  final double _wallGeneralJumpYForce = 30;
+  final double _wallGeneralJumpYForce = 15;
 
   final double _maxXSpeed = 120;
   final double _flyingXSpeed = 170;

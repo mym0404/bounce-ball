@@ -1,11 +1,11 @@
 import 'package:flame/widgets.dart';
 import 'package:grouped_list/grouped_list.dart';
 
-import '../../export.dart';
-import '../component/level/Level.dart';
+import '../../../export.dart';
+import '../../component/level/Level.dart';
 
-class GameMapOverlay extends StatelessWidget {
-  const GameMapOverlay({super.key});
+class GameMapDialog extends StatelessWidget {
+  const GameMapDialog({super.key});
 
   @override
   Widget build(BuildContext context) {

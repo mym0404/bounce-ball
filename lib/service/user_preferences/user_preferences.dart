@@ -10,6 +10,7 @@ class UserPreferencesData with _$UserPreferencesData {
   const UserPreferencesData._();
   const factory UserPreferencesData({
     @Default(true) bool isShowArrowControls,
+    @Default(1) double cameraZoomScale,
   }) = _UserPreferencesData;
 
   factory UserPreferencesData.fromJson(Map<String, dynamic> json) => _$UserPreferencesDataFromJson(json);

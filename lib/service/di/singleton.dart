@@ -35,3 +35,4 @@ Logger get log => di();
 GameManager get manager => di();
 LevelClearStorage get levelClearStorage => di();
 FirebaseAnalytics get fbAnalytics => FirebaseAnalytics.instance;
+UserPreferences get userPref => di();
