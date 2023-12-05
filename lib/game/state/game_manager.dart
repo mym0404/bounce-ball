@@ -50,4 +50,9 @@ class GameManager {
   void resetLevel() {
     game.ball.reset();
   }
+
+  void moveLevel(Level level) {
+    this.level.value = level;
+    deathCount.value = 0;
+  }
 }

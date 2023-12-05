@@ -44,13 +44,20 @@ class GameMapDialog extends StatelessWidget {
       },
       itemBuilder: (context, level) {
         var isCleared = levelClearStorage.isCleared(level);
+        var isMoveable =
+            isCleared || level.index == 1 || levelClearStorage.isCleared(Level.values[level.index - 1]);
         return ListTile(
           title: Text(
             level.name,
-            style: TS.c(isCleared ? C.onSurface : C.onSurface50),
+            style: TS.c(isMoveable ? C.onSurface : C.onSurface50),
           ),
-          trailing: !isCleared ? Icon(MdiIcons.lock) : null,
-          onTap: isCleared ? () {} : null,
+          trailing: !isMoveable ? Icon(MdiIcons.lock) : null,
+          onTap: isMoveable
+              ? () {
+                  manager.moveLevel(level);
+                  Navigator.pop(context);
+                }
+              : null,
         );
       },
       groupSeparatorBuilder: (value) => const Divider(),
