@@ -20,6 +20,8 @@ class $AssetsImagesGen {
   AssetGenImage get logo1024 =>
       const AssetGenImage('assets/images/logo1024.png');
 
+  $AssetsImagesPlanetGen get planet => const $AssetsImagesPlanetGen();
+
   /// File path: assets/images/tile.png
   AssetGenImage get tile => const AssetGenImage('assets/images/tile.png');
 
@@ -42,6 +44,27 @@ class $AssetsTilesGen {
   /// File path: assets/tiles/lv-03.tmx
   String get lv03 => 'assets/tiles/lv-03.tmx';
 
+  /// File path: assets/tiles/lv-04.tmx
+  String get lv04 => 'assets/tiles/lv-04.tmx';
+
+  /// File path: assets/tiles/lv-05.tmx
+  String get lv05 => 'assets/tiles/lv-05.tmx';
+
+  /// File path: assets/tiles/lv-06.tmx
+  String get lv06 => 'assets/tiles/lv-06.tmx';
+
+  /// File path: assets/tiles/lv-07.tmx
+  String get lv07 => 'assets/tiles/lv-07.tmx';
+
+  /// File path: assets/tiles/lv-08.tmx
+  String get lv08 => 'assets/tiles/lv-08.tmx';
+
+  /// File path: assets/tiles/lv-09.tmx
+  String get lv09 => 'assets/tiles/lv-09.tmx';
+
+  /// File path: assets/tiles/lv-16.tmx
+  String get lv16 => 'assets/tiles/lv-16.tmx';
+
   /// File path: assets/tiles/tile.tiled-project
   String get tileTiledProject => 'assets/tiles/tile.tiled-project';
 
@@ -49,8 +72,21 @@ class $AssetsTilesGen {
   String get tileTiledSession => 'assets/tiles/tile.tiled-session';
 
   /// List of all assets
-  List<String> get values =>
-      [tiles, lv01, lv02, lv03, tileTiledProject, tileTiledSession];
+  List<String> get values => [
+        tiles,
+        lv01,
+        lv02,
+        lv03,
+        lv04,
+        lv05,
+        lv06,
+        lv07,
+        lv08,
+        lv09,
+        lv16,
+        tileTiledProject,
+        tileTiledSession
+      ];
 }
 
 class $AssetsImagesBackgroundGen {
@@ -88,6 +124,17 @@ class $AssetsImagesEffectGen {
   const $AssetsImagesEffectGen();
 
   $AssetsImagesEffectSmokeGen get smoke => const $AssetsImagesEffectSmokeGen();
+}
+
+class $AssetsImagesPlanetGen {
+  const $AssetsImagesPlanetGen();
+
+  /// File path: assets/images/planet/world1.png
+  AssetGenImage get world1 =>
+      const AssetGenImage('assets/images/planet/world1.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [world1];
 }
 
 class $AssetsImagesEffectSmokeGen {

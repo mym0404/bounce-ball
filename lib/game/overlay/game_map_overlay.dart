@@ -9,20 +9,35 @@ class GameMapOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GroupedListView(
+      padding: const EdgeInsets.only(bottom: 32),
       elements: Level.allLevels,
       groupBy: (Level e) => e.world.index,
       groupHeaderBuilder: (Level element) {
         return PaddingVertical(
           20,
-          child: Container(
-            child: Column(mainAxisSize: MainAxisSize.min, children: [
-              Text(element.world.name),
-            ]),
-          ),
+          child: Column(mainAxisSize: MainAxisSize.min, children: [
+            Text(
+              '---- Chapter ${element.world.index} ---',
+              style: TS.t3.medium,
+            ),
+            const Gap(8),
+            Text(
+              element.world.name,
+              style: TS.t1.bold,
+            ),
+          ]),
         );
       },
-      itemBuilder: (context, element) {
-        return ListTile(title: Text(element.name));
+      itemBuilder: (context, level) {
+        var isCleared = levelClearStorage.isCleared(level);
+        return ListTile(
+          title: Text(
+            level.name,
+            style: TS.c(isCleared ? C.onSurface : C.onSurface50),
+          ),
+          trailing: !isCleared ? Icon(MdiIcons.lock) : null,
+          onTap: isCleared ? () {} : null,
+        );
       },
       groupSeparatorBuilder: (value) => const Divider(),
       stickyHeaderBackgroundColor: C.surface50,

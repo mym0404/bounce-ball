@@ -114,6 +114,7 @@ class TS {
 
   static const bold = TextStyle(fontFamily: FontFamily.stardust, fontWeight: FontWeight.bold);
   static const medium = TextStyle(fontFamily: FontFamily.stardust, fontWeight: FontWeight.w500);
+  static TextStyle c(Color c) => TextStyle(fontFamily: FontFamily.stardust, color: c);
 }
 
 extension TextStyleExtension on TextStyle {

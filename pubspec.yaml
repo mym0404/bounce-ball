@@ -98,6 +98,7 @@ flutter:
   assets:
     - assets/images/
     - assets/images/background/
+    - assets/images/planet/
     - assets/images/effect/
     - assets/images/effect/smoke/
     - assets/tiles/

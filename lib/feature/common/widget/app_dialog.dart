@@ -117,9 +117,9 @@ class _BaseAppDialogState extends State<_BaseAppDialog> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: BackdropBlur(
-          blur: 10,
+          blur: 0,
           borderRadius: 12.bRadius,
-          colorOpacity: 0.5,
+          colorOpacity: 0.8,
           child: GestureDetector(
             onTap: () {},
             child: Center(

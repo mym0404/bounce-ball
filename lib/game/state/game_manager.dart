@@ -5,6 +5,7 @@ import '../component/level/Level.dart';
 import '../main_game.dart';
 import '../overlay/game_all_clear_overlay.dart';
 import '../overlay/game_ready_overlay.dart';
+import 'level_clear_storage.dart';
 
 class GameManager {
   VAL<bool> isGameStarted = VAL(false);
@@ -19,6 +20,7 @@ class GameManager {
   }
 
   void clearLevel() {
+    di<LevelClearStorage>().markClear(level.value);
     fbAnalytics.logLevelEnd(levelName: level.value.name);
     var index = Level.values.indexOf(level.value);
     if (index == Level.values.length - 1) {

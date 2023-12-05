@@ -29,9 +29,13 @@ class _GamePageState extends State<GamePage> {
     super.initState();
     di.registerSingleton(_game);
 
-    if(kDebugMode){
-      showAppDialog(context, (context) => const GameMapOverlay(),
-          maxHeightRatio: 0.85, size: PanelSize.l);
+    if (kDebugMode) {
+      showAppDialog(
+        context,
+        (context) => const GameMapOverlay(),
+        maxHeightRatio: 0.85,
+        size: PanelSize.l,
+      );
     }
   }
 
