@@ -23,7 +23,7 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'BOUNCE    BALL  (0.1.0)',
+            'BOUNCE    BALL  (0.2.0)',
             style: TS.t3.bold,
           ),
           if (isGameStarted)
