@@ -16,6 +16,15 @@
   "g_bounce": "Bounce",
   "g_time": "Time",
   "g_share": "Share",
+  "g_ranking": "Ranking",
+  "register_ranking": "Register Ranking",
+  "register_ranking_start": "Ranking Registering...",
+  "register_ranking_done": "Ranking Registered!",
+  "g_error": "Unknown error occured!",
+  "g_empty_title": "No Data Yet",
+  "g_empty_body": "Explore infinity space",
+  "g_loading_title": "We are waiting...",
+  "g_loading_body": "Where to go?",
 
 
 

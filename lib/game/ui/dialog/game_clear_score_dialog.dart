@@ -2,6 +2,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../export.dart';
 import '../../component/level/Level.dart';
+import '../../network/score_repository.dart';
 import '../../state/score_schema.dart';
 
 class GameClearScoreDialog extends StatefulWidget {
@@ -19,11 +20,29 @@ class GameClearScoreDialog extends StatefulWidget {
 }
 
 class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
+  var isLoading = false;
   void _onPressOk() {
     Navigator.pop(context);
   }
 
   void _onPressShare() {}
+
+  void _onPressRegisterRanking() async {
+    setState(() => isLoading = true);
+    context.showInfoSnackBar(text: context.s.register_ranking_start);
+    try {
+      await ScoreRepository().saveRecord(
+        level: widget.level,
+        score: widget.score,
+        name: 'Beta Tester ${Random().nextInt(500)}',
+      );
+      context.showSuccessSnackBar(text: context.s.register_ranking_done);
+    } catch (e) {
+      log.e(e);
+      context.showErrorSnackBar(text: context.s.g_error);
+    }
+    setState(() => isLoading = false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +82,11 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
               //   label: Text(context.s.g_share),
               // ),
               // const Gap(12),
+              OutlinedButton(
+                onPressed: isLoading ? null : _onPressRegisterRanking,
+                child: Text(context.s.register_ranking),
+              ),
+              const Gap(12),
               FilledButton.tonal(onPressed: _onPressOk, child: Text(context.s.g_confirm)),
             ],
           ).animate().fadeIn(delay: 1.seconds),

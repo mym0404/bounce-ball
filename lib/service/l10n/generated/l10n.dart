@@ -220,6 +220,96 @@ class S {
     );
   }
 
+  /// `Ranking`
+  String get g_ranking {
+    return Intl.message(
+      'Ranking',
+      name: 'g_ranking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register Ranking`
+  String get register_ranking {
+    return Intl.message(
+      'Register Ranking',
+      name: 'register_ranking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ranking Registering...`
+  String get register_ranking_start {
+    return Intl.message(
+      'Ranking Registering...',
+      name: 'register_ranking_start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ranking Registered!`
+  String get register_ranking_done {
+    return Intl.message(
+      'Ranking Registered!',
+      name: 'register_ranking_done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown error occured!`
+  String get g_error {
+    return Intl.message(
+      'Unknown error occured!',
+      name: 'g_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Data Yet`
+  String get g_empty_title {
+    return Intl.message(
+      'No Data Yet',
+      name: 'g_empty_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Explore infinity space`
+  String get g_empty_body {
+    return Intl.message(
+      'Explore infinity space',
+      name: 'g_empty_body',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We are waiting...`
+  String get g_loading_title {
+    return Intl.message(
+      'We are waiting...',
+      name: 'g_loading_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Where to go?`
+  String get g_loading_body {
+    return Intl.message(
+      'Where to go?',
+      name: 'g_loading_body',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// ``
   String get __ {
     return Intl.message(

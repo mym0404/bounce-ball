@@ -129,6 +129,14 @@ class $AssetsImagesEffectGen {
 class $AssetsImagesPlanetGen {
   const $AssetsImagesPlanetGen();
 
+  /// File path: assets/images/planet/empty.png
+  AssetGenImage get empty =>
+      const AssetGenImage('assets/images/planet/empty.png');
+
+  /// File path: assets/images/planet/loading.png
+  AssetGenImage get loading =>
+      const AssetGenImage('assets/images/planet/loading.png');
+
   /// File path: assets/images/planet/world1.png
   AssetGenImage get world1 =>
       const AssetGenImage('assets/images/planet/world1.png');
@@ -138,7 +146,7 @@ class $AssetsImagesPlanetGen {
       const AssetGenImage('assets/images/planet/world2.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [world1, world2];
+  List<AssetGenImage> get values => [empty, loading, world1, world2];
 }
 
 class $AssetsImagesEffectSmokeGen {

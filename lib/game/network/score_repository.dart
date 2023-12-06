@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../component/level/Level.dart';
 import '../state/score_schema.dart';
+import 'firestore_extension.dart';
 
 class ScoreRepository {
   ScoreRepository._internal();
@@ -10,6 +11,16 @@ class ScoreRepository {
   FirebaseFirestore get db => FirebaseFirestore.instance;
 
   Future<void> saveRecord({required Level level, required ScoreSchema score, required String name}) async {
-    await db.collection('scores/${level.id}').add({...score.toJson(), name: name});
+    await getLevelRef(level).add(score.copyWith(name: name).toJson());
   }
+
+  Future<List<ScoreSchema>> listRecordByTime({required Level level}) async {
+    return getLevelRef(level).orderBy('timeMs').limit(50).get().map(ScoreSchema.fromJson);
+  }
+
+  Future<List<ScoreSchema>> listRecordByBounce({required Level level}) async {
+    return getLevelRef(level).orderBy('bounceCount').limit(50).get().map(ScoreSchema.fromJson);
+  }
+
+  CollectionReference getLevelRef(Level level) => db.collection('rankings_${level.id}');
 }

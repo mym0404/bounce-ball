@@ -20,6 +20,7 @@ ScoreSchema _$ScoreSchemaFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ScoreSchema {
+  String get name => throw _privateConstructorUsedError;
   int get deathCount => throw _privateConstructorUsedError;
   int get bounceCount => throw _privateConstructorUsedError;
   int get startUnixMs => throw _privateConstructorUsedError;
@@ -37,7 +38,12 @@ abstract class $ScoreSchemaCopyWith<$Res> {
           ScoreSchema value, $Res Function(ScoreSchema) then) =
       _$ScoreSchemaCopyWithImpl<$Res, ScoreSchema>;
   @useResult
-  $Res call({int deathCount, int bounceCount, int startUnixMs, int timeMs});
+  $Res call(
+      {String name,
+      int deathCount,
+      int bounceCount,
+      int startUnixMs,
+      int timeMs});
 }
 
 /// @nodoc
@@ -53,12 +59,17 @@ class _$ScoreSchemaCopyWithImpl<$Res, $Val extends ScoreSchema>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? deathCount = null,
     Object? bounceCount = null,
     Object? startUnixMs = null,
     Object? timeMs = null,
   }) {
     return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       deathCount: null == deathCount
           ? _value.deathCount
           : deathCount // ignore: cast_nullable_to_non_nullable
@@ -87,7 +98,12 @@ abstract class _$$ScoreSchemaImplCopyWith<$Res>
       __$$ScoreSchemaImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int deathCount, int bounceCount, int startUnixMs, int timeMs});
+  $Res call(
+      {String name,
+      int deathCount,
+      int bounceCount,
+      int startUnixMs,
+      int timeMs});
 }
 
 /// @nodoc
@@ -101,12 +117,17 @@ class __$$ScoreSchemaImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? name = null,
     Object? deathCount = null,
     Object? bounceCount = null,
     Object? startUnixMs = null,
     Object? timeMs = null,
   }) {
     return _then(_$ScoreSchemaImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
       deathCount: null == deathCount
           ? _value.deathCount
           : deathCount // ignore: cast_nullable_to_non_nullable
@@ -131,7 +152,8 @@ class __$$ScoreSchemaImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
   const _$ScoreSchemaImpl(
-      {this.deathCount = 0,
+      {this.name = '',
+      this.deathCount = 0,
       this.bounceCount = 0,
       this.startUnixMs = 0,
       this.timeMs = 0})
@@ -140,6 +162,9 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
   factory _$ScoreSchemaImpl.fromJson(Map<String, dynamic> json) =>
       _$$ScoreSchemaImplFromJson(json);
 
+  @override
+  @JsonKey()
+  final String name;
   @override
   @JsonKey()
   final int deathCount;
@@ -155,7 +180,7 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ScoreSchema(deathCount: $deathCount, bounceCount: $bounceCount, startUnixMs: $startUnixMs, timeMs: $timeMs)';
+    return 'ScoreSchema(name: $name, deathCount: $deathCount, bounceCount: $bounceCount, startUnixMs: $startUnixMs, timeMs: $timeMs)';
   }
 
   @override
@@ -163,6 +188,7 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ScoreSchema'))
+      ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('deathCount', deathCount))
       ..add(DiagnosticsProperty('bounceCount', bounceCount))
       ..add(DiagnosticsProperty('startUnixMs', startUnixMs))
@@ -174,6 +200,7 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ScoreSchemaImpl &&
+            (identical(other.name, name) || other.name == name) &&
             (identical(other.deathCount, deathCount) ||
                 other.deathCount == deathCount) &&
             (identical(other.bounceCount, bounceCount) ||
@@ -185,8 +212,8 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, deathCount, bounceCount, startUnixMs, timeMs);
+  int get hashCode => Object.hash(
+      runtimeType, name, deathCount, bounceCount, startUnixMs, timeMs);
 
   @JsonKey(ignore: true)
   @override
@@ -204,7 +231,8 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
 
 abstract class _ScoreSchema extends ScoreSchema {
   const factory _ScoreSchema(
-      {final int deathCount,
+      {final String name,
+      final int deathCount,
       final int bounceCount,
       final int startUnixMs,
       final int timeMs}) = _$ScoreSchemaImpl;
@@ -213,6 +241,8 @@ abstract class _ScoreSchema extends ScoreSchema {
   factory _ScoreSchema.fromJson(Map<String, dynamic> json) =
       _$ScoreSchemaImpl.fromJson;
 
+  @override
+  String get name;
   @override
   int get deathCount;
   @override

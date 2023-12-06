@@ -7,6 +7,7 @@ part 'score_schema.g.dart';
 class ScoreSchema with _$ScoreSchema {
   const ScoreSchema._();
   const factory ScoreSchema({
+    @Default('') String name,
     @Default(0) int deathCount,
     @Default(0) int bounceCount,
     @Default(0) int startUnixMs,

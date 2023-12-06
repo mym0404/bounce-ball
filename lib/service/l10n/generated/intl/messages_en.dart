@@ -30,8 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "g_clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "g_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "g_death": MessageLookupByLibrary.simpleMessage("Death"),
+        "g_empty_body":
+            MessageLookupByLibrary.simpleMessage("Explore infinity space"),
+        "g_empty_title": MessageLookupByLibrary.simpleMessage("No Data Yet"),
+        "g_error":
+            MessageLookupByLibrary.simpleMessage("Unknown error occured!"),
         "g_level": MessageLookupByLibrary.simpleMessage("Level"),
+        "g_loading_body": MessageLookupByLibrary.simpleMessage("Where to go?"),
+        "g_loading_title":
+            MessageLookupByLibrary.simpleMessage("We are waiting..."),
         "g_okay": MessageLookupByLibrary.simpleMessage("Okay"),
+        "g_ranking": MessageLookupByLibrary.simpleMessage("Ranking"),
         "g_score": MessageLookupByLibrary.simpleMessage("Score"),
         "g_share": MessageLookupByLibrary.simpleMessage("Share"),
         "g_stage": MessageLookupByLibrary.simpleMessage("Stage"),
@@ -39,6 +48,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "g_time": MessageLookupByLibrary.simpleMessage("Time"),
         "g_total": MessageLookupByLibrary.simpleMessage("Total"),
         "g_world": MessageLookupByLibrary.simpleMessage("World"),
+        "register_ranking":
+            MessageLookupByLibrary.simpleMessage("Register Ranking"),
+        "register_ranking_done":
+            MessageLookupByLibrary.simpleMessage("Ranking Registered!"),
+        "register_ranking_start":
+            MessageLookupByLibrary.simpleMessage("Ranking Registering..."),
         "setting_title": MessageLookupByLibrary.simpleMessage("Settings")
       };
 }
