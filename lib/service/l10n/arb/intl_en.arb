@@ -1,6 +1,7 @@
 {
   "_locale": "en",
   "app_name": "Bounce Ball",
+  "ready_dv_description": "Bounce your ball\nReach the Goal\nAnd, explore infinity space",
   "setting_title": "Settings",
   "g_start": "Start",
   "g_okay": "Okay",

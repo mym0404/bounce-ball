@@ -70,6 +70,16 @@ class S {
     );
   }
 
+  /// `Bounce your ball\nReach the Goal\nAnd, explore infinity space`
+  String get ready_dv_description {
+    return Intl.message(
+      'Bounce your ball\nReach the Goal\nAnd, explore infinity space',
+      name: 'ready_dv_description',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get setting_title {
     return Intl.message(

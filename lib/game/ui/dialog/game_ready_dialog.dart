@@ -30,12 +30,12 @@ class _GameReadyDialogState extends State<GameReadyDialog> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Text(
-            'Bounce Ball',
+          Text(
+            context.s.app_name,
             style: TS.titleLarge,
           ),
           const Gap(12),
-          const Text('Bounce your ball\nReach the Goal', textAlign: TextAlign.center),
+          Text(context.s.ready_dv_description, textAlign: TextAlign.center),
           const Gap(12),
           img.logo1024
               .image(width: 128)
@@ -44,7 +44,7 @@ class _GameReadyDialogState extends State<GameReadyDialog> {
           const Gap(12),
           FilledButton.tonal(
             onPressed: _pressStart,
-            child: const Text('Start'),
+            child: Text(context.s.g_start),
           ),
           const Gap(12),
           Text(

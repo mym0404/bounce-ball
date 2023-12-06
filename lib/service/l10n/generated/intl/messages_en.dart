@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "g_time": MessageLookupByLibrary.simpleMessage("Time"),
         "g_total": MessageLookupByLibrary.simpleMessage("Total"),
         "g_world": MessageLookupByLibrary.simpleMessage("World"),
+        "ready_dv_description": MessageLookupByLibrary.simpleMessage(
+            "Bounce your ball\nReach the Goal\nAnd, explore infinity space"),
         "register_ranking":
             MessageLookupByLibrary.simpleMessage("Register Ranking"),
         "register_ranking_done":
