@@ -39,6 +39,7 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
       context.showSuccessSnackBar(text: context.s.register_ranking_done);
     } catch (e) {
       log.e(e);
+      print(e);
       context.showErrorSnackBar(text: context.s.g_error);
     }
     setState(() => isLoading = false);
