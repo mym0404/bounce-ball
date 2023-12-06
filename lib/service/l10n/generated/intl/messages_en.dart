@@ -22,9 +22,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "__": MessageLookupByLibrary.simpleMessage(""),
         "_locale": MessageLookupByLibrary.simpleMessage("en"),
         "app_name": MessageLookupByLibrary.simpleMessage("Bounce Ball"),
+        "g_bounce": MessageLookupByLibrary.simpleMessage("Bounce"),
+        "g_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "g_clear": MessageLookupByLibrary.simpleMessage("Clear"),
+        "g_confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "g_death": MessageLookupByLibrary.simpleMessage("Death"),
+        "g_level": MessageLookupByLibrary.simpleMessage("Level"),
+        "g_okay": MessageLookupByLibrary.simpleMessage("Okay"),
+        "g_score": MessageLookupByLibrary.simpleMessage("Score"),
+        "g_share": MessageLookupByLibrary.simpleMessage("Share"),
+        "g_stage": MessageLookupByLibrary.simpleMessage("Stage"),
         "g_start": MessageLookupByLibrary.simpleMessage("Start"),
+        "g_time": MessageLookupByLibrary.simpleMessage("Time"),
+        "g_total": MessageLookupByLibrary.simpleMessage("Total"),
+        "g_world": MessageLookupByLibrary.simpleMessage("World"),
         "setting_title": MessageLookupByLibrary.simpleMessage("Settings")
       };
 }

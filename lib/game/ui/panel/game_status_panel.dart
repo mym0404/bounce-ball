@@ -10,6 +10,7 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
     var level = watchValue((GameManager e) => e.level);
     var scoreOfStage = watchValue((GameManager e) => e.scoreOfStage);
     var isGameStarted = watchValue((GameManager e) => e.isGameStarted);
+    var isStageCleared = watchValue((GameManager e) => e.isStageCleared);
 
     return DefaultTextStyle(
       style: TS.b1.onSurface.copyWith(
@@ -36,8 +37,12 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
               child: IntervalBuilder(
                 interval: 0.01.seconds,
                 builder: (context) {
-                  var diffMs = scoreOfStage.startUnixMs == 0 ? 0 : DateTime.now().millisecondsSinceEpoch - scoreOfStage.startUnixMs;
-                  var formatted = '${diffMs ~/ 1000}.${(diffMs % 1000).toStringAsFixed(0)}';
+                  var diffMs = isStageCleared
+                      ? scoreOfStage.timeMs
+                      : scoreOfStage.startUnixMs == 0
+                          ? 0
+                          : unixMs - scoreOfStage.startUnixMs;
+                  var formatted = (diffMs / 1000).toStringAsFixed(3);
                   return Text(formatted);
                 },
               ),

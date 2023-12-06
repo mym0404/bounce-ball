@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -25,6 +26,7 @@ FutureOr<void> _initFirebase() async {
   try {
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     fbAnalytics.setAnalyticsCollectionEnabled(!kDebugMode);
+    di.registerSingleton(FirebaseFirestore.instance);
   } catch (e) {}
 }
 
@@ -47,6 +49,7 @@ class BootStrapApp extends StatelessWidget with WatchItMixin {
     var locale = watchPropertyValue((L10NManager settings) => settings.locale);
 
     return MaterialApp.router(
+      title: '${S.current.app_name} | MJ Studio',
       routerConfig: appRouter,
       locale: locale,
       localizationsDelegates: const [

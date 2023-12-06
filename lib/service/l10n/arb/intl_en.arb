@@ -2,5 +2,23 @@
   "_locale": "en",
   "app_name": "Bounce Ball",
   "setting_title": "Settings",
-  "g_start": "Start"
+  "g_start": "Start",
+  "g_okay": "Okay",
+  "g_cancel": "Cancel",
+  "g_total": "Total",
+  "g_clear": "Clear",
+  "g_confirm": "Confirm",
+  "g_stage": "Stage",
+  "g_level": "Level",
+  "g_world": "World",
+  "g_score": "Score",
+  "g_death": "Death",
+  "g_bounce": "Bounce",
+  "g_time": "Time",
+  "g_share": "Share",
+
+
+
+
+  "__":""
 }

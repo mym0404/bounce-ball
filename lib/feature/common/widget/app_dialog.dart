@@ -8,8 +8,9 @@ Future<T?> showAppDialog<T>(
   bool dismissible = true,
   PanelSize size = PanelSize.m,
   double? maxHeightRatio,
+  VC? onDismiss,
 }) async {
-  return showGeneralDialog(
+  return showGeneralDialog<T?>(
     barrierColor: Colors.transparent,
     transitionBuilder: (context, animation, secondaryAnimation, child) {
       final position = animation.drive(
@@ -39,7 +40,10 @@ Future<T?> showAppDialog<T>(
         ),
       );
     },
-  );
+  ).then((value) {
+    onDismiss?.call();
+    return value;
+  });
 }
 
 Future<T?> showAppAlertDialog<T>(

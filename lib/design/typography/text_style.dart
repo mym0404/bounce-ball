@@ -120,6 +120,7 @@ class TS {
 extension TextStyleExtension on TextStyle {
   TextStyle c(Color c) => copyWith(color: c);
   TextStyle get bold => copyWith(fontWeight: FontWeight.bold);
+  TextStyle get italic => copyWith(fontStyle: FontStyle.italic);
   TextStyle get medium => copyWith(fontWeight: FontWeight.w500);
   TextStyle get onSurface30 => copyWith(color: C.onSurface30);
   TextStyle get onSurface50 => copyWith(color: C.onSurface50);

@@ -89,6 +89,146 @@ class S {
       args: [],
     );
   }
+
+  /// `Okay`
+  String get g_okay {
+    return Intl.message(
+      'Okay',
+      name: 'g_okay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get g_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'g_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total`
+  String get g_total {
+    return Intl.message(
+      'Total',
+      name: 'g_total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get g_clear {
+    return Intl.message(
+      'Clear',
+      name: 'g_clear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get g_confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'g_confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Stage`
+  String get g_stage {
+    return Intl.message(
+      'Stage',
+      name: 'g_stage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level`
+  String get g_level {
+    return Intl.message(
+      'Level',
+      name: 'g_level',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `World`
+  String get g_world {
+    return Intl.message(
+      'World',
+      name: 'g_world',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Score`
+  String get g_score {
+    return Intl.message(
+      'Score',
+      name: 'g_score',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Death`
+  String get g_death {
+    return Intl.message(
+      'Death',
+      name: 'g_death',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bounce`
+  String get g_bounce {
+    return Intl.message(
+      'Bounce',
+      name: 'g_bounce',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get g_time {
+    return Intl.message(
+      'Time',
+      name: 'g_time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get g_share {
+    return Intl.message(
+      'Share',
+      name: 'g_share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ``
+  String get __ {
+    return Intl.message(
+      '',
+      name: '__',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

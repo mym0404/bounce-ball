@@ -1,15 +1,18 @@
 import '../../export.dart';
 import '../../feature/common/widget/app_dialog.dart';
+import '../../feature/common/widget/overlay_panel.dart';
 import '../../service/router/app_router.dart';
 import '../component/level/Level.dart';
 import '../main_game.dart';
 import '../ui/dialog/game_all_clear_dialog.dart';
+import '../ui/dialog/game_clear_score_dialog.dart';
 import '../ui/dialog/game_ready_dialog.dart';
 import 'level_clear_storage.dart';
 import 'score_schema.dart';
 
 class GameManager {
   VAL<bool> isGameStarted = VAL(false);
+  VAL<bool> isStageCleared = VAL(false);
   VAL<Level> level = VAL(Level.lv00);
   VAL<ScoreSchema> scoreOfStage = VAL(ScoreSchema.initial());
 
@@ -23,11 +26,22 @@ class GameManager {
   void clearLevel() {
     di<LevelClearStorage>().markClear(level.value);
     fbAnalytics.logLevelEnd(levelName: level.value.name);
+    isStageCleared.value = true;
+    scoreOfStage.value = scoreOfStage.value.copyWith(timeMs: unixMs - scoreOfStage.value.startUnixMs);
+    showAppDialog(
+      globalContext,
+      (context) => GameClearScoreDialog(level: level.value, score: scoreOfStage.value),
+      size: PanelSize.l,
+      onDismiss: moveToNextLevel,
+    );
+  }
+
+  void moveToNextLevel() {
     var index = Level.values.indexOf(level.value);
     if (index == Level.values.length - 1) {
       _allClear();
     } else {
-      level.value = Level.values[index + 1];
+      moveLevel(Level.values[index + 1]);
     }
     resetScore();
   }
@@ -56,6 +70,7 @@ class GameManager {
   void moveLevel(Level level) {
     this.level.value = level;
     resetScore(resetDie: true);
+    isStageCleared.value = false;
   }
 
   void increaseBounceCount() {
@@ -67,10 +82,11 @@ class GameManager {
   }
 
   void _markStageStart() {
-    scoreOfStage.value = scoreOfStage.value.copyWith(startUnixMs: DateTime.now().millisecondsSinceEpoch);
+    scoreOfStage.value = scoreOfStage.value.copyWith(startUnixMs: unixMs);
   }
 
   void resetScore({bool resetDie = true}) {
     scoreOfStage.value = ScoreSchema.initial(deathCount: resetDie ? 0 : scoreOfStage.value.deathCount);
+    isStageCleared.value = false;
   }
 }
