@@ -333,10 +333,12 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
   void onTapDownLeft() {
     isLeftPressing = true;
+    _onKeyDown(LogicalKeyboardKey.arrowLeft);
   }
 
   void onTapDownRight() {
     isRightPressing = true;
+    _onKeyDown(LogicalKeyboardKey.arrowRight);
   }
 
   void onTapUpLeft() {
