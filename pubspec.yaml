@@ -62,7 +62,8 @@ dependencies:
   firebase_core: ^2.24.0
   firebase_analytics: ^10.7.2
   grouped_list: ^5.1.2
-  cloud_firestore: ^4.13.3
+  cloud_firestore: ^4.9.2
+  encrypt: ^5.0.3
 
 dev_dependencies:
   flutter_test:
