@@ -47,6 +47,7 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
     var newWorld = GameLevel(level: level, tile: newTile);
 
     if (showTransition) {
+      currentWorld.ball.removeFromParent();
       currentWorld.add(
         MoveByEffect(V2(0, -size.y), EffectController(duration: 0.5, curve: Curves.easeInOutCubic))
           ..onComplete = () {

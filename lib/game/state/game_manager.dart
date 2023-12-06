@@ -40,10 +40,10 @@ class GameManager {
     var index = Level.values.indexOf(level.value);
     if (index == Level.values.length - 1) {
       _allClear();
+      resetScore();
     } else {
       moveLevel(Level.values[index + 1]);
     }
-    resetScore();
   }
 
   void _allClear() {
