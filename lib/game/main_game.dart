@@ -30,6 +30,7 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
     doOnLayout(() {
       showAppDialog(globalContext, (context) => const GameReadyDialog(), dismissible: false);
     });
+    manager.isGameLoading.value = false;
   }
 
   void _listenLevelChanged() {

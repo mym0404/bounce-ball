@@ -1,6 +1,36 @@
 {
   "_locale": "ko",
   "app_name": "공튀기기",
-  "setting_title": "설정",
-  "g_start": "시작"
+  "ready_dv_description": "Bounce your ball\nReach the Goal\nAnd, explore infinity space",
+  "setting_title": "Settings",
+  "g_start": "Start",
+  "g_okay": "Okay",
+  "g_cancel": "Cancel",
+  "g_total": "Total",
+  "g_clear": "Clear",
+  "g_confirm": "Confirm",
+  "g_stage": "Stage",
+  "g_level": "Level",
+  "g_world": "World",
+  "g_score": "Score",
+  "g_death": "Death",
+  "g_bounce": "Bounce",
+  "g_time": "Time",
+  "g_share": "Share",
+  "g_ranking": "Ranking",
+  "register_ranking": "Register Ranking",
+  "register_ranking_start": "Ranking Registering...",
+  "register_ranking_done": "Ranking Registered!",
+  "g_error": "Unknown error occured!",
+  "g_empty_title": "No Data Yet",
+  "g_empty_body": "Explore infinity space",
+  "g_loading_title": "We are waiting...",
+  "g_loading_body": "Where to go?",
+  "game_loading_title": "Welcome to Bounce Ball",
+  "game_loading_body": "Infinity Space is Loading\nWait a moment...",
+
+
+
+
+  "__":""
 }

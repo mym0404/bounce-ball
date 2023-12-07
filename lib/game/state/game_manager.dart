@@ -11,6 +11,7 @@ import 'level_clear_storage.dart';
 import 'score_schema.dart';
 
 class GameManager {
+  VAL<bool> isGameLoading = VAL(true);
   VAL<bool> isGameStarted = VAL(false);
   VAL<bool> isStageCleared = VAL(false);
   VAL<Level> level = VAL(Level.lv00);

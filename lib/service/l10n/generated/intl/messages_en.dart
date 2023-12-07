@@ -48,6 +48,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "g_time": MessageLookupByLibrary.simpleMessage("Time"),
         "g_total": MessageLookupByLibrary.simpleMessage("Total"),
         "g_world": MessageLookupByLibrary.simpleMessage("World"),
+        "game_loading_body": MessageLookupByLibrary.simpleMessage(
+            "Infinity Space is Loading\nWait a moment..."),
+        "game_loading_title":
+            MessageLookupByLibrary.simpleMessage("Welcome to Bounce Ball"),
         "ready_dv_description": MessageLookupByLibrary.simpleMessage(
             "Bounce your ball\nReach the Goal\nAnd, explore infinity space"),
         "register_ranking":

@@ -3,7 +3,9 @@ import 'package:flame/widgets.dart';
 import '../../../export.dart';
 
 class LoadingState extends StatelessWidget {
-  const LoadingState({super.key});
+  const LoadingState({super.key, this.title, this.body});
+
+  final String? title, body;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class LoadingState extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            context.s.g_loading_title,
+            title ?? context.s.g_loading_title,
             style: TS.t2.bold,
           ),
           const Gap(12),
@@ -30,7 +32,7 @@ class LoadingState extends StatelessWidget {
           ),
           const Gap(8),
           Text(
-            context.s.g_loading_body,
+            body ?? context.s.g_loading_body,
             style: TS.b3.bold.onSurface50,
           ),
         ],

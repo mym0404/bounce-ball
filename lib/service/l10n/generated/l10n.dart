@@ -320,6 +320,26 @@ class S {
     );
   }
 
+  /// `Welcome to Bounce Ball`
+  String get game_loading_title {
+    return Intl.message(
+      'Welcome to Bounce Ball',
+      name: 'game_loading_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Infinity Space is Loading\nWait a moment...`
+  String get game_loading_body {
+    return Intl.message(
+      'Infinity Space is Loading\nWait a moment...',
+      name: 'game_loading_body',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// ``
   String get __ {
     return Intl.message(

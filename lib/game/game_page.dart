@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../export.dart';
 import '../feature/common/widget/app_dialog.dart';
 import '../feature/common/widget/game_icon_button.dart';
+import '../feature/common/widget/loading_state.dart';
 import '../feature/common/widget/overlay_panel.dart';
 import '../service/user_preferences/user_preferences.dart';
 import 'component/ball/ball.dart';
@@ -119,6 +120,18 @@ class _GamePageState extends State<GamePage> {
               isRepeatingAnimation: false,
             ),
           ),
+        ),
+        VL(
+          valueListenable: manager.isGameLoading,
+          builder: (context, value, child) {
+            if (value) {
+              return LoadingState(
+                title: context.s.game_loading_title,
+                body: context.s.game_loading_body,
+              );
+            }
+            return const Empty();
+          },
         ),
       ],
     );
