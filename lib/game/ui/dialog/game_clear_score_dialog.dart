@@ -89,14 +89,6 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
                 )
               ],
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              child: Opacity(
-                opacity: 0.5,
-                child: Assets.lottie.clear.lottie(width: 160, height: 160, repeat: true),
-              ),
-            ),
           ],
         );
       },
