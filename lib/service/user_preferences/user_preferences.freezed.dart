@@ -168,7 +168,7 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
   const _$UserPreferencesDataImpl(
       {this.isShowArrowControls = true,
       this.cameraZoomScale = 1,
-      this.bgmVolumn = 0.5,
+      this.bgmVolumn = 0.3,
       this.effectVolumn = 0.5,
       this.isBgmSoundEnable = true,
       this.isEffectSoundEnable = true})

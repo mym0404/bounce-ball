@@ -111,17 +111,34 @@ class _GamePageState extends State<GamePage> {
         BottomCenter(
           child: PaddingBottom(
             24,
-            child: AnimatedTextKit(
-              key: ValueKey(gameLevel),
-              animatedTexts: [
-                TypewriterAnimatedText(
-                  gameLevel.say,
-                  textStyle: TS.b2,
-                  textAlign: TextAlign.center,
-                  speed: const Duration(milliseconds: 100),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedTextKit(
+                  key: ValueKey(gameLevel),
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      gameLevel.say,
+                      textStyle: TS.b2,
+                      textAlign: TextAlign.center,
+                      speed: const Duration(milliseconds: 100),
+                    ),
+                  ],
+                  isRepeatingAnimation: false,
                 ),
+                const Gap(4),
+                Row(mainAxisSize: MainAxisSize.min, children: [
+                  Icon(
+                    MdiIcons.music,
+                    color: C.onSurface50,
+                    size: 16,
+                  ),
+                  Text(
+                    gameLevel.world.bgmName,
+                    style: TS.l3.onSurface50.italic,
+                  ),
+                ]),
               ],
-              isRepeatingAnimation: false,
             ),
           ),
         ),

@@ -21,7 +21,7 @@ class GameManager {
 
   void startGame() {
     isGameStarted.value = true;
-    level.value = Level.lv1_1;
+    level.value = kDebugMode ? Level.lv5_1 : Level.lv1_1;
   }
 
   void clearLevel() {

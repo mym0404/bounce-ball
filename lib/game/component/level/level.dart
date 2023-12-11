@@ -121,7 +121,12 @@ enum LevelWorlds {
       };
   String get bgm => switch (this) {
         LevelWorlds.unknownGalaxy01 => sfxs.bgm.world1,
-        LevelWorlds.abandonedGasStation05 => sfxs.bgm.world1,
+        LevelWorlds.abandonedGasStation05 => sfxs.bgm.world5,
         _ => sfxs.bgm.world1,
+      };
+  String get bgmName => switch (this) {
+        LevelWorlds.unknownGalaxy01 => 'kronbits sfx pack - retro music',
+        LevelWorlds.abandonedGasStation05 => 'Undertale MEGALOVANIA Camellia Remix',
+        _ => '',
       };
 }

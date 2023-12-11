@@ -130,8 +130,11 @@ class $AssetsAudioBgmGen {
   /// File path: assets/audio/bgm/world1.wav
   String get world1 => 'assets/audio/bgm/world1.wav';
 
+  /// File path: assets/audio/bgm/world5.mp3
+  String get world5 => 'assets/audio/bgm/world5.mp3';
+
   /// List of all assets
-  List<String> get values => [world1];
+  List<String> get values => [world1, world5];
 }
 
 class $AssetsImagesBackgroundGen {
