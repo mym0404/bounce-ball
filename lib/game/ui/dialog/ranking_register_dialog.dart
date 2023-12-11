@@ -83,6 +83,12 @@ class _RankingRegisterDialogState extends State<RankingRegisterDialog> {
               ),
             ),
             const Gap(24),
+            TextButton.icon(
+              icon: Icon(MdiIcons.trashCan),
+              onPressed: () => _controller.clear(),
+              label: Text(context.s.g_clear),
+            ),
+            const Gap(24),
             FilledButton.tonal(
                 onPressed: isLoading ? null : _register, child: Text(context.s.register_ranking)),
             const Gap(12),

@@ -66,6 +66,7 @@ dependencies:
   signature: ^5.4.1
   lottie: ^2.7.0
   flame_audio: ^2.1.5
+  url_launcher: ^6.2.2
 
 dev_dependencies:
   flutter_test:

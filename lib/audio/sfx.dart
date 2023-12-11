@@ -35,7 +35,8 @@ class Sfx {
   Future<void> playBgm(Level level) async {
     if (lastBgm == level.world.bgm.audioPath) return;
     bgmPlayer?.dispose();
-    bgmPlayer = await FlameAudio.loop(level.world.bgm.audioPath, volume: pref.value.bgmVolumn);
+    bgmPlayer = await FlameAudio.loop(level.world.bgm.audioPath,
+        volume: pref.value.isBgmSoundEnable ? pref.value.bgmVolumn : 0);
     lastBgm = level.world.bgm.audioPath;
   }
 

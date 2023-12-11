@@ -75,8 +75,12 @@ class _GamePageState extends State<GamePage> {
                     icon: MdiIcons.map,
                     size: 32,
                     onPressed: () {
-                      showAppDialog(context, (context) => const GameMapDialog(),
-                          maxHeightRatio: 0.85, size: PanelSize.l);
+                      showAppDialog(
+                        context,
+                        (context) => const GameMapDialog(),
+                        maxHeightRatio: 0.6,
+                        size: PanelSize.m,
+                      );
                     },
                   ),
                   const Gap(12)
@@ -95,7 +99,7 @@ class _GamePageState extends State<GamePage> {
                   icon: MdiIcons.cog,
                   size: 32,
                   onPressed: () {
-                    showAppDialog(context, (context) => const SettingsDialog());
+                    showAppDialog(context, (context) => const SettingsDialog(), size: PanelSize.l);
                   },
                 ),
               ],
