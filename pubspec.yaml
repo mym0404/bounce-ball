@@ -65,6 +65,7 @@ dependencies:
   encrypt: ^5.0.3
   signature: ^5.4.1
   lottie: ^2.7.0
+  flame_audio: ^2.1.5
 
 dev_dependencies:
   flutter_test:
@@ -106,6 +107,8 @@ flutter:
     - assets/images/effect/smoke/
     - assets/tiles/
     - assets/lottie/
+    - assets/audio/
+    - assets/audio/bgm/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

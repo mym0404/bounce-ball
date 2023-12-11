@@ -25,6 +25,7 @@ class GameManager {
   }
 
   void clearLevel() {
+    sfx.playClear();
     di<LevelClearStorage>().markClear(level.value);
     fbAnalytics.logLevelEnd(levelName: level.value.name);
     isStageCleared.value = true;

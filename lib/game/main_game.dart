@@ -24,6 +24,7 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
+    await sfx.init();
     add(LevelBackground());
     _listenLevelChanged();
 
@@ -33,10 +34,17 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
     manager.isGameLoading.value = false;
   }
 
+  @override
+  void onDispose() {
+    sfx.dispose();
+    super.onDispose();
+  }
+
   void _listenLevelChanged() {
     listenValue(manager.level, (value) {
       loadLevel(value);
       _showStageStartOverlay(value);
+      sfx.playBgm(value);
     }, listenInitialValue: false);
   }
 

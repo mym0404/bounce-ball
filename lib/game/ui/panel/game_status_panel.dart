@@ -23,12 +23,10 @@ class GameStatusPanel extends StatelessWidget with WatchItMixin {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'BOUNCE    BALL  (0.2.0)',
+            'BOUNCE    BALL  (0.5.0)',
             style: TS.t3.bold,
           ),
-          if (isGameStarted)
-            Text(
-                '${level.world.name} - ${level.name.split('').where((element) => RegExp(r'\d').hasMatch(element)).join()}'),
+          if (isGameStarted) Text('${level.world.name} - ${level.name}'),
           if (isGameStarted) ...[
             Text(
               'DIE ${scoreOfStage.deathCount}   BOUNCE ${scoreOfStage.bounceCount}',

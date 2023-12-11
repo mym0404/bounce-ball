@@ -22,6 +22,10 @@ UserPreferencesData _$UserPreferencesDataFromJson(Map<String, dynamic> json) {
 mixin _$UserPreferencesData {
   bool get isShowArrowControls => throw _privateConstructorUsedError;
   double get cameraZoomScale => throw _privateConstructorUsedError;
+  double get bgmVolumn => throw _privateConstructorUsedError;
+  double get effectVolumn => throw _privateConstructorUsedError;
+  bool get isBgmSoundEnable => throw _privateConstructorUsedError;
+  bool get isEffectSoundEnable => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +39,13 @@ abstract class $UserPreferencesDataCopyWith<$Res> {
           UserPreferencesData value, $Res Function(UserPreferencesData) then) =
       _$UserPreferencesDataCopyWithImpl<$Res, UserPreferencesData>;
   @useResult
-  $Res call({bool isShowArrowControls, double cameraZoomScale});
+  $Res call(
+      {bool isShowArrowControls,
+      double cameraZoomScale,
+      double bgmVolumn,
+      double effectVolumn,
+      bool isBgmSoundEnable,
+      bool isEffectSoundEnable});
 }
 
 /// @nodoc
@@ -53,6 +63,10 @@ class _$UserPreferencesDataCopyWithImpl<$Res, $Val extends UserPreferencesData>
   $Res call({
     Object? isShowArrowControls = null,
     Object? cameraZoomScale = null,
+    Object? bgmVolumn = null,
+    Object? effectVolumn = null,
+    Object? isBgmSoundEnable = null,
+    Object? isEffectSoundEnable = null,
   }) {
     return _then(_value.copyWith(
       isShowArrowControls: null == isShowArrowControls
@@ -63,6 +77,22 @@ class _$UserPreferencesDataCopyWithImpl<$Res, $Val extends UserPreferencesData>
           ? _value.cameraZoomScale
           : cameraZoomScale // ignore: cast_nullable_to_non_nullable
               as double,
+      bgmVolumn: null == bgmVolumn
+          ? _value.bgmVolumn
+          : bgmVolumn // ignore: cast_nullable_to_non_nullable
+              as double,
+      effectVolumn: null == effectVolumn
+          ? _value.effectVolumn
+          : effectVolumn // ignore: cast_nullable_to_non_nullable
+              as double,
+      isBgmSoundEnable: null == isBgmSoundEnable
+          ? _value.isBgmSoundEnable
+          : isBgmSoundEnable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isEffectSoundEnable: null == isEffectSoundEnable
+          ? _value.isEffectSoundEnable
+          : isEffectSoundEnable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -75,7 +105,13 @@ abstract class _$$UserPreferencesDataImplCopyWith<$Res>
       __$$UserPreferencesDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isShowArrowControls, double cameraZoomScale});
+  $Res call(
+      {bool isShowArrowControls,
+      double cameraZoomScale,
+      double bgmVolumn,
+      double effectVolumn,
+      bool isBgmSoundEnable,
+      bool isEffectSoundEnable});
 }
 
 /// @nodoc
@@ -91,6 +127,10 @@ class __$$UserPreferencesDataImplCopyWithImpl<$Res>
   $Res call({
     Object? isShowArrowControls = null,
     Object? cameraZoomScale = null,
+    Object? bgmVolumn = null,
+    Object? effectVolumn = null,
+    Object? isBgmSoundEnable = null,
+    Object? isEffectSoundEnable = null,
   }) {
     return _then(_$UserPreferencesDataImpl(
       isShowArrowControls: null == isShowArrowControls
@@ -101,6 +141,22 @@ class __$$UserPreferencesDataImplCopyWithImpl<$Res>
           ? _value.cameraZoomScale
           : cameraZoomScale // ignore: cast_nullable_to_non_nullable
               as double,
+      bgmVolumn: null == bgmVolumn
+          ? _value.bgmVolumn
+          : bgmVolumn // ignore: cast_nullable_to_non_nullable
+              as double,
+      effectVolumn: null == effectVolumn
+          ? _value.effectVolumn
+          : effectVolumn // ignore: cast_nullable_to_non_nullable
+              as double,
+      isBgmSoundEnable: null == isBgmSoundEnable
+          ? _value.isBgmSoundEnable
+          : isBgmSoundEnable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isEffectSoundEnable: null == isEffectSoundEnable
+          ? _value.isEffectSoundEnable
+          : isEffectSoundEnable // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -110,7 +166,12 @@ class __$$UserPreferencesDataImplCopyWithImpl<$Res>
 class _$UserPreferencesDataImpl extends _UserPreferencesData
     with DiagnosticableTreeMixin {
   const _$UserPreferencesDataImpl(
-      {this.isShowArrowControls = true, this.cameraZoomScale = 1})
+      {this.isShowArrowControls = true,
+      this.cameraZoomScale = 1,
+      this.bgmVolumn = 0.5,
+      this.effectVolumn = 0.5,
+      this.isBgmSoundEnable = true,
+      this.isEffectSoundEnable = true})
       : super._();
 
   factory _$UserPreferencesDataImpl.fromJson(Map<String, dynamic> json) =>
@@ -122,10 +183,22 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
   @override
   @JsonKey()
   final double cameraZoomScale;
+  @override
+  @JsonKey()
+  final double bgmVolumn;
+  @override
+  @JsonKey()
+  final double effectVolumn;
+  @override
+  @JsonKey()
+  final bool isBgmSoundEnable;
+  @override
+  @JsonKey()
+  final bool isEffectSoundEnable;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserPreferencesData(isShowArrowControls: $isShowArrowControls, cameraZoomScale: $cameraZoomScale)';
+    return 'UserPreferencesData(isShowArrowControls: $isShowArrowControls, cameraZoomScale: $cameraZoomScale, bgmVolumn: $bgmVolumn, effectVolumn: $effectVolumn, isBgmSoundEnable: $isBgmSoundEnable, isEffectSoundEnable: $isEffectSoundEnable)';
   }
 
   @override
@@ -134,7 +207,11 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
     properties
       ..add(DiagnosticsProperty('type', 'UserPreferencesData'))
       ..add(DiagnosticsProperty('isShowArrowControls', isShowArrowControls))
-      ..add(DiagnosticsProperty('cameraZoomScale', cameraZoomScale));
+      ..add(DiagnosticsProperty('cameraZoomScale', cameraZoomScale))
+      ..add(DiagnosticsProperty('bgmVolumn', bgmVolumn))
+      ..add(DiagnosticsProperty('effectVolumn', effectVolumn))
+      ..add(DiagnosticsProperty('isBgmSoundEnable', isBgmSoundEnable))
+      ..add(DiagnosticsProperty('isEffectSoundEnable', isEffectSoundEnable));
   }
 
   @override
@@ -145,13 +222,27 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
             (identical(other.isShowArrowControls, isShowArrowControls) ||
                 other.isShowArrowControls == isShowArrowControls) &&
             (identical(other.cameraZoomScale, cameraZoomScale) ||
-                other.cameraZoomScale == cameraZoomScale));
+                other.cameraZoomScale == cameraZoomScale) &&
+            (identical(other.bgmVolumn, bgmVolumn) ||
+                other.bgmVolumn == bgmVolumn) &&
+            (identical(other.effectVolumn, effectVolumn) ||
+                other.effectVolumn == effectVolumn) &&
+            (identical(other.isBgmSoundEnable, isBgmSoundEnable) ||
+                other.isBgmSoundEnable == isBgmSoundEnable) &&
+            (identical(other.isEffectSoundEnable, isEffectSoundEnable) ||
+                other.isEffectSoundEnable == isEffectSoundEnable));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isShowArrowControls, cameraZoomScale);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isShowArrowControls,
+      cameraZoomScale,
+      bgmVolumn,
+      effectVolumn,
+      isBgmSoundEnable,
+      isEffectSoundEnable);
 
   @JsonKey(ignore: true)
   @override
@@ -171,7 +262,11 @@ class _$UserPreferencesDataImpl extends _UserPreferencesData
 abstract class _UserPreferencesData extends UserPreferencesData {
   const factory _UserPreferencesData(
       {final bool isShowArrowControls,
-      final double cameraZoomScale}) = _$UserPreferencesDataImpl;
+      final double cameraZoomScale,
+      final double bgmVolumn,
+      final double effectVolumn,
+      final bool isBgmSoundEnable,
+      final bool isEffectSoundEnable}) = _$UserPreferencesDataImpl;
   const _UserPreferencesData._() : super._();
 
   factory _UserPreferencesData.fromJson(Map<String, dynamic> json) =
@@ -181,6 +276,14 @@ abstract class _UserPreferencesData extends UserPreferencesData {
   bool get isShowArrowControls;
   @override
   double get cameraZoomScale;
+  @override
+  double get bgmVolumn;
+  @override
+  double get effectVolumn;
+  @override
+  bool get isBgmSoundEnable;
+  @override
+  bool get isEffectSoundEnable;
   @override
   @JsonKey(ignore: true)
   _$$UserPreferencesDataImplCopyWith<_$UserPreferencesDataImpl> get copyWith =>

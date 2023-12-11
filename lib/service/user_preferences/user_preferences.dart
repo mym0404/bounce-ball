@@ -11,6 +11,10 @@ class UserPreferencesData with _$UserPreferencesData {
   const factory UserPreferencesData({
     @Default(true) bool isShowArrowControls,
     @Default(1) double cameraZoomScale,
+    @Default(0.3) double bgmVolumn,
+    @Default(0.5) double effectVolumn,
+    @Default(true) bool isBgmSoundEnable,
+    @Default(true) bool isEffectSoundEnable,
   }) = _UserPreferencesData;
 
   factory UserPreferencesData.fromJson(Map<String, dynamic> json) => _$UserPreferencesDataFromJson(json);

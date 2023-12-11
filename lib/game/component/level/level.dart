@@ -119,4 +119,9 @@ enum LevelWorlds {
         LevelWorlds.abandonedGasStation05 => 256,
         _ => 1,
       };
+  String get bgm => switch (this) {
+        LevelWorlds.unknownGalaxy01 => sfxs.bgm.world1,
+        LevelWorlds.abandonedGasStation05 => sfxs.bgm.world1,
+        _ => sfxs.bgm.world1,
+      };
 }

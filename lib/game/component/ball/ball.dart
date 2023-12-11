@@ -154,6 +154,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
           ..position = position,
       );
       _die();
+      sfx.playDieBomb();
       return;
     }
 
@@ -168,6 +169,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
           ..position = V2(position.x, position.y + 8),
       );
       manager.increaseBounceCount();
+      sfx.playBounce();
       return;
     }
 
@@ -179,6 +181,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
           rightArrowBlock.y + rightArrowBlock.height / 2);
       velocity = V2(_flyingXSpeed, 0);
       manager.increaseBounceCount();
+      sfx.playArrow();
       return;
     }
     if (leftArrowBlock != null) {
@@ -186,6 +189,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
       position = V2(leftArrowBlock.x - ballRadius - 1, leftArrowBlock.y + leftArrowBlock.height / 2);
       velocity = V2(-_flyingXSpeed, 0);
       manager.increaseBounceCount();
+      sfx.playArrow();
       return;
     }
 
@@ -223,6 +227,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
           velocity.y *= -1;
           nextPosition = position;
         }
+        sfx.playBounce();
       }
     }
 
@@ -233,6 +238,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
     var isOverlap =
         game.size.toRect().overlaps(Rect.fromCircle(center: position.toOffset(), radius: ballRadius));
     if (!isOverlap) {
+      sfx.playDieOutOfBound();
       _die();
     }
   }
@@ -274,6 +280,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
     velocity.x = direction * _wallGeneralJumpXForce * (0.5 + Random().nextDouble());
     velocity.y += -_wallGeneralJumpYForce * (Random().nextDouble() - 0.4);
+    sfx.playBounce();
   }
 
   void _wallStrongJump(int direction) {
@@ -287,6 +294,7 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
 
     velocity.x = _wallStrongJumpXForce * direction;
     velocity.y = -_wallStrongJumpYForce;
+    sfx.playJumpWall();
   }
 
   void _die() {

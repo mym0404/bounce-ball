@@ -22,7 +22,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
 
   @override
   Widget build(BuildContext context) {
-    var userPref = watchIt<UserPreferences>();
+    var pref = watchIt<UserPreferences>().value;
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -54,6 +54,47 @@ class _SettingsDialogState extends State<SettingsDialog> {
                 max: 3,
               );
             },
+          ),
+          const Gap(12),
+          Row(
+            children: [
+              const Text('BGM Volumn'),
+              const Gap(8),
+              const Gap(8),
+              IconButton.filledTonal(
+                onPressed: () =>
+                    di<UserPreferences>().value = pref.copyWith(isBgmSoundEnable: !pref.isBgmSoundEnable),
+                icon: Icon(pref.isBgmSoundEnable ? MdiIcons.volumeSource : MdiIcons.volumeOff),
+              ),
+            ],
+          ),
+          Slider(
+            value: pref.bgmVolumn,
+            onChanged: (value) {
+              userPref.value = userPref.value.copyWith(bgmVolumn: value);
+            },
+            min: 0,
+            max: 1,
+          ),
+          const Gap(12),
+          Row(
+            children: [
+              const Text('Effect Volumn'),
+              const Gap(8),
+              IconButton.filledTonal(
+                onPressed: () => di<UserPreferences>().value =
+                    pref.copyWith(isEffectSoundEnable: !pref.isEffectSoundEnable),
+                icon: Icon(pref.isEffectSoundEnable ? MdiIcons.volumeSource : MdiIcons.volumeOff),
+              ),
+            ],
+          ),
+          Slider(
+            value: pref.effectVolumn,
+            onChanged: (value) {
+              userPref.value = userPref.value.copyWith(effectVolumn: value);
+            },
+            min: 0,
+            max: 1,
           ),
         ],
       ),

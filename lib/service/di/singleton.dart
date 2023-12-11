@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:local_file_preferences/local_file_preferences.dart';
 
+import '../../audio/Sfx.dart';
 import '../../export.dart';
 import '../../feature/common/util/log_debug.dart';
 import '../../game/state/game_manager.dart';
@@ -15,6 +16,7 @@ Future<void> registerSingletons() async {
   var sharedPreferences = await SharedPreferences.getInstance();
   registerGlobalStorage(SharedPreferencesStorage(sharedPreferences: sharedPreferences));
   di.registerSingleton<LocalStorage>(SharedPreferencesLocalStorage(sharedPreferences));
+  di.registerSingleton(Sfx());
   di.registerSingleton(L10NManager());
   di.registerSingleton(Logger());
   di.registerSingleton(LayoutManager());
@@ -27,3 +29,4 @@ GameManager get manager => di();
 LevelClearStorage get levelClearStorage => di();
 FirebaseAnalytics get fbAnalytics => FirebaseAnalytics.instance;
 UserPreferences get userPref => di();
+Sfx get sfx => di();
