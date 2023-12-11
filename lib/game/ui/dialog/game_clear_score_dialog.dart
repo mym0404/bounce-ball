@@ -84,7 +84,7 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
                               )
                             ];
                           },
-                          body: const Empty(), /* PaddingTop(24, child: _buildScoreRankingPanel()),*/
+                          body: PaddingTop(24, child: _buildScoreRankingPanel()),
                         ),
                 )
               ],
