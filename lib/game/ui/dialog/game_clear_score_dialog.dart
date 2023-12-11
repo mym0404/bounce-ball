@@ -33,8 +33,6 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
     manager.restartThisStage();
   }
 
-  void _onPressShare() {}
-
   void _onPressRegisterRanking() async {
     Object? result = await showAppDialog(
       context,
