@@ -15,7 +15,7 @@ class GameMapDialog extends StatefulWidget {
 
 class _GameMapDialogState extends State<GameMapDialog> {
   bool _isShowScore = false;
-  Level selectedLevel = Level.lv00;
+  Level selectedLevel = Level.lv0_0;
 
   @override
   Widget build(BuildContext context) {

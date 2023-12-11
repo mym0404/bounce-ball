@@ -13,13 +13,11 @@ import 'package:lottie/lottie.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  $AssetsImagesBackgroundGen get background =>
-      const $AssetsImagesBackgroundGen();
+  $AssetsImagesBackgroundGen get background => const $AssetsImagesBackgroundGen();
   $AssetsImagesEffectGen get effect => const $AssetsImagesEffectGen();
 
   /// File path: assets/images/logo1024.png
-  AssetGenImage get logo1024 =>
-      const AssetGenImage('assets/images/logo1024.png');
+  AssetGenImage get logo1024 => const AssetGenImage('assets/images/logo1024.png');
 
   $AssetsImagesPlanetGen get planet => const $AssetsImagesPlanetGen();
 
@@ -46,14 +44,14 @@ class $AssetsTilesGen {
   /// File path: assets/tiles/Tiles.tsx
   String get tiles => 'assets/tiles/Tiles.tsx';
 
-  /// File path: assets/tiles/lv-01.tmx
-  String get lv01 => 'assets/tiles/lv-01.tmx';
+  /// File path: assets/tiles/lv1_1.tmx
+  String get lv01 => 'assets/tiles/lv1_1.tmx';
 
-  /// File path: assets/tiles/lv-02.tmx
-  String get lv02 => 'assets/tiles/lv-02.tmx';
+  /// File path: assets/tiles/lv1_2.tmx
+  String get lv02 => 'assets/tiles/lv1_2.tmx';
 
-  /// File path: assets/tiles/lv-03.tmx
-  String get lv03 => 'assets/tiles/lv-03.tmx';
+  /// File path: assets/tiles/lv1_3.tmx
+  String get lv03 => 'assets/tiles/lv1_3.tmx';
 
   /// File path: assets/tiles/lv-04.tmx
   String get lv04 => 'assets/tiles/lv-04.tmx';
@@ -83,49 +81,30 @@ class $AssetsTilesGen {
   String get tileTiledSession => 'assets/tiles/tile.tiled-session';
 
   /// List of all assets
-  List<String> get values => [
-        tiles,
-        lv01,
-        lv02,
-        lv03,
-        lv04,
-        lv05,
-        lv06,
-        lv07,
-        lv08,
-        lv09,
-        lv16,
-        tileTiledProject,
-        tileTiledSession
-      ];
+  List<String> get values =>
+      [tiles, lv01, lv02, lv03, lv04, lv05, lv06, lv07, lv08, lv09, lv16, tileTiledProject, tileTiledSession];
 }
 
 class $AssetsImagesBackgroundGen {
   const $AssetsImagesBackgroundGen();
 
   /// File path: assets/images/background/blue.png
-  AssetGenImage get blue =>
-      const AssetGenImage('assets/images/background/blue.png');
+  AssetGenImage get blue => const AssetGenImage('assets/images/background/blue.png');
 
   /// File path: assets/images/background/green.png
-  AssetGenImage get green =>
-      const AssetGenImage('assets/images/background/green.png');
+  AssetGenImage get green => const AssetGenImage('assets/images/background/green.png');
 
   /// File path: assets/images/background/purple.png
-  AssetGenImage get purple =>
-      const AssetGenImage('assets/images/background/purple.png');
+  AssetGenImage get purple => const AssetGenImage('assets/images/background/purple.png');
 
   /// File path: assets/images/background/star1.png
-  AssetGenImage get star1 =>
-      const AssetGenImage('assets/images/background/star1.png');
+  AssetGenImage get star1 => const AssetGenImage('assets/images/background/star1.png');
 
   /// File path: assets/images/background/star2.png
-  AssetGenImage get star2 =>
-      const AssetGenImage('assets/images/background/star2.png');
+  AssetGenImage get star2 => const AssetGenImage('assets/images/background/star2.png');
 
   /// File path: assets/images/background/star3.png
-  AssetGenImage get star3 =>
-      const AssetGenImage('assets/images/background/star3.png');
+  AssetGenImage get star3 => const AssetGenImage('assets/images/background/star3.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [blue, green, purple, star1, star2, star3];
@@ -141,20 +120,16 @@ class $AssetsImagesPlanetGen {
   const $AssetsImagesPlanetGen();
 
   /// File path: assets/images/planet/empty.png
-  AssetGenImage get empty =>
-      const AssetGenImage('assets/images/planet/empty.png');
+  AssetGenImage get empty => const AssetGenImage('assets/images/planet/empty.png');
 
   /// File path: assets/images/planet/loading.png
-  AssetGenImage get loading =>
-      const AssetGenImage('assets/images/planet/loading.png');
+  AssetGenImage get loading => const AssetGenImage('assets/images/planet/loading.png');
 
   /// File path: assets/images/planet/world1.png
-  AssetGenImage get world1 =>
-      const AssetGenImage('assets/images/planet/world1.png');
+  AssetGenImage get world1 => const AssetGenImage('assets/images/planet/world1.png');
 
   /// File path: assets/images/planet/world2.png
-  AssetGenImage get world2 =>
-      const AssetGenImage('assets/images/planet/world2.png');
+  AssetGenImage get world2 => const AssetGenImage('assets/images/planet/world2.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [empty, loading, world1, world2];
@@ -164,20 +139,16 @@ class $AssetsImagesEffectSmokeGen {
   const $AssetsImagesEffectSmokeGen();
 
   /// File path: assets/images/effect/smoke/smoke1.png
-  AssetGenImage get smoke1 =>
-      const AssetGenImage('assets/images/effect/smoke/smoke1.png');
+  AssetGenImage get smoke1 => const AssetGenImage('assets/images/effect/smoke/smoke1.png');
 
   /// File path: assets/images/effect/smoke/smoke2.png
-  AssetGenImage get smoke2 =>
-      const AssetGenImage('assets/images/effect/smoke/smoke2.png');
+  AssetGenImage get smoke2 => const AssetGenImage('assets/images/effect/smoke/smoke2.png');
 
   /// File path: assets/images/effect/smoke/smoke3.png
-  AssetGenImage get smoke3 =>
-      const AssetGenImage('assets/images/effect/smoke/smoke3.png');
+  AssetGenImage get smoke3 => const AssetGenImage('assets/images/effect/smoke/smoke3.png');
 
   /// File path: assets/images/effect/smoke/smoke4.png
-  AssetGenImage get smoke4 =>
-      const AssetGenImage('assets/images/effect/smoke/smoke4.png');
+  AssetGenImage get smoke4 => const AssetGenImage('assets/images/effect/smoke/smoke4.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [smoke1, smoke2, smoke3, smoke4];

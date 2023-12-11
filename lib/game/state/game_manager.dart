@@ -14,14 +14,14 @@ class GameManager {
   VAL<bool> isGameLoading = VAL(true);
   VAL<bool> isGameStarted = VAL(false);
   VAL<bool> isStageCleared = VAL(false);
-  VAL<Level> level = VAL(Level.lv00);
+  VAL<Level> level = VAL(Level.lv0_0);
   VAL<ScoreSchema> scoreOfStage = VAL(ScoreSchema.initial());
 
   MainGame get game => di();
 
   void startGame() {
     isGameStarted.value = true;
-    level.value = Level.lv01;
+    level.value = Level.lv1_1;
   }
 
   void clearLevel() {

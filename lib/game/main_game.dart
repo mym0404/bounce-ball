@@ -44,7 +44,7 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
     var currentWorld = children.query<GameLevel>().firstOrNull;
     var showTransition = level != Level.values.first && currentWorld != null;
 
-    var newTile = await TiledComponent.load('${level.name}.tmx', V2.all(16));
+    var newTile = await TiledComponent.load('${level.tileName}.tmx', V2.all(16));
     var newWorld = GameLevel(level: level, tile: newTile);
 
     if (showTransition) {
