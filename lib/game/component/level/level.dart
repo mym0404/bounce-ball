@@ -76,7 +76,7 @@ enum Level {
   lv5_1(
     LevelWorlds.abandonedGasStation05,
     'lv5_1',
-    '01-Abandoned World',
+    'ㅇㅏ 맵만들기 귀찮다',
     36,
     24,
     'Welcome to New World!\na.k.a. Hello World!',
