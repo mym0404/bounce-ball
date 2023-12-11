@@ -1,9 +1,10 @@
 import '../../../export.dart';
+import '../../../feature/common/widget/app_dialog.dart';
 import '../../component/level/Level.dart';
-import '../../network/score_repository.dart';
 import '../../state/score_schema.dart';
 import '../panel/score_ranking_panel.dart';
 import '../widget/panel_header.dart';
+import 'ranking_register_dialog.dart';
 
 class GameClearScoreDialog extends StatefulWidget {
   const GameClearScoreDialog({
@@ -20,7 +21,8 @@ class GameClearScoreDialog extends StatefulWidget {
 }
 
 class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
-  var isLoading = false;
+  bool _isRankingRegistered = false;
+
   void _onPressNextStage() {
     Navigator.pop(context);
     manager.moveToNextLevel();
@@ -34,20 +36,16 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
   void _onPressShare() {}
 
   void _onPressRegisterRanking() async {
-    setState(() => isLoading = true);
-    context.showInfoSnackBar(text: context.s.register_ranking_start);
-    try {
-      await ScoreRepository().saveRecord(
+    Object? result = await showAppDialog(
+      context,
+      (context) => RankingRegisterDialog(
         level: widget.level,
         score: widget.score,
-        name: 'Beta Tester ${Random().nextInt(500)}',
-      );
-      context.showSuccessSnackBar(text: context.s.register_ranking_done);
-    } catch (e) {
-      log.e(e);
-      context.showErrorSnackBar(text: context.s.g_error);
+      ),
+    );
+    if (result == true) {
+      setState(() => _isRankingRegistered = true);
     }
-    setState(() => isLoading = false);
   }
 
   @override
@@ -56,39 +54,51 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
       builder: (context, cont) {
         var width = cont.maxWidth;
         var isWideLayout = width >= 500;
-        return Column(
+        return Stack(
           children: [
-            PanelHeader(
-              title: context.s.g_clear,
-              hideBack: true,
-              right: [
-                OutlinedButton(onPressed: _onPressRestart, child: Text(context.s.restart)),
-                const Gap(8),
-                FilledButton.tonal(onPressed: _onPressNextStage, child: Text(context.s.next_stage)),
+            Column(
+              children: [
+                PanelHeader(
+                  title: context.s.g_clear,
+                  hideBack: true,
+                  right: [
+                    OutlinedButton(onPressed: _onPressRestart, child: Text(context.s.restart)),
+                    const Gap(8),
+                    FilledButton.tonal(onPressed: _onPressNextStage, child: Text(context.s.next_stage)),
+                  ],
+                ),
+                const Gap(20),
+                Expanded(
+                  child: isWideLayout
+                      ? Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            PaddingHorizontal(12, child: SizedBox(width: 200, child: _buildScorePanel())),
+                            const VerticalDivider(),
+                            Expanded(child: _buildScoreRankingPanel()),
+                          ],
+                        )
+                      : NestedScrollView(
+                          headerSliverBuilder: (context, innerBoxIsScrolled) {
+                            return [
+                              SliverToBoxAdapter(
+                                child: _buildScorePanel(),
+                              )
+                            ];
+                          },
+                          body: PaddingTop(24, child: _buildScoreRankingPanel()),
+                        ),
+                )
               ],
             ),
-            const Gap(20),
-            Expanded(
-              child: isWideLayout
-                  ? Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        PaddingHorizontal(12, child: SizedBox(width: 200, child: _buildScorePanel())),
-                        const VerticalDivider(),
-                        Expanded(child: _buildScoreRankingPanel()),
-                      ],
-                    )
-                  : NestedScrollView(
-                      headerSliverBuilder: (context, innerBoxIsScrolled) {
-                        return [
-                          SliverToBoxAdapter(
-                            child: _buildScorePanel(),
-                          )
-                        ];
-                      },
-                      body: PaddingTop(24, child: _buildScoreRankingPanel()),
-                    ),
-            )
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: Opacity(
+                opacity: 0.5,
+                child: Assets.lottie.clear.lottie(width: 160, height: 160, repeat: true),
+              ),
+            ),
           ],
         );
       },
@@ -96,22 +106,26 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
   }
 
   Widget _buildScoreRankingPanel() {
-    return Column(
-      children: [
-        Text(context.s.g_ranking, style: TS.t3.bold),
-        const Gap(12),
-        TextButton.icon(
-          onPressed: _onPressRegisterRanking,
-          icon: Icon(MdiIcons.send),
-          label: Text(context.s.register_ranking),
-        ),
-        const Gap(12),
-        Expanded(
-          child: ScoreRankingPanel(
-            level: widget.level,
+    return KeyedSubtree(
+      key: ValueKey(_isRankingRegistered),
+      child: Column(
+        children: [
+          Text(context.s.g_ranking, style: TS.t3.bold),
+          const Gap(12),
+          if (!_isRankingRegistered)
+            TextButton.icon(
+              onPressed: _onPressRegisterRanking,
+              icon: Icon(MdiIcons.send),
+              label: Text(context.s.register_ranking),
+            ),
+          const Gap(12),
+          Expanded(
+            child: ScoreRankingPanel(
+              level: widget.level,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

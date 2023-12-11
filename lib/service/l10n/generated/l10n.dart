@@ -390,6 +390,26 @@ class S {
     );
   }
 
+  /// `Register your ranking with your signature!\nDraw your signature in the box and press 'Register Ranking'`
+  String get register_ranking_body {
+    return Intl.message(
+      'Register your ranking with your signature!\nDraw your signature in the box and press \'Register Ranking\'',
+      name: 'register_ranking_body',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signature is empty`
+  String get e_empty_signature {
+    return Intl.message(
+      'Signature is empty',
+      name: 'e_empty_signature',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// ``
   String get __ {
     return Intl.message(

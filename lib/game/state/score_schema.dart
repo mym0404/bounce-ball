@@ -1,4 +1,7 @@
-import '../../export.dart';
+import 'package:signature/signature.dart' show Point;
+
+import '../../export.dart' hide Point;
+import '../../feature/common/util/signature_point_json_converter.dart';
 
 part 'score_schema.freezed.dart';
 part 'score_schema.g.dart';
@@ -7,7 +10,7 @@ part 'score_schema.g.dart';
 class ScoreSchema with _$ScoreSchema {
   const ScoreSchema._();
   const factory ScoreSchema({
-    @Default('') String name,
+    @Default([]) @SignaturePointJsonConverter() List<Point> signaturePoints,
     @Default(0) int deathCount,
     @Default(0) int bounceCount,
     @Default(0) int startUnixMs,

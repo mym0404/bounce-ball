@@ -8,7 +8,11 @@ part of 'score_schema.dart';
 
 _$ScoreSchemaImpl _$$ScoreSchemaImplFromJson(Map<String, dynamic> json) =>
     _$ScoreSchemaImpl(
-      name: json['name'] as String? ?? '',
+      signaturePoints: (json['signaturePoints'] as List<dynamic>?)
+              ?.map((e) =>
+                  const SignaturePointJsonConverter().fromJson(e as String))
+              .toList() ??
+          const [],
       deathCount: json['deathCount'] as int? ?? 0,
       bounceCount: json['bounceCount'] as int? ?? 0,
       startUnixMs: json['startUnixMs'] as int? ?? 0,
@@ -17,7 +21,9 @@ _$ScoreSchemaImpl _$$ScoreSchemaImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$ScoreSchemaImplToJson(_$ScoreSchemaImpl instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'signaturePoints': instance.signaturePoints
+          .map(const SignaturePointJsonConverter().toJson)
+          .toList(),
       'deathCount': instance.deathCount,
       'bounceCount': instance.bounceCount,
       'startUnixMs': instance.startUnixMs,

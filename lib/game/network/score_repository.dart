@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:signature/signature.dart';
 
 import '../component/level/Level.dart';
 import '../state/score_schema.dart';
@@ -10,8 +11,9 @@ class ScoreRepository {
 
   FirebaseFirestore get db => FirebaseFirestore.instance;
 
-  Future<void> saveRecord({required Level level, required ScoreSchema score, required String name}) async {
-    await getLevelRef(level).add(score.copyWith(name: name).toJson());
+  Future<void> saveRecord(
+      {required Level level, required ScoreSchema score, required List<Point> signaturePoints}) async {
+    await getLevelRef(level).add(score.copyWith(signaturePoints: signaturePoints).toJson());
   }
 
   Future<List<ScoreSchema>> listRecordByTime({required Level level}) async {

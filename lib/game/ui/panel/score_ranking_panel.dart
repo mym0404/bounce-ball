@@ -2,6 +2,7 @@ import '../../../export.dart';
 import '../../../feature/common/data/task.dart';
 import '../../../feature/common/widget/empty_state.dart';
 import '../../../feature/common/widget/loading_state.dart';
+import '../../../feature/common/widget/signature_renderer.dart';
 import '../../component/level/Level.dart';
 import '../../network/score_repository.dart';
 import '../../state/score_schema.dart';
@@ -67,19 +68,42 @@ class _ScoreRankingPanelState extends State<ScoreRankingPanel> {
             delegate: SliverChildBuilderDelegate((context, index) {
               var score = data[index];
               var createdText = score.created.format('yyyy-MM-dd');
-              return ListTile(
-                trailing: index <= 2
-                    ? Icon(
-                        MdiIcons.trophy,
-                        color: [Colors.amber, Colors.grey, Colors.brown][index],
-                      )
-                    : null,
-                title: Text('${index + 1}. ${score.name}'),
-                subtitle: Text(
-                  isTimeRanking
-                      ? '${(score.timeMs / 1000).toStringAsFixed(3)}ms\n$createdText'
-                      : '${score.bounceCount} bounces\n$createdText',
-                  style: TS.b2.bold,
+
+              return PaddingAll(
+                12,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              index <= 2
+                                  ? Icon(
+                                      MdiIcons.trophy,
+                                      color: [Colors.amber, Colors.grey, Colors.brown][index],
+                                    )
+                                  : Text(
+                                      '   ${index + 1}',
+                                      style: TS.b1.bold,
+                                    ),
+                            ],
+                          ),
+                          const Gap(12),
+                          Text(
+                            isTimeRanking
+                                ? '${(score.timeMs / 1000).toStringAsFixed(3)}ms'
+                                : '${score.bounceCount} bounces',
+                            style: TS.b2.bold,
+                          ),
+                          const Gap(8),
+                          Text(createdText, style: TS.l2.italic.onSurface50),
+                        ],
+                      ),
+                    ),
+                    SignatureRenderer(points: score.signaturePoints, size: 100),
+                  ],
                 ),
               );
             }, childCount: data.length),

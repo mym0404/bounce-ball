@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "__": MessageLookupByLibrary.simpleMessage(""),
         "_locale": MessageLookupByLibrary.simpleMessage("en"),
         "app_name": MessageLookupByLibrary.simpleMessage("Bounce Ball"),
+        "e_empty_signature":
+            MessageLookupByLibrary.simpleMessage("Signature is empty"),
         "g_bounce": MessageLookupByLibrary.simpleMessage("Bounce"),
         "g_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "g_clear": MessageLookupByLibrary.simpleMessage("Clear"),
@@ -59,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bounce your ball\nReach the Goal\nAnd, explore infinity space"),
         "register_ranking":
             MessageLookupByLibrary.simpleMessage("Register Ranking"),
+        "register_ranking_body": MessageLookupByLibrary.simpleMessage(
+            "Register your ranking with your signature!\nDraw your signature in the box and press \'Register Ranking\'"),
         "register_ranking_done":
             MessageLookupByLibrary.simpleMessage("Ranking Registered!"),
         "register_ranking_start":

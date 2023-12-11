@@ -64,6 +64,7 @@ dependencies:
   cloud_firestore: ^4.13.3
   encrypt: ^5.0.3
   signature: ^5.4.1
+  lottie: ^2.7.0
 
 dev_dependencies:
   flutter_test:
@@ -104,6 +105,7 @@ flutter:
     - assets/images/effect/
     - assets/images/effect/smoke/
     - assets/tiles/
+    - assets/lottie/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -139,3 +141,6 @@ flutter_intl:
 
 flutter_gen:
   output: lib/assets/
+  integrations:
+    flutter_svg: true
+    lottie: true

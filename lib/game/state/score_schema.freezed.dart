@@ -20,7 +20,8 @@ ScoreSchema _$ScoreSchemaFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ScoreSchema {
-  String get name => throw _privateConstructorUsedError;
+  @SignaturePointJsonConverter()
+  List<Point> get signaturePoints => throw _privateConstructorUsedError;
   int get deathCount => throw _privateConstructorUsedError;
   int get bounceCount => throw _privateConstructorUsedError;
   int get startUnixMs => throw _privateConstructorUsedError;
@@ -39,7 +40,7 @@ abstract class $ScoreSchemaCopyWith<$Res> {
       _$ScoreSchemaCopyWithImpl<$Res, ScoreSchema>;
   @useResult
   $Res call(
-      {String name,
+      {@SignaturePointJsonConverter() List<Point> signaturePoints,
       int deathCount,
       int bounceCount,
       int startUnixMs,
@@ -59,17 +60,17 @@ class _$ScoreSchemaCopyWithImpl<$Res, $Val extends ScoreSchema>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? signaturePoints = null,
     Object? deathCount = null,
     Object? bounceCount = null,
     Object? startUnixMs = null,
     Object? timeMs = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
+      signaturePoints: null == signaturePoints
+          ? _value.signaturePoints
+          : signaturePoints // ignore: cast_nullable_to_non_nullable
+              as List<Point>,
       deathCount: null == deathCount
           ? _value.deathCount
           : deathCount // ignore: cast_nullable_to_non_nullable
@@ -99,7 +100,7 @@ abstract class _$$ScoreSchemaImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
+      {@SignaturePointJsonConverter() List<Point> signaturePoints,
       int deathCount,
       int bounceCount,
       int startUnixMs,
@@ -117,17 +118,17 @@ class __$$ScoreSchemaImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? signaturePoints = null,
     Object? deathCount = null,
     Object? bounceCount = null,
     Object? startUnixMs = null,
     Object? timeMs = null,
   }) {
     return _then(_$ScoreSchemaImpl(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
+      signaturePoints: null == signaturePoints
+          ? _value._signaturePoints
+          : signaturePoints // ignore: cast_nullable_to_non_nullable
+              as List<Point>,
       deathCount: null == deathCount
           ? _value.deathCount
           : deathCount // ignore: cast_nullable_to_non_nullable
@@ -152,19 +153,28 @@ class __$$ScoreSchemaImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
   const _$ScoreSchemaImpl(
-      {this.name = '',
+      {@SignaturePointJsonConverter()
+      final List<Point> signaturePoints = const [],
       this.deathCount = 0,
       this.bounceCount = 0,
       this.startUnixMs = 0,
       this.timeMs = 0})
-      : super._();
+      : _signaturePoints = signaturePoints,
+        super._();
 
   factory _$ScoreSchemaImpl.fromJson(Map<String, dynamic> json) =>
       _$$ScoreSchemaImplFromJson(json);
 
+  final List<Point> _signaturePoints;
   @override
   @JsonKey()
-  final String name;
+  @SignaturePointJsonConverter()
+  List<Point> get signaturePoints {
+    if (_signaturePoints is EqualUnmodifiableListView) return _signaturePoints;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_signaturePoints);
+  }
+
   @override
   @JsonKey()
   final int deathCount;
@@ -180,7 +190,7 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ScoreSchema(name: $name, deathCount: $deathCount, bounceCount: $bounceCount, startUnixMs: $startUnixMs, timeMs: $timeMs)';
+    return 'ScoreSchema(signaturePoints: $signaturePoints, deathCount: $deathCount, bounceCount: $bounceCount, startUnixMs: $startUnixMs, timeMs: $timeMs)';
   }
 
   @override
@@ -188,7 +198,7 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ScoreSchema'))
-      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('signaturePoints', signaturePoints))
       ..add(DiagnosticsProperty('deathCount', deathCount))
       ..add(DiagnosticsProperty('bounceCount', bounceCount))
       ..add(DiagnosticsProperty('startUnixMs', startUnixMs))
@@ -200,7 +210,8 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ScoreSchemaImpl &&
-            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality()
+                .equals(other._signaturePoints, _signaturePoints) &&
             (identical(other.deathCount, deathCount) ||
                 other.deathCount == deathCount) &&
             (identical(other.bounceCount, bounceCount) ||
@@ -213,7 +224,12 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, name, deathCount, bounceCount, startUnixMs, timeMs);
+      runtimeType,
+      const DeepCollectionEquality().hash(_signaturePoints),
+      deathCount,
+      bounceCount,
+      startUnixMs,
+      timeMs);
 
   @JsonKey(ignore: true)
   @override
@@ -231,7 +247,7 @@ class _$ScoreSchemaImpl extends _ScoreSchema with DiagnosticableTreeMixin {
 
 abstract class _ScoreSchema extends ScoreSchema {
   const factory _ScoreSchema(
-      {final String name,
+      {@SignaturePointJsonConverter() final List<Point> signaturePoints,
       final int deathCount,
       final int bounceCount,
       final int startUnixMs,
@@ -242,7 +258,8 @@ abstract class _ScoreSchema extends ScoreSchema {
       _$ScoreSchemaImpl.fromJson;
 
   @override
-  String get name;
+  @SignaturePointJsonConverter()
+  List<Point> get signaturePoints;
   @override
   int get deathCount;
   @override
