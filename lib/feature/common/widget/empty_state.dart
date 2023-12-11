@@ -7,17 +7,20 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: LayoutBuilder(
-        builder: (context, cont) {
-          var height = cont.maxHeight;
-          if (height <= 100) {
-            return Text(
+    return LayoutBuilder(
+      builder: (context, cont) {
+        var height = cont.maxHeight;
+        double length = height - 150 >= 256 ? 256 : 128;
+        if (height <= 100) {
+          return Center(
+            child: Text(
               context.s.g_empty_title,
               style: TS.t2.bold,
-            );
-          }
-          return Column(
+            ),
+          );
+        }
+        return Center(
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
@@ -25,26 +28,16 @@ class EmptyState extends StatelessWidget {
                 style: TS.t2.bold,
               ),
               const Gap(12),
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, cont) {
-                    var height = cont.maxHeight;
-                    if (height < 128) return const Empty();
-
-                    double length = height >= 256 ? 256 : 128;
-                    return SizedBox(
-                      height: length,
-                      width: length,
-                      child: SpriteAnimationWidget.asset(
-                        path: img.planet.empty.gPath,
-                        data: SpriteAnimationData.sequenced(
-                          amount: 50,
-                          stepTime: 0.1,
-                          textureSize: V2.all(256),
-                        ),
-                      ),
-                    );
-                  },
+              SizedBox(
+                height: length,
+                width: length,
+                child: SpriteAnimationWidget.asset(
+                  path: img.planet.empty.gPath,
+                  data: SpriteAnimationData.sequenced(
+                    amount: 50,
+                    stepTime: 0.1,
+                    textureSize: V2.all(256),
+                  ),
                 ),
               ),
               const Gap(8),
@@ -53,9 +46,9 @@ class EmptyState extends StatelessWidget {
                 style: TS.b3.bold.onSurface50,
               ),
             ],
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

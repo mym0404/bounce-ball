@@ -12,6 +12,7 @@ class LoadingState extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, cont) {
         var height = cont.maxHeight;
+        double length = height - 150 >= 256 ? 256 : 128;
         if (height <= 100) {
           return Center(
             child: Text(
@@ -29,26 +30,16 @@ class LoadingState extends StatelessWidget {
                 style: TS.t2.bold,
               ),
               const Gap(12),
-              Expanded(
-                child: LayoutBuilder(
-                  builder: (context, cont) {
-                    var height = cont.maxHeight;
-                    if (height < 128) return const Empty();
-
-                    double length = height >= 256 ? 256 : 128;
-                    return SizedBox(
-                      height: length,
-                      width: length,
-                      child: SpriteAnimationWidget.asset(
-                        path: img.planet.loading.gPath,
-                        data: SpriteAnimationData.sequenced(
-                          amount: 50,
-                          stepTime: 0.1,
-                          textureSize: V2.all(256),
-                        ),
-                      ),
-                    );
-                  },
+              SizedBox(
+                height: length,
+                width: length,
+                child: SpriteAnimationWidget.asset(
+                  path: img.planet.loading.gPath,
+                  data: SpriteAnimationData.sequenced(
+                    amount: 50,
+                    stepTime: 0.1,
+                    textureSize: V2.all(256),
+                  ),
                 ),
               ),
               const Gap(8),
