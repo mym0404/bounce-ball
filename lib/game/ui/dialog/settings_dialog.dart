@@ -1,6 +1,7 @@
 import '../../../export.dart';
 import '../../../service/user_preferences/user_preferences.dart';
 import '../../main_game.dart';
+import '../widget/panel_header.dart';
 
 class SettingsDialog extends StatefulWidget with WatchItStatefulWidgetMixin {
   const SettingsDialog({super.key});
@@ -27,23 +28,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Expanded(
-                child: Text(
-                  'Settings',
-                  style: TS.titleLarge,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(MdiIcons.close),
-              ),
-            ],
-          ),
+          PanelHeader(title: context.s.setting_title),
           const Gap(24),
           SwitchListTile(
             title: const Text('Show control arrows'),

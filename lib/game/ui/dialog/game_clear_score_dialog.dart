@@ -1,9 +1,9 @@
-import 'package:flutter_animate/flutter_animate.dart';
-
 import '../../../export.dart';
 import '../../component/level/Level.dart';
 import '../../network/score_repository.dart';
 import '../../state/score_schema.dart';
+import '../panel/score_ranking_panel.dart';
+import '../widget/panel_header.dart';
 
 class GameClearScoreDialog extends StatefulWidget {
   const GameClearScoreDialog({
@@ -21,8 +21,14 @@ class GameClearScoreDialog extends StatefulWidget {
 
 class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
   var isLoading = false;
-  void _onPressOk() {
+  void _onPressNextStage() {
     Navigator.pop(context);
+    manager.moveToNextLevel();
+  }
+
+  void _onPressRestart() {
+    Navigator.pop(context);
+    manager.restartThisStage();
   }
 
   void _onPressShare() {}
@@ -39,7 +45,6 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
       context.showSuccessSnackBar(text: context.s.register_ranking_done);
     } catch (e) {
       log.e(e);
-      print(e);
       context.showErrorSnackBar(text: context.s.g_error);
     }
     setState(() => isLoading = false);
@@ -47,60 +52,93 @@ class _GameClearScoreDialogState extends State<GameClearScoreDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return Focus(
-      autofocus: true,
-      onKey: (node, event) {
-        if (event.isKeyPressed(LogicalKeyboardKey.enter) || event.isKeyPressed(LogicalKeyboardKey.space)) {
-          _onPressOk();
-          return KeyEventResult.handled;
-        }
-        return KeyEventResult.ignored;
+    return LayoutBuilder(
+      builder: (context, cont) {
+        var width = cont.maxWidth;
+        var isWideLayout = width >= 500;
+        return Column(
+          children: [
+            PanelHeader(
+              title: context.s.g_clear,
+              hideBack: true,
+              right: [
+                OutlinedButton(onPressed: _onPressRestart, child: Text(context.s.restart)),
+                const Gap(8),
+                FilledButton.tonal(onPressed: _onPressNextStage, child: Text(context.s.next_stage)),
+              ],
+            ),
+            const Gap(20),
+            Expanded(
+              child: isWideLayout
+                  ? Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PaddingHorizontal(12, child: SizedBox(width: 200, child: _buildScorePanel())),
+                        const VerticalDivider(),
+                        Expanded(child: _buildScoreRankingPanel()),
+                      ],
+                    )
+                  : NestedScrollView(
+                      headerSliverBuilder: (context, innerBoxIsScrolled) {
+                        return [
+                          SliverToBoxAdapter(
+                            child: _buildScorePanel(),
+                          )
+                        ];
+                      },
+                      body: PaddingTop(24, child: _buildScoreRankingPanel()),
+                    ),
+            )
+          ],
+        );
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            '${context.s.g_clear}!',
-            style: TS.t2,
-          ).animate().fadeIn(),
-          const Gap(24),
-          _buildItem(context.s.g_world, widget.level.world.name),
-          const Gap(8),
-          _buildItem(context.s.g_level, widget.level.name),
-          const Gap(24),
-          _buildItem(context.s.g_time, '${(widget.score.timeMs / 1000).toStringAsFixed(3)}ms'),
-          const Gap(8),
-          _buildItem(context.s.g_bounce, widget.score.bounceCount.toString()),
-          const Gap(8),
-          _buildItem(context.s.g_death, widget.score.deathCount.toString()),
-          const Gap(24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // OutlinedButton.icon(
-              //   icon: Icon(MdiIcons.shareAllOutline),
-              //   onPressed: _onPressShare,
-              //   label: Text(context.s.g_share),
-              // ),
-              // const Gap(12),
-              OutlinedButton(
-                onPressed: isLoading ? null : _onPressRegisterRanking,
-                child: Text(context.s.register_ranking),
-              ),
-              const Gap(12),
-              FilledButton.tonal(onPressed: _onPressOk, child: Text(context.s.g_confirm)),
-            ],
-          ).animate().fadeIn(delay: 1.seconds),
-        ],
-      ),
+    );
+  }
+
+  Widget _buildScoreRankingPanel() {
+    return Column(
+      children: [
+        Text(context.s.g_ranking, style: TS.t3.bold),
+        const Gap(12),
+        TextButton.icon(
+          onPressed: _onPressRegisterRanking,
+          icon: Icon(MdiIcons.send),
+          label: Text(context.s.register_ranking),
+        ),
+        const Gap(12),
+        Expanded(
+          child: ScoreRankingPanel(
+            level: widget.level,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildScorePanel() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(context.s.g_score, style: TS.t3.bold),
+        const Gap(24),
+        _buildItem(context.s.g_world, widget.level.world.name),
+        const Gap(12),
+        _buildItem(context.s.g_level, widget.level.name),
+        const Gap(24),
+        _buildItem(context.s.g_time, '${(widget.score.timeMs / 1000).toStringAsFixed(3)}ms'),
+        const Gap(12),
+        _buildItem(context.s.g_bounce, widget.score.bounceCount.toString()),
+        const Gap(12),
+        _buildItem(context.s.g_death, widget.score.deathCount.toString()),
+      ],
     );
   }
 
   Widget _buildItem(String title, String value) {
     return Row(
       children: [
-        Expanded(child: Text(title, style: TS.b3.onSurface70.italic)),
-        Text(value, style: TS.b3.bold),
+        Expanded(child: Text(title, style: TS.b2.onSurface70.italic)),
+        Text(value, style: TS.b2.bold),
       ],
     );
   }

@@ -33,10 +33,10 @@ FutureOr<void> _initFirebase() async {
 void _registerErrorHandler() {
   FlutterError.onError = (details) {
     FlutterError.presentError(details);
-    log.e('flutter Error Occurred', error: details.exception, stackTrace: details.stack);
+    log.e(details.exception, 'flutter Error Occurred');
   };
   PlatformDispatcher.instance.onError = (exception, stackTrace) {
-    log.e('Platform Error Occurred', error: exception, stackTrace: stackTrace);
+    log.e(exception, 'Platform Error Occurred');
     return true;
   };
 }

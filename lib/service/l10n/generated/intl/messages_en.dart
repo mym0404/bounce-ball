@@ -52,6 +52,9 @@ class MessageLookup extends MessageLookupByLibrary {
             "Infinity Space is Loading\nWait a moment..."),
         "game_loading_title":
             MessageLookupByLibrary.simpleMessage("Welcome to Bounce Ball"),
+        "next_stage": MessageLookupByLibrary.simpleMessage("Next Stage"),
+        "ranking_tab_bounce": MessageLookupByLibrary.simpleMessage("Bounce"),
+        "ranking_tab_time": MessageLookupByLibrary.simpleMessage("Time"),
         "ready_dv_description": MessageLookupByLibrary.simpleMessage(
             "Bounce your ball\nReach the Goal\nAnd, explore infinity space"),
         "register_ranking":
@@ -60,6 +63,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ranking Registered!"),
         "register_ranking_start":
             MessageLookupByLibrary.simpleMessage("Ranking Registering..."),
-        "setting_title": MessageLookupByLibrary.simpleMessage("Settings")
+        "restart": MessageLookupByLibrary.simpleMessage("Restart"),
+        "setting_title": MessageLookupByLibrary.simpleMessage("Settings"),
+        "stage_dv_title": MessageLookupByLibrary.simpleMessage("Stages")
       };
 }

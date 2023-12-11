@@ -1,8 +1,8 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:local_file_preferences/local_file_preferences.dart';
-import 'package:logger/logger.dart';
 
 import '../../export.dart';
+import '../../feature/common/util/log_debug.dart';
 import '../../game/state/game_manager.dart';
 import '../../game/state/level_clear_storage.dart';
 import '../l10n/util/l10n_manager.dart';
@@ -16,16 +16,7 @@ Future<void> registerSingletons() async {
   registerGlobalStorage(SharedPreferencesStorage(sharedPreferences: sharedPreferences));
   di.registerSingleton<LocalStorage>(SharedPreferencesLocalStorage(sharedPreferences));
   di.registerSingleton(L10NManager());
-  di.registerSingleton(
-    Logger(
-      printer: PrefixPrinter(
-        PrettyPrinter(colors: false, methodCount: 0, errorMethodCount: 20),
-        error: '⛔',
-        info: '💡',
-        debug: '🌙',
-      ),
-    ),
-  );
+  di.registerSingleton(Logger());
   di.registerSingleton(LayoutManager());
   di.registerSingleton(GameManager());
   di.registerSingleton(LevelClearStorage());

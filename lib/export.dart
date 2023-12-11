@@ -34,6 +34,7 @@ export 'assets/assets.gen.dart';
 export 'design/color/theme_colors.dart';
 export 'design/theme.dart';
 export 'design/typography/text_style.dart';
+export 'feature/common/util/date_time_format.dart';
 export 'feature/common/util/duration_util.dart';
 export 'feature/common/util/flame_extension.dart';
 export 'feature/common/util/is.dart';

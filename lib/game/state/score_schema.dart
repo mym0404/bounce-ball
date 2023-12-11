@@ -17,4 +17,6 @@ class ScoreSchema with _$ScoreSchema {
   factory ScoreSchema.fromJson(Map<String, dynamic> json) => _$ScoreSchemaFromJson(json);
   factory ScoreSchema.initial({int deathCount = 0, int startUnixMs = 0}) =>
       ScoreSchema(deathCount: deathCount, startUnixMs: startUnixMs);
+
+  DateTime get created => DateTime.fromMillisecondsSinceEpoch(startUnixMs + timeMs);
 }

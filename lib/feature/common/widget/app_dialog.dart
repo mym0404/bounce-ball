@@ -8,6 +8,7 @@ Future<T?> showAppDialog<T>(
   bool dismissible = true,
   PanelSize size = PanelSize.m,
   double? maxHeightRatio,
+  double? maxWidth,
   VC? onDismiss,
 }) async {
   return showGeneralDialog<T?>(
@@ -36,6 +37,7 @@ Future<T?> showAppDialog<T>(
         child: OverlayPanel(
           size: size,
           maxHeightRatio: maxHeightRatio,
+          maxWidth: maxWidth,
           child: dialogContent(context),
         ),
       );

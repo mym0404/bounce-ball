@@ -29,6 +29,14 @@
   "game_loading_title": "Welcome to Bounce Ball",
   "game_loading_body": "Infinity Space is Loading\nWait a moment...",
 
+  "ranking_tab_time": "Time",
+  "ranking_tab_bounce": "Bounce",
+  "stage_dv_title": "Stages",
+  "g_ranking": "Ranking",
+  "register_ranking": "Register Ranking",
+  "next_stage": "Next Stage",
+  "restart": "Restart",
+
 
 
 

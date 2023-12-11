@@ -29,6 +29,7 @@ class AppTheme {
       useMaterial3: true,
       textTheme: _textTheme,
       fontFamily: FontFamily.stardust,
+      dividerTheme: DividerThemeData(color: C.onSurface30),
     );
   }
 }

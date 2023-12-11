@@ -35,12 +35,12 @@ class MainGame extends FlameGame with HasCollisionDetection, HasKeyboardHandlerC
 
   void _listenLevelChanged() {
     listenValue(manager.level, (value) {
-      _loadLevel(value);
+      loadLevel(value);
       _showStageStartOverlay(value);
     }, listenInitialValue: false);
   }
 
-  void _loadLevel(Level level) async {
+  void loadLevel(Level level) async {
     var currentWorld = children.query<GameLevel>().firstOrNull;
     var showTransition = level != Level.values.first && currentWorld != null;
 

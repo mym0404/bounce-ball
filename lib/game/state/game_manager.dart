@@ -32,8 +32,9 @@ class GameManager {
     showAppDialog(
       globalContext,
       (context) => GameClearScoreDialog(level: level.value, score: scoreOfStage.value),
+      maxWidth: 600,
       size: PanelSize.l,
-      onDismiss: moveToNextLevel,
+      dismissible: false,
     );
   }
 
@@ -45,6 +46,12 @@ class GameManager {
     } else {
       moveLevel(Level.values[index + 1]);
     }
+  }
+
+  void restartThisStage() {
+    resetScore(resetDie: true);
+    isStageCleared.value = false;
+    game.loadLevel(level.value);
   }
 
   void _allClear() {
