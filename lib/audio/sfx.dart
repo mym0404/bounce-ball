@@ -14,7 +14,12 @@ class Sfx {
   Future<void> init() async {
     FlameAudio.bgm.initialize();
 
-    await FlameAudio.audioCache.loadAll([...sfxs.values, ...sfxs.bgm.values]);
+    await FlameAudio.audioCache.loadAll(
+      [
+        ...sfxs.values.map((e) => e.audioPath),
+        ...sfxs.bgm.values.map((e) => e.audioPath),
+      ],
+    );
 
     arrowAP = await FlameAudio.createPool(sfxs.arrow.audioPath, maxPlayers: 1);
     bounceAP = await FlameAudio.createPool(sfxs.bounce.audioPath, maxPlayers: 3);
