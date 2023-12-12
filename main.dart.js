@@ -46463,7 +46463,7 @@ case 2:s=3
 return A.K(A.EQ(B.e.eg("assets/audio/arrow.wav","assets/audio/",""),1),$async$ja)
 case 3:q.a=b
 s=4
-return A.K(A.EQ(B.e.eg("assets/audio/bounce.wav","assets/audio/",""),3),$async$ja)
+return A.K(A.EQ(B.e.eg("assets/audio/bounce.wav","assets/audio/",""),10),$async$ja)
 case 4:q.b=b
 s=5
 return A.K(A.EQ(B.e.eg("assets/audio/clear.wav","assets/audio/",""),1),$async$ja)
