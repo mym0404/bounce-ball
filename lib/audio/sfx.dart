@@ -22,7 +22,7 @@ class Sfx {
     );
 
     arrowAP = await FlameAudio.createPool(sfxs.arrow.audioPath, maxPlayers: 1);
-    bounceAP = await FlameAudio.createPool(sfxs.bounce.audioPath, maxPlayers: 3);
+    bounceAP = await FlameAudio.createPool(sfxs.bounce.audioPath, maxPlayers: 10);
     clearAP = await FlameAudio.createPool(sfxs.clear.audioPath, maxPlayers: 1);
     dieBombAP = await FlameAudio.createPool(sfxs.dieBomb.audioPath, maxPlayers: 1);
     dieOutOfBoundAP = await FlameAudio.createPool(sfxs.dieOutofbound.audioPath, maxPlayers: 1);
