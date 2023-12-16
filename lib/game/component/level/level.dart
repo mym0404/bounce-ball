@@ -99,7 +99,8 @@ enum Level {
   final String tileName, name, say;
   final LevelWorlds world;
 
-  String get id => '${world.index}-$index';
+  // name and world.name should be identified, unchanged
+  String get id => '${world.name}-$name';
 }
 
 enum LevelWorlds {
