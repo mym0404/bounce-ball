@@ -33,6 +33,7 @@ class LevelClearStorage with LocalFilePrefMixin<List<String>> {
   }
 
   bool isCleared(Level level) {
+    if (kDebugMode) return true;
     return value.contains(level.id);
   }
 }

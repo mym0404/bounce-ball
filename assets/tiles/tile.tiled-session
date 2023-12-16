@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "lv-09.tmx",
+    "activeFile": "lv2_1.tmx",
     "expandedProjectPaths": [
         "."
     ],
@@ -142,6 +142,14 @@
                 "x": 288.0628958287836,
                 "y": 192.4612360777462
             }
+        },
+        "lv2_1.tmx": {
+            "scale": 0.9681423611111112,
+            "selectedLayer": 7,
+            "viewCenter": {
+                "x": 465.8405810095938,
+                "y": 234.46964942168023
+            }
         }
     },
     "last.imagePath": "/Users/mj/Desktop/bounce-ball/assets/tile",
@@ -151,14 +159,11 @@
     "map.tileWidth": 16,
     "map.width": 36,
     "openFiles": [
-        "lv-06.tmx",
-        "lv-07.tmx",
-        "lv-08.tmx",
-        "lv-16.tmx",
-        "lv-09.tmx"
+        "lv2_1.tmx"
     ],
     "project": "tile.tiled-project",
     "recentFiles": [
+        "lv2_1.tmx",
         "lv-06.tmx",
         "lv-07.tmx",
         "lv-08.tmx",
@@ -169,8 +174,7 @@
         "lv-04.tmx",
         "lv-03.tmx",
         "lv-02.tmx",
-        "Tiles.tsx",
-        "lv-01.tmx"
+        "Tiles.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

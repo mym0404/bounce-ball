@@ -22,9 +22,15 @@ class _Painter extends CustomPainter {
 
     var paint = Paint()
       ..color = Colors.yellowAccent[100]!
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 12);
+      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
 
     canvas.drawCircle(Offset(w / 2, w / 2), w / 2, paint);
+
+    var outlinePaint = Paint()
+      ..color = Colors.yellowAccent[100]!
+      ..style = PaintingStyle.stroke;
+
+    canvas.drawCircle(Offset(w / 2, w / 2), w / 2, outlinePaint);
   }
 
   @override

@@ -98,6 +98,9 @@ class $AssetsTilesGen {
   /// File path: assets/tiles/lv1_8.tmx
   String get lv18 => 'assets/tiles/lv1_8.tmx';
 
+  /// File path: assets/tiles/lv2_1.tmx
+  String get lv21 => 'assets/tiles/lv2_1.tmx';
+
   /// File path: assets/tiles/lv5_1.tmx
   String get lv51 => 'assets/tiles/lv5_1.tmx';
 
@@ -118,6 +121,7 @@ class $AssetsTilesGen {
         lv16,
         lv17,
         lv18,
+        lv21,
         lv51,
         tileTiledProject,
         tileTiledSession
@@ -127,14 +131,17 @@ class $AssetsTilesGen {
 class $AssetsAudioBgmGen {
   const $AssetsAudioBgmGen();
 
-  /// File path: assets/audio/bgm/world1.wav
-  String get world1 => 'assets/audio/bgm/world1.wav';
+  /// File path: assets/audio/bgm/world1.mp3
+  String get world1 => 'assets/audio/bgm/world1.mp3';
+
+  /// File path: assets/audio/bgm/world2.mp3
+  String get world2 => 'assets/audio/bgm/world2.mp3';
 
   /// File path: assets/audio/bgm/world5.mp3
   String get world5 => 'assets/audio/bgm/world5.mp3';
 
   /// List of all assets
-  List<String> get values => [world1, world5];
+  List<String> get values => [world1, world2, world5];
 }
 
 class $AssetsImagesBackgroundGen {
@@ -193,8 +200,12 @@ class $AssetsImagesPlanetGen {
   AssetGenImage get world2 =>
       const AssetGenImage('assets/images/planet/world2.png');
 
+  /// File path: assets/images/planet/world5.png
+  AssetGenImage get world5 =>
+      const AssetGenImage('assets/images/planet/world5.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [empty, loading, world1, world2];
+  List<AssetGenImage> get values => [empty, loading, world1, world2, world5];
 }
 
 class $AssetsImagesEffectSmokeGen {

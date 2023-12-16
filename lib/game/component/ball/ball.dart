@@ -23,9 +23,9 @@ class Ball extends PositionComponent with GRef, KeyboardHandler {
   final double _wallGeneralJumpXForce = 70;
   final double _wallGeneralJumpYForce = 15;
 
-  final double _maxXSpeed = kDebugMode ? 9999 : 120;
+  final double _maxXSpeed = 120;
   final double _flyingXSpeed = 170;
-  final double _inputXForce = kDebugMode ? 1000 : 120;
+  final double _inputXForce = 120;
   final double gravity = 600;
   final double terminalYVelocity = 400;
   V2 velocity = V2.zero();

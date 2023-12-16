@@ -73,13 +73,21 @@ enum Level {
     24,
     'Move like sneak',
   ),
+  lv2_1(
+    LevelWorlds.weirdForest02,
+    'lv2_1',
+    '01-Enter to weridness',
+    36,
+    24,
+    'Wow, where it is?',
+  ),
   lv5_1(
     LevelWorlds.abandonedGasStation05,
     'lv5_1',
-    'ㅇㅏ 맵만들기 귀찮다',
+    '01-So many abandoned',
     36,
     24,
-    'Welcome to New World!\na.k.a. Hello World!',
+    'Welcome to New World!',
   ),
   ;
 
@@ -97,6 +105,7 @@ enum Level {
 enum LevelWorlds {
   dummy0(''),
   unknownGalaxy01('Unknown Planet'),
+  weirdForest02('Weird Forest'),
   abandonedGasStation05('Abandoned Gas Station'),
   ;
 
@@ -106,27 +115,32 @@ enum LevelWorlds {
 
   AssetGenImage get sprite => switch (this) {
         LevelWorlds.unknownGalaxy01 => img.planet.world1,
-        LevelWorlds.abandonedGasStation05 => img.planet.world2,
-        _ => img.planet.world1,
+        LevelWorlds.weirdForest02 => img.planet.world2,
+        LevelWorlds.abandonedGasStation05 => img.planet.world5,
+        LevelWorlds.dummy0 => img.planet.world1,
       };
   int get spriteAmount => switch (this) {
         LevelWorlds.unknownGalaxy01 => 24,
+        LevelWorlds.weirdForest02 => 50,
         LevelWorlds.abandonedGasStation05 => 48,
-        _ => 1,
+        LevelWorlds.dummy0 => 1,
       };
   double get spriteSize => switch (this) {
         LevelWorlds.unknownGalaxy01 => 128,
+        LevelWorlds.weirdForest02 => 128,
         LevelWorlds.abandonedGasStation05 => 256,
-        _ => 1,
+        LevelWorlds.dummy0 => 1,
       };
   String get bgm => switch (this) {
         LevelWorlds.unknownGalaxy01 => sfxs.bgm.world1,
+        LevelWorlds.weirdForest02 => sfxs.bgm.world2,
         LevelWorlds.abandonedGasStation05 => sfxs.bgm.world5,
-        _ => sfxs.bgm.world1,
+        LevelWorlds.dummy0 => sfxs.bgm.world1,
       };
   String get bgmName => switch (this) {
-        LevelWorlds.unknownGalaxy01 => 'kronbits sfx pack - retro music',
-        LevelWorlds.abandonedGasStation05 => 'Undertale MEGALOVANIA Camellia Remix',
-        _ => '',
+        LevelWorlds.unknownGalaxy01 => 'Retro Platforming - David Fesliyan',
+        LevelWorlds.weirdForest02 => 'Boss Time - David Renda',
+        LevelWorlds.abandonedGasStation05 => 'Undertale MEGALOVANIA - Camellia Remix',
+        LevelWorlds.dummy0 => '',
       };
 }
